@@ -20,7 +20,7 @@ The project is Open Sourced under the Apache 2.0 license
 ## Reference Material &amp; Community
 You can also find associated reference material for the Ripple tool as well as community forums at the following locations.
 
-* [Community Forums](http://supportforums.blackberry.com/t5/Web-Development/bd-p/browser_dev)
+* [Community Forums](http://supportforums.blackberry.com/t5/Ripple-Contributions/bd-p/ripple)
 * [Documentation](http://rippledocs.tinyhippos.com/index.html)
 
 ## Getting Started
