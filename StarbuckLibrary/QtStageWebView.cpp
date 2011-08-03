@@ -22,16 +22,16 @@ using namespace BlackBerry::Starbuck;
 
 QtStageWebView::QtStageWebView(QWidget *p) : QWebView(p), waitForJsLoad(true)
 {	
-  //Turn off context menu's (i.e. menu when right clicking)
-	this->setContextMenuPolicy(Qt::NoContextMenu);
+    //Turn off context menu's (i.e. menu when right clicking)
+	//this->setContextMenuPolicy(Qt::NoContextMenu);
 
 	// Connect signals for events
 	connect(this, SIGNAL(urlChanged(const QUrl&)), this, SLOT(notifyUrlChanged(const QUrl&)));
 
 	if (page() && page()->mainFrame())
-  {
-		connect(page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(notifyJavaScriptWindowObjectCleared()));
-  }
+    {
+        connect(page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(notifyJavaScriptWindowObjectCleared()));
+    }
 
 	//Initialize headers to 0
 	_headersSize = 0;
@@ -80,11 +80,15 @@ void QtStageWebView::notifyJavaScriptWindowObjectCleared()
 void QtStageWebView::registerEventbus()
 {
   QWebFrame* frame = page()->mainFrame();
-  frame->addToJavaScriptWindowObject(QString("eventbus"), new BlackBerryBus(this, frame));
+  frame->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame));
+  frame->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
 
   // check for iframes, if found add to window object
   for(int i = 0; i < frame->childFrames().length(); i++)
-      frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus"), new BlackBerryBus(this, frame->childFrames()[i]));
+  {
+      frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame->childFrames()[i]));
+      frame->childFrames()[i]->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
+  }
 }
 
 void QtStageWebView::continueLoad()

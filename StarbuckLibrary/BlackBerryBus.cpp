@@ -81,7 +81,7 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData)
   }
 }
 
-void BlackBerryBus::on(QString eventName, QString jsonCallback)
+QString BlackBerryBus::on(QString eventName, QString jsonCallback)
 {
   QList<CallbackInfo>* info = 0;
 
@@ -98,5 +98,26 @@ void BlackBerryBus::on(QString eventName, QString jsonCallback)
 
   _listener.insert(eventName, info);
   this->m_pWebFrame->evaluateJavaScript("var " + callback.function + " = "  + jsonCallback);
+
+  return callback.function;
 }
 
+QString BlackBerryBus::getFunctionName(QString input)
+{
+    QList<CallbackInfo>* info = 0;
+    QString result;
+
+    if (_listener.contains(input) )
+    {
+        info = _listener[input];
+        for (int i = 0; i<info->length(); i++)
+        {
+            if (!result.isEmpty())
+                result += ";";
+
+            result += (*info)[i].function;
+        }
+    }
+    
+    return result;
+}

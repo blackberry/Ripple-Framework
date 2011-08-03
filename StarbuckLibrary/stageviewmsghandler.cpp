@@ -21,8 +21,10 @@ using namespace BlackBerry::Starbuck;
 using namespace BlackBerry::Starbuck::IPCChannel;
 
 StageViewMsgHandler::StageViewMsgHandler(QObject *parent)
-	: MessageHandler(parent), m_pRequest(new RequestObject(QString(), this))
+	: MessageHandler(parent)
 {
+	QString request_string;
+	m_pRequest = new RequestObject(request_string, this);
 }
 
 StageViewMsgHandler::~StageViewMsgHandler()
@@ -133,7 +135,6 @@ void StageViewMsgHandler::processMessage(Message* pMsg)
 void StageViewMsgHandler::resourceRequest(QNetworkRequest* request)
 {
   //qDebug() << "emit stagewebview.OnRequest(), url:" << request->url().toString();
-  m_pRequest->setUrl(request->url().toString());
   m_pRequest->setWebFrame(rimStageWebview()->page()->mainFrame());
   emit onRequest(m_pRequest);
   //qDebug() << " stagewebview.OnRequest() emitted";

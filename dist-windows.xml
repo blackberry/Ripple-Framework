@@ -1,0 +1,33 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>Starbuck</id>
+    <formats>
+        <format>zip</format>
+    </formats>  
+    <includeBaseDirectory>false</includeBaseDirectory> 
+
+	<fileSets>
+        <fileSet>            
+            <directory>build/bin</directory>    
+			<outputDirectory>.</outputDirectory>
+			<includes>
+				<include>Starbuck.exe</include>
+				<include>*.dll</include>
+			</includes>          
+        </fileSet>
+        <fileSet>            
+            <directory>${env.QTDIR}/bin</directory>                    
+            <outputDirectory>.</outputDirectory>
+			<includes>
+				<include>QtGuid4.dll</include>
+				<include>QtCored4.dll</include>
+				<include>QtWebKitd4.dll</include>
+				<include>QtNetworkd4.dll</include>
+				<include>QtXmld4.dll</include>
+				<include>QtTestd4.dll</include>
+				<include>phonond4.dll</include>
+			</includes>
+        </fileSet> 
+	</fileSets>
+</assembly>

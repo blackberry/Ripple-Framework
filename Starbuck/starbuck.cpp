@@ -17,7 +17,6 @@
 #include "stdafx.h"
 #include "starbuck.h"
 
-
 using namespace BlackBerry::Starbuck;
 
 const int Starbuck::PROGRESS_BAR_HEIGHT = 23;
@@ -48,11 +47,12 @@ void Starbuck::init(void)
 #ifdef NDEBUG //cmake definition for relase build
   webView->setContextMenuPolicy(Qt::NoContextMenu);
 #else
-	webView->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+  webView->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 #endif
 
   //Enable local persistent storage for local database
   webView->settings()->enablePersistentStorage(_config->localStoragePath());
+  webView->setContextMenuPolicy(Qt::NoContextMenu);
 
   QSize size = _config->windowSize();
 
@@ -109,17 +109,22 @@ void Starbuck::registerAPIs()
   //register StageWebViewMsgHandler as JS object named stagewebview
   QWebFrame* frame = webView->page()->mainFrame();
   frame->addToJavaScriptWindowObject(QString("stagewebview"), m_pStageViewHandler);
-  frame->addToJavaScriptWindowObject(QString("eventbus"), new BlackBerryBus(this, frame));
+  frame->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame));
+  frame->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
 }
 
 void Starbuck::registerInternalAPIs()
 {
   QWebFrame* frame = webViewInternal->page()->mainFrame();
-  frame->addToJavaScriptWindowObject(QString("eventbus"), new BlackBerryBus(this, frame));
+  frame->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame));
+  frame->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
 
   // check for iframes, if found add to window object
   for(int i = 0; i < frame->childFrames().length(); i++)
-      frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus"), new BlackBerryBus(this, frame->childFrames()[i]));
+  {
+      frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame->childFrames()[i]));
+      frame->childFrames()[i]->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
+  }
 }
 
 void Starbuck::resizeEvent(QResizeEvent * e )

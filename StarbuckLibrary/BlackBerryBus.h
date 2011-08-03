@@ -24,6 +24,33 @@
 namespace BlackBerry {
 namespace Starbuck {
 
+const QString eventbusSource("var eventbus = (function() {\
+        var objMap = new Object();\
+            return {\
+                on: function(event, what) {\
+                    if (typeof what == \"function\") {\
+                        var fname = eventbus2.on(event, \"function\");\
+                        objMap[fname] = what;\
+                    }\
+                    else\
+                        eventbus2.on(event, what);\
+                },\
+                trigger: function(event, data) {\
+                    var fnames = eventbus2.getFunctionName(event);\
+                    fnames = fnames.split(\";\");\
+                    for(var i = 0; i<fnames.length; i++) {\
+                        var prop = fnames[i];\
+                        for (var prop in objMap) {\
+                            if (objMap.hasOwnProperty(prop))\
+                                eval(objMap[prop](data));\
+                            else\
+                                eventbus2.trigger(event, data);\
+                        }\
+                    }\
+                }\
+            };\
+        })();");
+
 struct CallbackInfo
 {
     QString function;
@@ -45,7 +72,8 @@ private:
 public slots:
   void trigger(QString eventName, QString jsonData, bool async);
   void trigger(QString eventName, QString jsonData);
-  void on(QString eventName, QString jsonCallback);
+  QString on(QString eventName, QString jsonCallback);
+  QString getFunctionName(QString input);
 };
 
 }
