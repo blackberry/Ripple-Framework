@@ -26,25 +26,26 @@ namespace Starbuck {
 
 const QString eventbusSource("window.eventbus = (function() {\
         var _objMap = new Object();\
+        var _eventbus = parent.eventbus2;\
+        delete parent.eventbus2;\
             return {\
                 on: function(event, what) {\
-                    var fname = eventbus2.on(event, \"function\");\
+                    var fname = _eventbus.on(event, \"function\");\
                     _objMap[fname] = what;\
                 },\
                 trigger: function(event, data) {\
-                    var fnames = eventbus2.getFunctionName(event);\
+                    var fnames = _eventbus.getFunctionName(event);\
                     fnames = fnames.split(\";\");\
                     for(var i = 0; i<fnames.length; i++) {\
                         var prop = fnames[i];\
                         if (_objMap[prop])\
                             eval(_objMap[prop](data));\
                         else\
-                            eventbus2.trigger(event, data);\
+                            _eventbus.trigger(event, data);\
                         }\
                 }\
             };\
         })();");
-
 
 struct CallbackInfo
 {
