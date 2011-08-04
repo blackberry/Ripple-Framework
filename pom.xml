@@ -255,31 +255,7 @@
 								</configuration>
 							</execution>
 						</executions>
-					</plugin>
-					
-					
-					<!-- Build the installer for Mac OS-->
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.6</version>
-						<executions>
-							<execution>
-								<goals>
-									<goal>run</goal>
-								</goals>
-								<phase>package</phase>
-								<configuration>
-									<target>
-										<exec executable="build.exe">
-											<arg file="Ripple.iap_xml" />
-											<arg value="-w" />
-										</exec>
-									</target>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
+					</plugin>					
 				</plugins>
 			</build>
 		</profile>
