@@ -2,9 +2,9 @@
 
 **THIS REPOSITORY IS CONSIDERED A WORK IN PROGRESS**
 
-Ripple is a browser based, platform agnostic mobile application development and testing tool.  This specific repository contains the QT framework portion of the Ripple product.
+Ripple is a browser based, platform agnostic mobile application development and testing tool.  This specific repository contains the Qt framework portion of the Ripple product.
 
-Currently Ripple is a Chrome Extension that will soon be migrating to this QT framework to provide further enhanced emulation.
+Currently Ripple is a Chrome Extension that will soon be migrating to this Qt framework to provide further enhanced emulation.
  
 The project is Open Sourced under the Apache 2.0 license 
  
@@ -12,7 +12,7 @@ The project is Open Sourced under the Apache 2.0 license
 
 ## Build Requirements
  
-* QT Framework
+* Qt Framework
 
 ## Downloads
 * Coming Soon
