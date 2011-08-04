@@ -36,31 +36,31 @@ namespace BlackBerry
   {
     class Starbuck : public QMainWindow
     {
-      Q_OBJECT
+        Q_OBJECT
 
     public:
       Starbuck(QWidget *parent = 0, Qt::WFlags flags = 0);
       ~Starbuck();
 
     protected:
-      void closeEvent(QCloseEvent *event);
-      void resizeEvent(QResizeEvent * e );
+        void closeEvent(QCloseEvent *event);
+        void resizeEvent(QResizeEvent * e );
 
-      private slots:
+    private slots:
         void registerAPIs();
         void registerInternalAPIs();
 
     private:
-      static const int PROGRESS_BAR_HEIGHT;
-      QWebView* webView;
-      QtStageWebView* webViewInternal;
-      QProgressBar* progressBar;
-      ConfigData *_config;
-      IPCBridge* m_pBridge;
-      StageViewMsgHandler* m_pStageViewHandler;
-      XHRMsgHandler* m_pXHRHandler;
+        static const int PROGRESS_BAR_HEIGHT;
+        QWebView* webView;
+        QtStageWebView* webViewInternal;
+        QProgressBar* progressBar;
+        ConfigData *_config;
+        IPCBridge* m_pBridge;
+        StageViewMsgHandler* m_pStageViewHandler;
+        XHRMsgHandler* m_pXHRHandler;
 
-      void init(void);    
+        void init(void);    
     };
   }
 }
