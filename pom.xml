@@ -116,7 +116,7 @@
 						</executions>
 					</plugin>
 					
-					<!-- Package the header files and the lib/dll files for the starbuck project -->
+					<!-- Move the header files and the lib/dll to the installer resource directory -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-assembly-plugin</artifactId>
@@ -133,6 +133,29 @@
 										<descriptor>dist-windows.xml</descriptor>
 									</descriptors>
 									<appendAssemblyId>false</appendAssemblyId> 
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					
+					<!-- build the installer for windows -->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<exec executable="build.exe">
+											<arg file="Ripple.iap_xml" />
+											<arg value="-x" />
+										</exec>
+									</target>
 								</configuration>
 							</execution>
 						</executions>
@@ -212,7 +235,7 @@
 						</executions>
 					</plugin>
 					
-					<!-- Compress Starbuck.app into a zip file -->
+					<!-- Move Starbuck.app into a installer resource directory -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-assembly-plugin</artifactId>
@@ -229,6 +252,30 @@
 										<descriptor>dist-mac.xml</descriptor>
 									</descriptors>
 									<appendAssemblyId>false</appendAssemblyId> 
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+					
+					
+					<!-- Build the installer for Mac OS-->
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<version>1.6</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>run</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<target>
+										<exec executable="build.exe">
+											<arg file="Ripple.iap_xml" />
+											<arg value="-w" />
+										</exec>
+									</target>
 								</configuration>
 							</execution>
 						</executions>
