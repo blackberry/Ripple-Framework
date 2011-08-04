@@ -25,26 +25,20 @@ namespace BlackBerry {
 namespace Starbuck {
 
 const QString eventbusSource("var eventbus = (function() {\
-        var objMap = new Object();\
+        var _objMap = new Object();\
             return {\
                 on: function(event, what) {\
-                    if (typeof what == \"function\") {\
-                        var fname = eventbus2.on(event, \"function\");\
-                        objMap[fname] = what;\
-                    }\
-                    else\
-                        eventbus2.on(event, what);\
+                    var fname = eventbus2.on(event, \"function\");\
+                    _objMap[fname] = what;\
                 },\
                 trigger: function(event, data) {\
                     var fnames = eventbus2.getFunctionName(event);\
                     fnames = fnames.split(\";\");\
                     for(var i = 0; i<fnames.length; i++) {\
                         var prop = fnames[i];\
-                        for (var prop in objMap) {\
-                            if (objMap.hasOwnProperty(prop))\
-                                eval(objMap[prop](data));\
-                            else\
-                                eventbus2.trigger(event, data);\
+                        for (var prop in _objMap) {\
+                            if (_objMap.hasOwnProperty(prop))\
+                                eval(_objMap[prop](data));\
                         }\
                     }\
                 }\

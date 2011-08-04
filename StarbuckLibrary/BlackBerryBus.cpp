@@ -60,7 +60,8 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData, bool async)
         for(int i = 0; i < (*info).length(); i++)
         {
           CallbackInfo callback = (*info)[i];
-          QVariant res = callback.frame->evaluateJavaScript("setTimeout(\"" + callback.function + "('"  + jsonData + "')\", 1)");
+          QString evalString("eventbus.trigger('" + eventName + "', '" + jsonData + "')");
+          QVariant res = callback.frame->evaluateJavaScript("setTimeout(\"" + evalString + "\", 1)");
         }
       }
     }
@@ -76,7 +77,8 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData)
     for(int i = 0; i < (*info).length(); i++)
     {
       CallbackInfo callback = (*info)[i];
-      QVariant res = callback.frame->evaluateJavaScript(callback.function + "('"  + jsonData + "')");
+      QString evalString("eventbus.trigger('" + eventName + "', '" + jsonData + "')");
+      QVariant res = callback.frame->evaluateJavaScript(evalString);
     }
   }
 }
@@ -97,7 +99,6 @@ QString BlackBerryBus::on(QString eventName, QString jsonCallback)
   info->append(callback);
 
   _listener.insert(eventName, info);
-  this->m_pWebFrame->evaluateJavaScript("var " + callback.function + " = "  + jsonCallback);
 
   return callback.function;
 }
