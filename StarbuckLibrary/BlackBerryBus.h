@@ -24,7 +24,7 @@
 namespace BlackBerry {
 namespace Starbuck {
 
-const QString eventbusSource("var eventbus = (function() {\
+const QString eventbusSource("window.eventbus = (function() {\
         var _objMap = new Object();\
             return {\
                 on: function(event, what) {\
@@ -36,14 +36,15 @@ const QString eventbusSource("var eventbus = (function() {\
                     fnames = fnames.split(\";\");\
                     for(var i = 0; i<fnames.length; i++) {\
                         var prop = fnames[i];\
-                        for (var prop in _objMap) {\
-                            if (_objMap.hasOwnProperty(prop))\
-                                eval(_objMap[prop](data));\
+                        if (_objMap[prop])\
+                            eval(_objMap[prop](data));\
+                        else\
+                            eventbus2.trigger(event, data);\
                         }\
-                    }\
                 }\
             };\
         })();");
+
 
 struct CallbackInfo
 {
