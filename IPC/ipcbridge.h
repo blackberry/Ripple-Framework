@@ -19,7 +19,7 @@
 
 #include <QObject>
 #include <QString>
-#include "MessageQueue.h"
+#include "messagequeue.h"
 #include "ipcbridgeworker.h"
 #include "messagehandler.h"
 

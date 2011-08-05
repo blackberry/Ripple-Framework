@@ -18,7 +18,7 @@
 #define MESSAGEHANDLER_H
 
 #include <QObject>
-#include "Message.h"
+#include "message.h"
 #include "irimstagewebview.h"
 
 namespace BlackBerry { 

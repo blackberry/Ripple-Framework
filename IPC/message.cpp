@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-#include "StdAfx.h"
+#include "stdafx.h"
 #include "message.h"
 
 using namespace BlackBerry::Starbuck::IPCChannel;
