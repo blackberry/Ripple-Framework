@@ -15,7 +15,7 @@
 */
 
 #include "stdafx.h"
-#include "stageviewmsghandler.h"
+#include "StageViewMsgHandler.h"
 
 using namespace BlackBerry::Starbuck;
 using namespace BlackBerry::Starbuck::IPCChannel;

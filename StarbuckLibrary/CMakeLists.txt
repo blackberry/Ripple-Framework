@@ -12,7 +12,7 @@ LIST(APPEND STARBUCKLIBRARY_SOURCES
     ConfigData.cpp
     #RIMStageWebView.cpp
     QtStageWebView.cpp
-    stageviewmsghandler.cpp
+    StageViewMsgHandler.cpp
     xhrmsghandler.cpp
     BlackBerryBus.cpp
     RequestObject.cpp
@@ -22,7 +22,7 @@ LIST(APPEND STARBUCKLIBRARY_SOURCES
 SET(STARBUCKLIBRARY_MOC_HEADERS
     #RIMStageWebView.h
     QtStageWebView.h
-    stageviewmsghandler.h
+    StageViewMsgHandler.h
     xhrmsghandler.h
     BlackBerryBus.h
     RequestObject.h

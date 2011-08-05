@@ -23,9 +23,9 @@
 #include <QWebView>
 #include "ConfigData.h"
 #include "ipcbridge.h"
-#include "stageviewmsghandler.h"
+#include "StageViewMsgHandler.h"
 #include "xhrmsghandler.h"
-#include "blackberrybus.h"
+#include "BlackBerryBus.h"
 #include "RequestObject.h"
 
 using namespace BlackBerry::Starbuck::IPCChannel;
