@@ -35,10 +35,9 @@ void StageViewMsgHandler::registerEvents()
 {
 	connect(rimStageWebview(), SIGNAL(urlChanged(QString)), this, SLOT(urlChanged(QString)));
 	connect(rimStageWebview(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(javaScriptWindowObjectCleared()));
-  connect(rimStageWebview()->page()->mainFrame(), SIGNAL(networkResourceRequest(QNetworkRequest*)), this, SLOT(resourceRequest(QNetworkRequest*)));
-  connect(rimStageWebview()->page()->mainFrame(), SIGNAL(networkResourceReply(QNetworkReply*)), this, SLOT(resourceReply(QNetworkReply*)));
- 
-  connect(this, SIGNAL(javaScriptInjected()), rimStageWebview(), SLOT(continueLoad()));
+    connect(rimStageWebview()->page()->mainFrame(), SIGNAL(networkResourceRequest(QNetworkRequest*)), this, SLOT(resourceRequest(QNetworkRequest*)));
+    connect(rimStageWebview()->page()->mainFrame(), SIGNAL(networkResourceReply(QNetworkReply*)), this, SLOT(resourceReply(QNetworkReply*)));
+    connect(this, SIGNAL(javaScriptInjected()), rimStageWebview(), SLOT(continueLoad()));
 }
 
 void StageViewMsgHandler::loadUrl(const QString& url)

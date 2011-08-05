@@ -51,26 +51,27 @@ public slots:
 	int historyLength();
 	int historyPosition();
 	void historyPosition(int position);
-  //following slots are used internal for emit signals which will be connected from js side
-  void urlChanged(const QString& url);
+    //following slots are used internal for emit signals which will be connected from js side
+    void urlChanged(const QString& url);
 	void javaScriptWindowObjectCleared();
 	void processMessage(Message* pMsg);
-  void resourceRequest(QNetworkRequest* request);
-  void resourceReply(QNetworkReply* reply);
+    void resourceRequest(QNetworkRequest* request);
+    void resourceReply(QNetworkReply* reply);
 
 //stagewebview events
 signals:
 	void locationChanged(const QString& url);
-  void javaScriptWindowCleared();
-  void javaScriptInjected();
-  void onRequest(QObject* request);
-  void onResponse(QObject* response);
+    void javaScriptWindowCleared();
+    void javaScriptInjected();
+    void onRequest(QObject* request);
+    void onResponse(QObject* response);
 
 protected:
     void registerEvents();
 
 private:
-  RequestObject* m_pRequest;
+    RequestObject* m_pRequest;
+
 	virtual IStarbuckWebView* stageWebview()
 	{
 		return dynamic_cast<IStarbuckWebView*>(m_pWebView);

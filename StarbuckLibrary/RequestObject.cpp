@@ -29,29 +29,29 @@ RequestObject::~RequestObject()
 
 void RequestObject::setUrl(QString& url)
 {
-  m_url = url;
+    m_url = url;
 }
 
 void RequestObject::setWebFrame(QWebFrame* frame)
 {
-  m_pWebFrame = frame;
+    m_pWebFrame = frame;
 }
 
 void RequestObject::allow()
 {
-  qDebug() << "allowed access: " << m_url;
-  m_pWebFrame->setAllowAccess(true);
+    qDebug() << "allowed access: " << m_url;
+    m_pWebFrame->setAllowAccess(true);
 }
 
 void RequestObject::deny()
 {
-  qDebug() << "denied access: " << m_url;
-  m_pWebFrame->setAllowAccess(false);
+    qDebug() << "denied access: " << m_url;
+    m_pWebFrame->setAllowAccess(false);
 }
 
 void RequestObject::respond(QString code, QString url)
 {
-  qDebug() << "respond code: " << code << "responde message:" << url;
-  //TODO: write response text and set the response code
+    qDebug() << "respond code: " << code << "responde message:" << url;
+    //TODO: write response text and set the response code
 }
 
