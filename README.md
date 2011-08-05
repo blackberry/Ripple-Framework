@@ -27,7 +27,31 @@ You can also find associated reference material for the Ripple tool as well as c
 * Coming Soon
 
 ## Building the Source Code
-* cmake .. -G "Visual Studio 9 2008"
+
+# Windows (QtWebKit)
+* Make sure Qt 4.7.3 is setup on your system and configured properly.
+* Use the provided qmake projects to compile.
+* Once compiled add reference to custom QtWebKit in Starbuck project.
+
+# Windows (framework only)
+* Create a build directory in your root folder (mkdir build).
+* cd build
+* cmake ..
+* Open resulting solution file in Visual Studio and build.
+
+# Linux (Ubuntu) (QtWebKit)
+* Be sure you have all the necessary packages to build: libqt4-dev, libxrender-dev, libsqlite3-dev
+* Run qmake in root folder.
+* make
+* Copy custom lib.so files into Starbuck folder to be linked.
+
+# Linux (Ubuntu) (framework only)
+* Be sure you have all the necessary packages to build: cmake, libqt4-dev
+* cmake .
+* make
+
+# MacOS X
+* Coming soon
 
 ## Testing the Source Code
 *Coming Soon*
