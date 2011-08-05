@@ -18,7 +18,7 @@
 #define MESSAGEQUEUE_H
 
 #include <QObject>
-#include <Message.h>
+#include <message.h>
 #include "messagehandler.h"
 #include <boost/interprocess/managed_shared_memory.hpp>
 #include <boost/interprocess/containers/deque.hpp>
