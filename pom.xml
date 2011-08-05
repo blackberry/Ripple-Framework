@@ -100,6 +100,22 @@
 									</arguments>
 								</configuration>
 							</execution>
+							<!-- build the installer for windows -->
+							<execution>
+								<id>build</id>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<workingDirectory>${project.build.sourceDirectory}</workingDirectory>
+									<executable>build.exe</executable>
+									<arguments>
+										<argument>Ripple.iap_xml</argument>
+										<argument>-x</argument>
+									</arguments>
+								</configuration>
+							</execution>
 							<!--
 							<execution>	
 								<id>runUnitTests</id>
@@ -116,7 +132,7 @@
 						</executions>
 					</plugin>
 					
-					<!-- Package the header files and the lib/dll files for the starbuck project -->
+					<!-- Move the header files and the lib/dll to the target directory -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-assembly-plugin</artifactId>
@@ -124,7 +140,7 @@
 						<executions>
 							<execution>
 								<id>assembly</id>
-								<phase>package</phase>
+								<phase>prepare-package</phase>
 								<goals>
 									<goal>single</goal>
 								</goals>
@@ -196,6 +212,7 @@
 									</arguments>
 								</configuration>
 							</execution>
+							
 							<!--
 							<execution>	
 								<id>runUnitTests</id>
@@ -212,7 +229,7 @@
 						</executions>
 					</plugin>
 					
-					<!-- Compress Starbuck.app into a zip file -->
+					<!-- Move Starbuck.app into a target directory -->
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-assembly-plugin</artifactId>
@@ -220,7 +237,7 @@
 						<executions>
 							<execution>
 								<id>assembly</id>
-								<phase>package</phase>
+								<phase>prepare-package</phase>
 								<goals>
 									<goal>single</goal>
 								</goals>
@@ -232,7 +249,7 @@
 								</configuration>
 							</execution>
 						</executions>
-					</plugin>
+					</plugin> 					
 				</plugins>
 			</build>
 		</profile>
