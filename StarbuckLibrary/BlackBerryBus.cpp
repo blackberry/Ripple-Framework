@@ -71,7 +71,7 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData, bool async)
 
 void BlackBerryBus::trigger(QString eventName, QString jsonData)
 {
-  if (_listener[eventName]) 
+  if (_listener.contains(eventName)) 
   {
     QList<CallbackInfo>* info = _listener[eventName];
     for(int i = 0; i < (*info).length(); i++)
