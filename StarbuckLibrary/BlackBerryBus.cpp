@@ -23,7 +23,7 @@ using namespace BlackBerry::Starbuck;
 QMap<QString, QList<CallbackInfo>*> BlackBerryBus::_listener;
 
 BlackBerryBus::BlackBerryBus(QObject *parent, QWebFrame *webFrame)
-  : QObject(parent), m_pWebFrame(webFrame)
+  : QObject(parent), m_pWebFrame(webFrame), _async(false)
 {
     // seed the random generator
     qsrand(QTime::currentTime().msec());
@@ -53,20 +53,9 @@ QString BlackBerryBus::generateRandomFunctionName()
 void BlackBerryBus::trigger(QString eventName, QString jsonData, bool async)
 {
     if (async)
-    {
-      if (_listener[eventName]) 
-      {
-        QList<CallbackInfo>* info = _listener[eventName];
-        for(int i = 0; i < (*info).length(); i++)
-        {
-          CallbackInfo callback = (*info)[i];
-          QString evalString("eventbus.trigger('" + eventName + "', '" + jsonData + "')");
-          QVariant res = callback.frame->evaluateJavaScript("setTimeout(\"" + evalString + "\", 1)");
-        }
-      }
-    }
-    else
-        trigger(eventName, jsonData);
+        _async = true;
+    
+    trigger(eventName, jsonData);
 }
 
 void BlackBerryBus::trigger(QString eventName, QString jsonData)
@@ -78,7 +67,15 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData)
     {
       CallbackInfo callback = (*info)[i];
       QString evalString("eventbus.trigger('" + eventName + "', '" + jsonData + "')");
-      QVariant res = callback.frame->evaluateJavaScript(evalString);
+
+      if (_async)
+      {
+          callback.frame->evaluateJavaScript("setTimeout(\"" + evalString + "\", 1)");
+          _async = false;
+      }
+      else
+        callback.frame->evaluateJavaScript(evalString);
+
     }
   }
 }

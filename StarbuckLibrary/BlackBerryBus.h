@@ -61,6 +61,7 @@ public:
   ~BlackBerryBus();
 private:
   static QMap<QString, QList<CallbackInfo>*> _listener;
+  bool _async;
   QWebFrame *m_pWebFrame;
   QtStageWebView *m_pInternalWebView;
   QString generateRandomFunctionName();
