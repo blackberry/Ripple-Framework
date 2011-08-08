@@ -20,7 +20,9 @@
 bool ConfigData::_instanceFlag = false;
 ConfigData* ConfigData::_instance = NULL;
 
-const QString ConfigData::APPLICATION_NAME_IN_SETTINGS = "Starbuck";
+const QString ConfigData::CONFIGURATION_FILE_NAME = "config.ini";
+
+const QString ConfigData::APPLICATION_NAME_IN_SETTINGS = "Ripple";
 const QString ConfigData::TOOLING_CONTENT_NAME_IN_SETTINGS = "windowContent";
 const QString ConfigData::MAIN_WINDOW_SIZE_NAME_IN_SETTINGS = "windowSize";
 const QString ConfigData::MAIN_WINDOW_POSITION_NAME_IN_SETTINGS = "windowPos"; 
@@ -33,18 +35,23 @@ const QString ConfigData::LOCAL_STORAGE_PATH_DEFAULT = "";
 
 ConfigData::ConfigData(void)
 {
+	QString config_path(QCoreApplication::applicationDirPath() + QDir::separator() + CONFIGURATION_FILE_NAME);
+	_settings = new QSettings(config_path, QSettings::IniFormat);
+
     readSettings();
 }
 
 ConfigData::~ConfigData(void)
 {
-    _instanceFlag = false;	
-    _instance = NULL;	
+	_instanceFlag = false;	
+	_instance = NULL;
+
+	delete _settings;
 }
 
 ConfigData* ConfigData::getInstance(void)
 {
-    if(!_instanceFlag)
+    if (!_instanceFlag)
     {
         _instance = new ConfigData();
         _instanceFlag = true;
@@ -58,22 +65,22 @@ ConfigData* ConfigData::getInstance(void)
 
 void ConfigData::writeSettings()
 {
-    _settings.beginGroup(APPLICATION_NAME_IN_SETTINGS);
-    _settings.setValue(MAIN_WINDOW_SIZE_NAME_IN_SETTINGS, _mainWindowSize);
-    _settings.setValue(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, _mainWindowPosition);
-    _settings.setValue(TOOLING_CONTENT_NAME_IN_SETTINGS, _toolingContent);
-    _settings.setValue(LOCAL_STORAGE_PATH_IN_SETTINGS, _localStoragePath);
-    _settings.endGroup();
+	_settings->beginGroup(APPLICATION_NAME_IN_SETTINGS);
+	_settings->setValue(MAIN_WINDOW_SIZE_NAME_IN_SETTINGS, _mainWindowSize);
+	_settings->setValue(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, _mainWindowPosition);
+	_settings->setValue(TOOLING_CONTENT_NAME_IN_SETTINGS, _toolingContent);
+	_settings->setValue(LOCAL_STORAGE_PATH_IN_SETTINGS, _localStoragePath);
+	_settings->endGroup();
 }
 
 void ConfigData::readSettings()
 {
-    _settings.beginGroup(APPLICATION_NAME_IN_SETTINGS);
-    _mainWindowSize = _settings.value(MAIN_WINDOW_SIZE_NAME_IN_SETTINGS, MAIN_WINDOW_SIZE_DEFAULT).toSize();
-    _mainWindowPosition = _settings.value(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, MAIN_WINDOW_POSITION_DEFAULT).toPoint();    
-    _toolingContent = _settings.value(TOOLING_CONTENT_NAME_IN_SETTINGS, TOOLING_CONTENT_DEFAULT).toString();
-    _localStoragePath = _settings.value(LOCAL_STORAGE_PATH_IN_SETTINGS, LOCAL_STORAGE_PATH_DEFAULT).toString();
-    _settings.endGroup();
+	_settings->beginGroup(APPLICATION_NAME_IN_SETTINGS);
+	_mainWindowSize = _settings->value(MAIN_WINDOW_SIZE_NAME_IN_SETTINGS, MAIN_WINDOW_SIZE_DEFAULT).toSize();
+	_mainWindowPosition = _settings->value(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, MAIN_WINDOW_POSITION_DEFAULT).toPoint();    
+	_toolingContent = _settings->value(TOOLING_CONTENT_NAME_IN_SETTINGS, TOOLING_CONTENT_DEFAULT).toString();
+	_localStoragePath = _settings->value(LOCAL_STORAGE_PATH_IN_SETTINGS, LOCAL_STORAGE_PATH_DEFAULT).toString();
+	_settings->endGroup();
 }
 
 QString ConfigData::toolingContent()
