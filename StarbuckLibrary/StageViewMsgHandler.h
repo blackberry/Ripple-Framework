@@ -57,6 +57,7 @@ public slots:
 	void processMessage(Message* pMsg);
     void resourceRequest(QNetworkRequest* request);
     void resourceReply(QNetworkReply* reply);
+	void reload();
 
 //stagewebview events
 signals:

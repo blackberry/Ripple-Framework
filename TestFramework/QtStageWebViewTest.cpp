@@ -409,3 +409,24 @@ TEST(QtStageWebView, CanSignalJavaScriptWindowCleared)
 
 	EXPECT_EQ(1, spy.count());
 }
+
+TEST(QtStageWebView, CanReloadPage)
+{
+	QtStageWebView webview;
+	webview.continueLoad();
+
+	webview.loadURL("http://www.google.ca");
+
+    // Create an event loop to wait for the loadFinished when loading webpages
+	QEventLoop loop;
+    QTimer::singleShot(5000, &loop, SLOT(quit()));
+
+    // Change the document title, this should get reset when we reload the page
+    webview.executeJavaScript("document.title = 'testing'");
+
+    webview.reload();
+
+    QVariant result = webview.executeJavaScript("document.title");
+
+    EXPECT_NE(result.toString(), "testing");
+}
