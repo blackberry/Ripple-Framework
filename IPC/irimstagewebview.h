@@ -34,5 +34,6 @@ public:
 	virtual int historyPosition() = 0;
 	virtual void historyPosition(int position) = 0;
 	virtual void setWindowGeometry(int x, int y, int w, int h) = 0;
+    virtual void reload() = 0;
 };
 }}}

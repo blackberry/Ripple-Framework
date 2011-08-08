@@ -84,10 +84,10 @@ public:
      */
 	QString location();
 
-  void setWindowGeometry(int x, int y, int w, int h)
-  {
-    setGeometry(x,y,w,h);
-  }
+    void setWindowGeometry(int x, int y, int w, int h)
+    {
+        setGeometry(x,y,w,h);
+    }
 
 	/**
      * The HTML title value.
@@ -595,7 +595,6 @@ public:
 	//fullscreenClientRelease
 	//fullscreenNativeInit
 	//fullscreenExited
-
 signals:
 	void urlChanged(QString);
 	void javaScriptWindowObjectCleared();

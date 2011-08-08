@@ -47,6 +47,7 @@ public:
 	MOCK_METHOD0(historyPosition, int());
 	MOCK_METHOD1(historyPosition, void(int));
 	MOCK_METHOD4(setWindowGeometry, void(int,int,int,int));
+    MOCK_METHOD0(reload, void());
 //	MOCK_METHOD1(injectJavaScriptObj, void(const QObject *jsObj));
 };
 

@@ -52,11 +52,14 @@ public slots:
 	int historyPosition();
 	void historyPosition(int position);
     //following slots are used internal for emit signals which will be connected from js side
-    void urlChanged(const QString& url);
+        void urlChanged(const QString& url);
 	void javaScriptWindowObjectCleared();
 	void processMessage(Message* pMsg);
-    void resourceRequest(QNetworkRequest* request);
-    void resourceReply(QNetworkReply* reply);
+        void resourceRequest(QNetworkRequest* request);
+        void resourceReply(QNetworkReply* reply);
+  	void resourceRequest(QNetworkRequest* request);
+  	void resourceReply(QNetworkReply* reply);
+        void refresh();
 
 //stagewebview events
 signals:
