@@ -44,6 +44,7 @@ private:
 	ConfigData(void);	
 	void readSettings();
 
+	static const QString CONFIGURATION_FILE_NAME;
 	static const QString APPLICATION_NAME_IN_SETTINGS;
 	static const QString TOOLING_CONTENT_NAME_IN_SETTINGS;
 	static const QString TOOLING_CONTENT_DEFAULT;
@@ -56,7 +57,8 @@ private:
 
 	static ConfigData* _instance;
 	static bool _instanceFlag;
-	QSettings _settings;
+	QSettings *_settings;
+
 	QString _toolingContent;
 	QSize _mainWindowSize;
 	QPoint _mainWindowPosition;	
