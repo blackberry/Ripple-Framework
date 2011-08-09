@@ -33,7 +33,7 @@ const QString eventbusSource("window.eventbus = (function() {\
                     var fname = _eventbus.on(event, \"function\");\
                     _objMap[fname] = what;\
                 },\
-                trigger: function(event, data) {\
+                trigger: function(event, data, blah) {\
                     var fnames = _eventbus.getFunctionName(event);\
                     fnames = fnames.split(\";\");\
                     for(var i = 0; i<fnames.length; i++) {\
@@ -42,6 +42,14 @@ const QString eventbusSource("window.eventbus = (function() {\
                             eval(_objMap[prop](data));\
                         else\
                             _eventbus.trigger(event, data);\
+                        }\
+                },\
+                internal: function(event, data) {\
+                    var fnames = _eventbus.getFunctionName(event);\
+                    fnames = fnames.split(\";\");\
+                    for(var i = 0; i<fnames.length; i++) {\
+                        var prop = fnames[i];\
+                            eval(_objMap[prop](data));\
                         }\
                 }\
             };\

@@ -66,7 +66,7 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData)
     for(int i = 0; i < (*info).length(); i++)
     {
       CallbackInfo callback = (*info)[i];
-      QString evalString("eventbus.trigger('" + eventName + "', '" + jsonData + "')");
+      QString evalString("eventbus.internal('" + eventName + "', '" + "" + ")");
 
       if (_async)
       {
@@ -74,7 +74,9 @@ void BlackBerryBus::trigger(QString eventName, QString jsonData)
           _async = false;
       }
       else
-        callback.frame->evaluateJavaScript(evalString);
+      {
+          callback.frame->evaluateJavaScript(evalString);
+      }
 
     }
   }
