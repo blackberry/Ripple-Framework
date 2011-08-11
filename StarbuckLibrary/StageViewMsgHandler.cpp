@@ -139,6 +139,8 @@ void StageViewMsgHandler::processMessage(Message* pMsg)
 void StageViewMsgHandler::resourceRequest(QNetworkRequest* request)
 {
   //qDebug() << "emit stagewebview.OnRequest(), url:" << request->url().toString();
+  QString request_string(request->url().toString());
+  m_pRequest->setUrl(request_string);
   m_pRequest->setWebFrame(rimStageWebview()->page()->mainFrame());
   emit onRequest(m_pRequest);
   //qDebug() << " stagewebview.OnRequest() emitted";
