@@ -16,11 +16,10 @@
 
 #include "stdafx.h"
 #include "QtStageWebView.h"
-#include "BlackBerryBus.h"
 
 using namespace BlackBerry::Starbuck;
 
-QtStageWebView::QtStageWebView(QWidget *p) : QWebView(p), waitForJsLoad(true)
+QtStageWebView::QtStageWebView(QWidget *p) : QWebView(p), waitForJsLoad(false)
 {	
     //Turn off context menu's (i.e. menu when right clicking, you will need to uncommment this if you want to use web inspector,
     //there is currently a conflict between the context menus when using two QWebView's
@@ -68,7 +67,7 @@ void QtStageWebView::notifyUrlChanged(const QUrl& url)
 
 void QtStageWebView::notifyJavaScriptWindowObjectCleared()
 {
-  registerEventbus();
+//  registerEventbus();
   QEventLoop loop;
   QObject::connect(this, SIGNAL(jsLoaded()), &loop, SLOT(quit()));
     emit javaScriptWindowObjectCleared();
@@ -77,6 +76,7 @@ void QtStageWebView::notifyJavaScriptWindowObjectCleared()
       loop.exec();
 }
 
+#if 0
 void QtStageWebView::registerEventbus()
 {
     QWebFrame* frame = page()->mainFrame();
@@ -90,6 +90,7 @@ void QtStageWebView::registerEventbus()
         frame->childFrames()[i]->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
   }
 }
+#endif
 
 void QtStageWebView::continueLoad()
 {

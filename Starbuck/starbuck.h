@@ -22,11 +22,7 @@
 #include <QProgressBar>
 #include <QWebView>
 #include "ConfigData.h"
-#include "ipcbridge.h"
 #include "StageViewMsgHandler.h"
-#include "xhrmsghandler.h"
-#include "BlackBerryBus.h"
-#include "RequestObject.h"
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
@@ -48,17 +44,13 @@ namespace BlackBerry
 
     private slots:
         void registerAPIs();
-        void registerInternalAPIs();
 
     private:
         static const int PROGRESS_BAR_HEIGHT;
-        QWebView* webView;
         QtStageWebView* webViewInternal;
         QProgressBar* progressBar;
         ConfigData *_config;
-        IPCBridge* m_pBridge;
         StageViewMsgHandler* m_pStageViewHandler;
-        XHRMsgHandler* m_pXHRHandler;
 
         void init(void);    
     };

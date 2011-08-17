@@ -606,7 +606,7 @@ private:
 	unsigned int _headersSize;
   bool waitForJsLoad;
   
-  void registerEventbus();
+//  void registerEventbus();
 
   public slots:
     void continueLoad();

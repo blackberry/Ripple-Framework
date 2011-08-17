@@ -40,13 +40,11 @@ void RequestObject::setWebFrame(QWebFrame* frame)
 void RequestObject::allow()
 {
     qDebug() << "allowed access: " << m_url;
-    m_pWebFrame->setAllowAccess(true);
 }
 
 void RequestObject::deny()
 {
     qDebug() << "denied access: " << m_url;
-    m_pWebFrame->setAllowAccess(false);
 }
 
 void RequestObject::respond(QString code, QString url)

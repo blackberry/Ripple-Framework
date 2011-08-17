@@ -16,18 +16,14 @@
 
 #ifndef STAGEVIEWMSGHANDLER_H
 #define STAGEVIEWMSGHANDLER_H
-#include "messagehandler.h"
 #include "QtStageWebView.h"
-#include "RequestObject.h"
-#include <QNetworkRequest>
-#include <QNetworkReply>
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
 namespace BlackBerry {
 namespace Starbuck {
 
-class StageViewMsgHandler : public MessageHandler
+class StageViewMsgHandler : public QObject
 {
   Q_OBJECT
 
@@ -35,6 +31,12 @@ public:
     StageViewMsgHandler(QObject *parent = 0);
     ~StageViewMsgHandler();
    
+    void Register(IStarbuckWebView* pWebView)
+    {
+      m_pWebView = pWebView;
+      registerEvents();
+    }
+
 //stagewebview APIs
 public slots:
 	void loadUrl(const QString& url);
@@ -54,9 +56,6 @@ public slots:
     //following slots are used internal for emit signals which will be connected from js side
     void urlChanged(const QString& url);
 	void javaScriptWindowObjectCleared();
-	void processMessage(Message* pMsg);
-    void resourceRequest(QNetworkRequest* request);
-    void resourceReply(QNetworkReply* reply);
 	void reload();
 
 //stagewebview events
@@ -71,8 +70,6 @@ protected:
     void registerEvents();
 
 private:
-    RequestObject* m_pRequest;
-
 	virtual IStarbuckWebView* stageWebview()
 	{
 		return dynamic_cast<IStarbuckWebView*>(m_pWebView);
@@ -82,6 +79,8 @@ private:
 	{
 		return dynamic_cast<QtStageWebView*>(m_pWebView);
 	}
+
+	IStarbuckWebView* m_pWebView;
 };
 }}
 #endif // STAGEVIEWMSGHANDLER_H

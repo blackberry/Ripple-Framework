@@ -34,36 +34,31 @@ Starbuck::~Starbuck()
     if ( progressBar != NULL )
     delete progressBar;
 
-    if ( webView != NULL )
-    delete webView;
+    if ( webViewInternal != NULL )
+    delete webViewInternal;
 }
 
 void Starbuck::init(void)
 {
     _config = ConfigData::getInstance();
     setAttribute(Qt::WA_DeleteOnClose);
-    webView = new QWebView(); 
-
-    //webView->setContextMenuPolicy(Qt::NoContextMenu);
-    webView->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-
-    //Enable local persistent storage for local database
-    webView->settings()->enablePersistentStorage(_config->localStoragePath());
 
     QSize size = _config->windowSize();
 
-    webViewInternal = new QtStageWebView(webView);
+    webViewInternal = new QtStageWebView;
+	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
 
     //Progress bar-------------------------
-    progressBar = new QProgressBar(webView);
+    progressBar = new QProgressBar(webViewInternal);
     progressBar->setObjectName(QString::fromUtf8("progressBar"));
     //When the loading of a new page has started, show and reset the progress bar
-    connect(webView, SIGNAL(loadStarted()), progressBar, SLOT( show() ));
-    connect(webView, SIGNAL(loadStarted()), progressBar, SLOT( reset()));
+    connect(webViewInternal, SIGNAL(loadStarted()), progressBar, SLOT( show() ));
+    connect(webViewInternal, SIGNAL(loadStarted()), progressBar, SLOT( reset()));
     //Increment the progress bar as the page loads
-    connect(webView, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int))); 
+    connect(webViewInternal, SIGNAL(loadProgress(int)), progressBar, SLOT(setValue(int))); 
     //When page is finished loading, hide the progress bar
-    connect(webView, SIGNAL(loadFinished(bool)), progressBar, SLOT( hide() ));
+    connect(webViewInternal, SIGNAL(loadFinished(bool)), progressBar, SLOT( hide() ));
     //--------------------------------------
     resize(size);
     //Set geometry for progressbar
@@ -71,26 +66,16 @@ void Starbuck::init(void)
 
     move(_config->windowPosition());
 
-    webView->load(QUrl(_config->toolingContent()));
+    webViewInternal->load(QUrl(_config->toolingContent()));
 
-    setCentralWidget(webView);
+    setCentralWidget(webViewInternal);
 
     //register webview
-    connect(webView->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerAPIs()));
-    connect(webViewInternal->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerInternalAPIs()));
+    connect(webViewInternal->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerAPIs()));
   
     //stagewebview interfaces
     m_pStageViewHandler = new StageViewMsgHandler(this);
     m_pStageViewHandler->Register(webViewInternal);
-
-    //XHR message handler
-    //m_pXHRHandler = new XHRMsgHandler(this, webView);
-    //m_pXHRHandler->Register(webViewInternal);
-    //initialize IPCBridge and register XHRHandler
-    //QString ssm = QString("StarbuckSM");
-    //m_pBridge = new IPCBridge(ssm, this);
-    //m_pBridge->RegisterMessageHandler(m_pXHRHandler);
-    //m_pBridge->Start();
 }
 
 void Starbuck::closeEvent(QCloseEvent *event)
@@ -103,24 +88,8 @@ void Starbuck::closeEvent(QCloseEvent *event)
 void Starbuck::registerAPIs()
 {
     //register StageWebViewMsgHandler as JS object named stagewebview
-    QWebFrame* frame = webView->page()->mainFrame();
-    frame->addToJavaScriptWindowObject(QString("stagewebview"), m_pStageViewHandler);
-    frame->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame));
-    frame->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
-}
-
-void Starbuck::registerInternalAPIs()
-{
     QWebFrame* frame = webViewInternal->page()->mainFrame();
-    frame->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame));
-    frame->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
-
-    // check for iframes, if found add to window object
-    for(int i = 0; i < frame->childFrames().length(); i++)
-    {
-        frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame->childFrames()[i]));
-        frame->childFrames()[i]->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
-    }
+    frame->addToJavaScriptWindowObject(QString("stagewebview"), m_pStageViewHandler);
 }
 
 void Starbuck::resizeEvent(QResizeEvent * e )

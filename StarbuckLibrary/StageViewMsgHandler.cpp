@@ -21,10 +21,8 @@ using namespace BlackBerry::Starbuck;
 using namespace BlackBerry::Starbuck::IPCChannel;
 
 StageViewMsgHandler::StageViewMsgHandler(QObject *parent)
-	: MessageHandler(parent)
+	: QObject(parent)
 {
-	QString request_string;
-	m_pRequest = new RequestObject(request_string, this);
 }
 
 StageViewMsgHandler::~StageViewMsgHandler()
@@ -130,7 +128,7 @@ void StageViewMsgHandler::javaScriptWindowObjectCleared()
 {
 	emit javaScriptWindowCleared();
 }
-
+#if 0
 void StageViewMsgHandler::processMessage(Message* pMsg)
 {
 	emit messageProcessed(pMsg);
@@ -151,3 +149,4 @@ void StageViewMsgHandler::resourceReply(QNetworkReply* reply)
   emit onResponse(this);
   //qDebug() << " stagewebview.onResponse() emitted";
 }
+#endif
