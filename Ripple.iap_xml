@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- This script was automatically generated using InstallAnywhere 2011 Enterprise, Build 4085
+<!-- This script was automatically generated using InstallAnywhere 2010 Enterprise, Build 3972
      STATUS: Fully-Functional UNLICENSED Trial Edition
-     DATE:   Thu Aug 04 08:04:25 EDT 2011 -->
-<InstallAnywhere_Deployment_Project increments="2366">
+     DATE:   Fri Aug 12 08:14:06 EDT 2011 -->
+<InstallAnywhere_Deployment_Project increments="2214">
 	<!-- ** DO NOT EDIT ** Essential authorization and configuration data ** DO NOT EDIT ** -->
 	<essentialScriptInfo>
-		<versionID major="12" minor="0" revision="0"/>
-		<editionID>49,50,46,48,32,69,110,116,101,114,112,114,105,115,101,32,66,117,105,108,100,32,52,48,56,53</editionID>
+		<versionID major="11" minor="5" revision="0"/>
+		<editionID>49,49,46,53,32,69,110,116,101,114,112,114,105,115,101,32,66,117,105,108,100,32,51,57,55,50</editionID>
 		<scriptID>12,42,11,85,78,76,73,67,69,78,83,69,68</scriptID>
 		<buildID>3,13,71,87,105,110,100,111,119,115,32,88,80,44,32,53,46,49,44,32,120,56,54,59,32,74,97,118,97,32,49,46,54,46,48,95,49,53,44,32,83,117,110,32,77,105,99,114,111,115,121,115,116,101,109,115,32,73,110,99,46,44,32,104,116,116,112,58,47,47,106,97,118,97,46,115,117,110,46,99,111,109,47,59,32,101,110,44,32,85,110,107,110,111,119,110,59,32,67,112,49,50,53,50</buildID>
 		<!-- The authorizationID may change between project saves and builds.  This does not effect the integrity of the project, nor do changes in this value represent changes in the actual InstallAnywhere project. -->
-		<authorizationID>1,0,0,48,-109,-91,32,96,64,99,70,101,125,121,100,96,105,48,48,49,56,52,67,98,113,112,124,44,81,100,99,62,57,15,14,2,1,30,100,1,1,0,0</authorizationID>
+		<authorizationID>1,0,0,48,-77,-27,-48,-64,64,99,70,101,125,121,100,96,105,48,48,49,56,52,67,98,113,112,124,44,81,100,99,62,57,15,14,12,15,25,109,1,1,0,0</authorizationID>
 	</essentialScriptInfo>
-	<installationObjects uniqueObjects="110">
+	<installationObjects uniqueObjects="111">
 		<object class="com.zerog.ia.installer.Installer" objectID="a549fc3c9248">
 			<property name="belongsToUninstallPhase">
 				<boolean>false</boolean>
@@ -22,9 +22,6 @@
 			</property>
 			<property name="rollbackEnabledError">
 				<boolean>true</boolean>
-			</property>
-			<property name="ruleExpression">
-				<string><![CDATA[]]></string>
 			</property>
 			<property name="tagsInInstallPiece">
 				<object class="java.util.Vector"/>
@@ -39,9 +36,6 @@
 					</property>
 					<property name="rollbackEnabledError">
 						<boolean>true</boolean>
-					</property>
-					<property name="ruleExpression">
-						<string><![CDATA[]]></string>
 					</property>
 					<property name="unixPermissions">
 						<string><![CDATA[664]]></string>
@@ -125,6 +119,19 @@ Relative paths are relative to the launcher.]]></string>
 								</object>
 							</method>
 							<method name="addElement">
+								<object class="com.zerog.ia.installer.util.LAXPropertyData" objectID="a82f28de9254">
+									<property name="propertyValue">
+										<string><![CDATA[$USER_INSTALL_DIR$]]></string>
+									</property>
+									<property name="propertyName">
+										<string><![CDATA[lax.root.install.dir]]></string>
+									</property>
+									<property name="propertyComment">
+										<string><![CDATA[path to the installdir magic folder]]></string>
+									</property>
+								</object>
+							</method>
+							<method name="addElement">
 								<object class="com.zerog.ia.installer.util.LAXPropertyData" objectID="a82f28de9257">
 									<property name="propertyValue">
 										<string><![CDATA[0]]></string>
@@ -138,19 +145,6 @@ Relative paths are relative to the launcher.]]></string>
 1, to Prefer 32bit JVM, if not available use 64 bit JVM
 2, to Prefer 64bit JVM, if not available exit with error
 3, to Prefer 32bit JVM, if not available exit with error]]></string>
-									</property>
-								</object>
-							</method>
-							<method name="addElement">
-								<object class="com.zerog.ia.installer.util.LAXPropertyData" objectID="a82f28de9254">
-									<property name="propertyValue">
-										<string><![CDATA[$USER_INSTALL_DIR$]]></string>
-									</property>
-									<property name="propertyName">
-										<string><![CDATA[lax.root.install.dir]]></string>
-									</property>
-									<property name="propertyComment">
-										<string><![CDATA[path to the installdir magic folder]]></string>
 									</property>
 								</object>
 							</method>
@@ -242,9 +236,6 @@ and any path to a file to save to the file]]></string>
 					</property>
 					<property name="launcherVMBehavior">
 						<int>3</int>
-					</property>
-					<property name="ruleExpression">
-						<string><![CDATA[]]></string>
 					</property>
 				</object>
 			</property>
@@ -362,45 +353,6 @@ and any path to a file to save to the file]]></string>
 			<property name="installLogEnabled">
 				<boolean>false</boolean>
 			</property>
-			<property name="logEnabled">
-				<boolean>false</boolean>
-			</property>
-			<property name="installLogUninstall">
-				<boolean>false</boolean>
-			</property>
-			<property name="addLogEnabled">
-				<boolean>false</boolean>
-			</property>
-			<property name="repairLogEnabled">
-				<boolean>false</boolean>
-			</property>
-			<property name="removeLogEnabled">
-				<boolean>false</boolean>
-			</property>
-			<property name="uninstallLogEnabled">
-				<boolean>false</boolean>
-			</property>
-			<property name="uninstallAllLogsEnabled">
-				<boolean>true</boolean>
-			</property>
-			<property name="stdErrEnabled">
-				<boolean>false</boolean>
-			</property>
-			<property name="installLogPath">
-				<string><![CDATA[$USER_INSTALL_DIR$$\$_$PRODUCT_NAME$_installation$\$Logs$/$]]></string>
-			</property>
-			<property name="addLogPath">
-				<string><![CDATA[$USER_INSTALL_DIR$$\$_$PRODUCT_NAME$_installation$\$Logs$/$]]></string>
-			</property>
-			<property name="removeLogPath">
-				<string><![CDATA[$USER_INSTALL_DIR$$\$_$PRODUCT_NAME$_installation$\$Logs$/$]]></string>
-			</property>
-			<property name="repairLogPath">
-				<string><![CDATA[$USER_INSTALL_DIR$$\$_$PRODUCT_NAME$_installation$\$Logs$/$]]></string>
-			</property>
-			<property name="uninstallLogPath">
-				<string><![CDATA[$USER_INSTALL_DIR$$\$_$PRODUCT_NAME$_installation$\$Logs$/$]]></string>
-			</property>
 			<property name="installLogFormat">
 				<int>1</int>
 			</property>
@@ -434,9 +386,6 @@ and any path to a file to save to the file]]></string>
 							</property>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
-							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
 							</property>
 							<property name="imageOption">
 								<int>1</int>
@@ -484,9 +433,6 @@ You may cancel this installation at any time by clicking the 'Cancel' button.]]>
 							</property>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
-							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
 							</property>
 							<property name="imageOption">
 								<int>1</int>
@@ -544,9 +490,6 @@ You may cancel this installation at any time by clicking the 'Cancel' button.]]>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
 							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
-							</property>
 							<property name="imageOption">
 								<int>1</int>
 							</property>
@@ -591,9 +534,6 @@ You may cancel this installation at any time by clicking the 'Cancel' button.]]>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
 							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
-							</property>
 							<property name="imageOption">
 								<int>1</int>
 							</property>
@@ -627,9 +567,6 @@ You may cancel this installation at any time by clicking the 'Cancel' button.]]>
 							<property name="showDiskSpace">
 								<boolean>true</boolean>
 							</property>
-							<property name="diskSpaceUnit">
-								<int>0</int>
-							</property>
 							<property name="labelOption">
 								<int>2</int>
 							</property>
@@ -662,9 +599,6 @@ You may cancel this installation at any time by clicking the 'Cancel' button.]]>
 							</property>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
-							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
 							</property>
 							<property name="imageOption">
 								<int>1</int>
@@ -816,24 +750,6 @@ Press "Done" to quit the installer.]]></string>
 											<property name="buildWithVM">
 												<boolean>false</boolean>
 											</property>
-											<property name="withoutVmSearchOption">
-												<short>10</short>
-											</property>
-											<property name="withVMSearchOption">
-												<short>21</short>
-											</property>
-											<property name="win32InstallerLauncherType">
-												<short>90</short>
-											</property>
-											<property name="jvmResolutionFileSpecs">
-												<object class="java.util.Vector"/>
-											</property>
-											<property name="md5CheckApplicable_search_notFound_download">
-												<boolean>false</boolean>
-											</property>
-											<property name="md5CheckApplicable_dontSearch_download">
-												<boolean>false</boolean>
-											</property>
 										</object>
 									</method>
 									<method name="addElement">
@@ -850,23 +766,8 @@ Press "Done" to quit the installer.]]></string>
 											<property name="buildWithVM">
 												<boolean>false</boolean>
 											</property>
-											<property name="withoutVmSearchOption">
-												<short>10</short>
-											</property>
-											<property name="withVMSearchOption">
-												<short>21</short>
-											</property>
-											<property name="win32InstallerLauncherType">
-												<short>90</short>
-											</property>
-											<property name="jvmResolutionFileSpecs">
-												<object class="java.util.Vector"/>
-											</property>
-											<property name="md5CheckApplicable_search_notFound_download">
-												<boolean>false</boolean>
-											</property>
-											<property name="md5CheckApplicable_dontSearch_download">
-												<boolean>false</boolean>
+											<property name="bundledVM">
+												<string><![CDATA[SunJRE160_15Win32.vm]]></string>
 											</property>
 										</object>
 									</method>
@@ -917,7 +818,7 @@ Press "Done" to quit the installer.]]></string>
 								<boolean>true</boolean>
 							</property>
 							<property name="buildOutputLocation">
-								<string><![CDATA[C:\Documents and Settings\haghaulor\My Documents\work\repositories\github\starbuck\Ripple-Framework\installer\Ripple_Build_Output\Default_Configuration]]></string>
+								<string><![CDATA[C:\Documents and Settings\haghaulor\My Documents\work\repositories\github\starbuck\Ripple-Framework\installer\INSTALL_RELEASE\Default_Configuration]]></string>
 							</property>
 							<property name="relatedProjectSettings">
 								<object class="com.zerog.ia.installer.RelatedProjectSettings" objectID="a549fc3c9257">
@@ -956,7 +857,7 @@ Press "Done" to quit the installer.]]></string>
 				<object class="java.util.Properties">
 					<method name="put">
 						<string><![CDATA[com.zerog.ia.project.save.last.date]]></string>
-						<string><![CDATA[August 4, 2011 8:04:24 AM EDT]]></string>
+						<string><![CDATA[August 12, 2011 8:14:06 AM EDT]]></string>
 					</method>
 					<method name="put">
 						<string><![CDATA[com.zerog.ia.build.options.optimization.platform.merge]]></string>
@@ -1004,7 +905,7 @@ Press "Done" to quit the installer.]]></string>
 					</method>
 					<method name="put">
 						<string><![CDATA[com.zerog.ia.project.build.last.date]]></string>
-						<string><![CDATA[August 3, 2011 7:21:01 PM EDT]]></string>
+						<string><![CDATA[August 9, 2011 9:38:20 AM EDT]]></string>
 					</method>
 					<method name="put">
 						<string><![CDATA[com.zerog.ia.installer.options.platform.macosx.authentication]]></string>
@@ -1194,9 +1095,6 @@ Press "Done" to quit the installer.]]></string>
 					<property name="rollbackEnabledError">
 						<boolean>true</boolean>
 					</property>
-					<property name="ruleExpression">
-						<string><![CDATA[]]></string>
-					</property>
 					<property name="imagePath">
 						<string><![CDATA[com/zerog/ia/installer/images/]]></string>
 					</property>
@@ -1235,9 +1133,6 @@ Press "Done" to quit the installer.]]></string>
 							</property>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
-							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
 							</property>
 							<property name="name">
 								<string><![CDATA[Ripple]]></string>
@@ -1510,9 +1405,6 @@ Press "Done" to quit the installer.]]></string>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
 							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
-							</property>
 							<property name="imageOption">
 								<int>1</int>
 							</property>
@@ -1561,9 +1453,6 @@ InstallAnywhere will remove the features that were installed during product inst
 							</property>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
-							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
 							</property>
 							<property name="imageOption">
 								<int>1</int>
@@ -1630,9 +1519,6 @@ InstallAnywhere will remove the features that were installed during product inst
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
 							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
-							</property>
 							<property name="categoryName">
 								<string><![CDATA[Uninstalling ... ]]></string>
 							</property>
@@ -1647,9 +1533,6 @@ InstallAnywhere will remove the features that were installed during product inst
 									<property name="rollbackEnabledError">
 										<boolean>true</boolean>
 									</property>
-									<property name="ruleExpression">
-										<string><![CDATA[]]></string>
-									</property>
 								</object>
 								<object class="com.zerog.ia.installer.actions.ExecuteUninstallCategoryFolders" objectID="a54fe56692bf">
 									<property name="belongsToUninstallPhase">
@@ -1660,9 +1543,6 @@ InstallAnywhere will remove the features that were installed during product inst
 									</property>
 									<property name="rollbackEnabledError">
 										<boolean>true</boolean>
-									</property>
-									<property name="ruleExpression">
-										<string><![CDATA[]]></string>
 									</property>
 								</object>
 								<object class="com.zerog.ia.installer.actions.ExecuteUninstallCategoryRegistries" objectID="a55008dc92ca">
@@ -1675,9 +1555,6 @@ InstallAnywhere will remove the features that were installed during product inst
 									<property name="rollbackEnabledError">
 										<boolean>true</boolean>
 									</property>
-									<property name="ruleExpression">
-										<string><![CDATA[CP886]]></string>
-									</property>
 									<rules logicalOperation="AND">
 										<object class="com.zerog.ia.installer.rules.PlatformChk" objectID="a55033d492f3">
 											<property name="belongsToUninstallPhase">
@@ -1688,9 +1565,6 @@ InstallAnywhere will remove the features that were installed during product inst
 											</property>
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
-											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
 											</property>
 											<property name="installOnPlatformList">
 												<object class="java.util.Vector">
@@ -1732,9 +1606,6 @@ InstallAnywhere will remove the features that were installed during product inst
 														<string><![CDATA[Unlisted Platforms]]></string>
 													</method>
 												</object>
-											</property>
-											<property name="ruleId">
-												<string><![CDATA[CP886]]></string>
 											</property>
 										</object>
 									</rules>
@@ -1926,42 +1797,6 @@ InstallAnywhere will remove the features that were installed during product inst
 					</property>
 				</object>
 			</property>
-			<property name="ruleExpression">
-				<string><![CDATA[]]></string>
-			</property>
-			<property name="multipleLaunch">
-				<boolean>false</boolean>
-			</property>
-			<property name="cancelButtonEnabledDuringInstall">
-				<boolean>true</boolean>
-			</property>
-			<property name="unsubstitutableVariables">
-				<object class="java.util.Vector"/>
-			</property>
-			<property name="installerIconPath">
-				<string><![CDATA[com/zerog/ia/installer/images/]]></string>
-			</property>
-			<property name="installerIconName">
-				<string><![CDATA[Icon1.ico]]></string>
-			</property>
-			<property name="billboardTimerEnabled">
-				<boolean>false</boolean>
-			</property>
-			<property name="billboardIntervals">
-				<double>0.5</double>
-			</property>
-			<property name="additionalClasspaths">
-				<object class="java.util.Vector"/>
-			</property>
-			<property name="doNotRemoveFoldersRecursively">
-				<object class="java.util.Vector"/>
-			</property>
-			<property name="customizedLauncherIcon">
-				<boolean>false</boolean>
-			</property>
-			<property name="restartForRollback">
-				<boolean>false</boolean>
-			</property>
 			<visualChildren>
 				<object class="com.zerog.ia.installer.InstallSet" objectID="a549fc3c9269">
 					<property name="belongsToUninstallPhase">
@@ -1972,9 +1807,6 @@ InstallAnywhere will remove the features that were installed during product inst
 					</property>
 					<property name="rollbackEnabledError">
 						<boolean>true</boolean>
-					</property>
-					<property name="ruleExpression">
-						<string><![CDATA[]]></string>
 					</property>
 					<property name="imagePath">
 						<string><![CDATA[com/zerog/ia/installer/images/]]></string>
@@ -2005,9 +1837,6 @@ InstallAnywhere will remove the features that were installed during product inst
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
 							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
-							</property>
 							<property name="bundleName">
 								<string><![CDATA[Application]]></string>
 							</property>
@@ -2031,9 +1860,6 @@ InstallAnywhere will remove the features that were installed during product inst
 									<property name="rollbackEnabledError">
 										<boolean>true</boolean>
 									</property>
-									<property name="ruleExpression">
-										<string><![CDATA[]]></string>
-									</property>
 									<property name="imagePath">
 										<string><![CDATA[com/zerog/ia/installer/images/]]></string>
 									</property>
@@ -2050,9 +1876,6 @@ InstallAnywhere will remove the features that were installed during product inst
 									</property>
 									<property name="rollbackEnabledError">
 										<boolean>true</boolean>
-									</property>
-									<property name="ruleExpression">
-										<string><![CDATA[]]></string>
 									</property>
 									<property name="componentName">
 										<string><![CDATA[Common]]></string>
@@ -2092,9 +1915,6 @@ InstallAnywhere will remove the features that were installed during product inst
 											</property>
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
-											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
 											</property>
 											<property name="unixPermissions">
 												<string><![CDATA[664]]></string>
@@ -2136,9 +1956,6 @@ InstallAnywhere will remove the features that were installed during product inst
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
-											</property>
 											<property name="matchesKeyFile">
 												<boolean>false</boolean>
 											</property>
@@ -2161,9 +1978,6 @@ InstallAnywhere will remove the features that were installed during product inst
 													</property>
 													<property name="rollbackEnabledError">
 														<boolean>true</boolean>
-													</property>
-													<property name="ruleExpression">
-														<string><![CDATA[]]></string>
 													</property>
 													<property name="versionMajor">
 														<int>1</int>
@@ -2189,9 +2003,6 @@ InstallAnywhere will remove the features that were installed during product inst
 													</property>
 													<property name="rollbackEnabledError">
 														<boolean>true</boolean>
-													</property>
-													<property name="ruleExpression">
-														<string><![CDATA[]]></string>
 													</property>
 													<property name="versionMajor">
 														<int>1</int>
@@ -2224,9 +2035,6 @@ InstallAnywhere will remove the features that were installed during product inst
 									<property name="hasSomethingToInstall">
 										<boolean>true</boolean>
 									</property>
-									<property name="updateExistingRegistry">
-										<boolean>false</boolean>
-									</property>
 									<installChildren>
 										<object refID="a5538ed39343"/>
 										<object class="com.zerog.ia.installer.actions.Comment" objectID="a549fc3c9281">
@@ -2238,9 +2046,6 @@ InstallAnywhere will remove the features that were installed during product inst
 											</property>
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
-											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
 											</property>
 											<property name="commentStr">
 												<string><![CDATA[IMPORTANT: Avoid adding non-uninstaller specific resources directly to the InstallAnywhere Uninstall Component (Uninstall) when modifying or adding new actions to your project. 
@@ -2262,14 +2067,11 @@ InstallAnywhere will remove the features that were installed during product inst
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[CP922]]></string>
-											</property>
 											<property name="useFilterExtensions">
 												<boolean>false</boolean>
 											</property>
 											<property name="totalSize">
-												<long>115324576</long>
+												<long>116518560</long>
 											</property>
 											<property name="unixPermissions">
 												<string><![CDATA[775]]></string>
@@ -2284,7 +2086,7 @@ InstallAnywhere will remove the features that were installed during product inst
 												<boolean>true</boolean>
 											</property>
 											<property name="sourcePath">
-												<string><![CDATA[$IA_PROJECT_DIR$\target\Starbuck]]></string>
+												<string><![CDATA[$IA_PROJECT_DIR$\target\Starbuck\win]]></string>
 											</property>
 											<property name="shouldUninstall">
 												<boolean>true</boolean>
@@ -2302,7 +2104,7 @@ InstallAnywhere will remove the features that were installed during product inst
 												<boolean>false</boolean>
 											</property>
 											<property name="directoryName">
-												<string><![CDATA[Starbuck]]></string>
+												<string><![CDATA[win]]></string>
 											</property>
 											<property name="patternMatcher">
 												<object class="com.zerog.ia.installer.SimplePatternMatcher" objectID="a5528fd4931f">
@@ -2381,9 +2183,6 @@ InstallAnywhere will remove the features that were installed during product inst
 											<property name="recursivelyUninstall">
 												<boolean>true</boolean>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[CP922]]></string>
-											</property>
 											<rules logicalOperation="AND">
 												<object class="com.zerog.ia.installer.rules.PlatformChk" objectID="a557fe4f93e3">
 													<property name="belongsToUninstallPhase">
@@ -2394,9 +2193,6 @@ InstallAnywhere will remove the features that were installed during product inst
 													</property>
 													<property name="rollbackEnabledError">
 														<boolean>true</boolean>
-													</property>
-													<property name="ruleExpression">
-														<string><![CDATA[]]></string>
 													</property>
 													<property name="installOnPlatformList">
 														<object class="java.util.Vector">
@@ -2439,9 +2235,6 @@ InstallAnywhere will remove the features that were installed during product inst
 															</method>
 														</object>
 													</property>
-													<property name="ruleId">
-														<string><![CDATA[CP922]]></string>
-													</property>
 												</object>
 											</rules>
 										</object>
@@ -2455,14 +2248,11 @@ InstallAnywhere will remove the features that were installed during product inst
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[CP616]]></string>
-											</property>
 											<property name="useFilterExtensions">
 												<boolean>false</boolean>
 											</property>
 											<property name="totalSize">
-												<long>0</long>
+												<long>97372900</long>
 											</property>
 											<property name="unixPermissions">
 												<string><![CDATA[775]]></string>
@@ -2477,7 +2267,7 @@ InstallAnywhere will remove the features that were installed during product inst
 												<boolean>true</boolean>
 											</property>
 											<property name="sourcePath">
-												<string><![CDATA[$IA_PROJECT_DIR$\target\Starbuck]]></string>
+												<string><![CDATA[$IA_PROJECT_DIR$\target\Starbuck\mac]]></string>
 											</property>
 											<property name="shouldUninstall">
 												<boolean>true</boolean>
@@ -2495,7 +2285,7 @@ InstallAnywhere will remove the features that were installed during product inst
 												<boolean>false</boolean>
 											</property>
 											<property name="directoryName">
-												<string><![CDATA[Starbuck]]></string>
+												<string><![CDATA[mac]]></string>
 											</property>
 											<property name="patternMatcher">
 												<object class="com.zerog.ia.installer.SimplePatternMatcher" objectID="a553aed09362">
@@ -2536,9 +2326,6 @@ InstallAnywhere will remove the features that were installed during product inst
 											<property name="recursivelyUninstall">
 												<boolean>true</boolean>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[CP616]]></string>
-											</property>
 											<rules logicalOperation="AND">
 												<object class="com.zerog.ia.installer.rules.PlatformChk" objectID="a557e86693e3">
 													<property name="belongsToUninstallPhase">
@@ -2549,9 +2336,6 @@ InstallAnywhere will remove the features that were installed during product inst
 													</property>
 													<property name="rollbackEnabledError">
 														<boolean>true</boolean>
-													</property>
-													<property name="ruleExpression">
-														<string><![CDATA[]]></string>
 													</property>
 													<property name="installOnPlatformList">
 														<object class="java.util.Vector">
@@ -2594,9 +2378,6 @@ InstallAnywhere will remove the features that were installed during product inst
 															</method>
 														</object>
 													</property>
-													<property name="ruleId">
-														<string><![CDATA[CP616]]></string>
-													</property>
 												</object>
 											</rules>
 										</object>
@@ -2612,9 +2393,6 @@ InstallAnywhere will remove the features that were installed during product inst
 									</property>
 									<property name="rollbackEnabledError">
 										<boolean>true</boolean>
-									</property>
-									<property name="ruleExpression">
-										<string><![CDATA[]]></string>
 									</property>
 									<property name="componentName">
 										<string><![CDATA[InstallAnywhere Uninstall Component]]></string>
@@ -2654,9 +2432,6 @@ InstallAnywhere will remove the features that were installed during product inst
 											</property>
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
-											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
 											</property>
 											<property name="unixPermissions">
 												<string><![CDATA[664]]></string>
@@ -2864,9 +2639,60 @@ and any path to a file to save to the file]]></string>
 											<property name="launcherVMBehavior">
 												<int>3</int>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
-											</property>
+											<rules logicalOperation="AND">
+												<object class="com.zerog.ia.installer.rules.PlatformChk" objectID="be7af2909321">
+													<property name="belongsToUninstallPhase">
+														<boolean>false</boolean>
+													</property>
+													<property name="rollbackEnabledCancel">
+														<boolean>true</boolean>
+													</property>
+													<property name="rollbackEnabledError">
+														<boolean>true</boolean>
+													</property>
+													<property name="installOnPlatformList">
+														<object class="java.util.Vector">
+															<method name="addElement">
+																<string><![CDATA[^Windows.*]]></string>
+															</method>
+														</object>
+													</property>
+													<property name="doNotInstallOnPlatformList">
+														<object class="java.util.Vector">
+															<method name="addElement">
+																<string><![CDATA[Mac OS X]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[Solaris]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[SunOS]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[HP-UX]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[Linux]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[AIX]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[FreeBSD]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[NetWare]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[OS/400]]></string>
+															</method>
+															<method name="addElement">
+																<string><![CDATA[Unlisted Platforms]]></string>
+															</method>
+														</object>
+													</property>
+												</object>
+											</rules>
 										</object>
 									</property>
 									<property name="dependency">
@@ -2879,9 +2705,6 @@ and any path to a file to save to the file]]></string>
 											</property>
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
-											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
 											</property>
 											<property name="matchesKeyFile">
 												<boolean>false</boolean>
@@ -2905,9 +2728,6 @@ and any path to a file to save to the file]]></string>
 													</property>
 													<property name="rollbackEnabledError">
 														<boolean>true</boolean>
-													</property>
-													<property name="ruleExpression">
-														<string><![CDATA[]]></string>
 													</property>
 													<property name="versionMajor">
 														<int>1</int>
@@ -2933,9 +2753,6 @@ and any path to a file to save to the file]]></string>
 													</property>
 													<property name="rollbackEnabledError">
 														<boolean>true</boolean>
-													</property>
-													<property name="ruleExpression">
-														<string><![CDATA[]]></string>
 													</property>
 													<property name="versionMajor">
 														<int>1</int>
@@ -2968,9 +2785,6 @@ and any path to a file to save to the file]]></string>
 									<property name="hasSomethingToInstall">
 										<boolean>true</boolean>
 									</property>
-									<property name="updateExistingRegistry">
-										<boolean>false</boolean>
-									</property>
 									<installChildren>
 										<object refID="a549fc3d9281"/>
 										<object class="com.zerog.ia.installer.actions.CreateShortcut" objectID="a549fc4d9287">
@@ -2982,9 +2796,6 @@ and any path to a file to save to the file]]></string>
 											</property>
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
-											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
 											</property>
 											<property name="targetAction">
 												<object refID="a549fc3d9281"/>
@@ -3007,9 +2818,6 @@ and any path to a file to save to the file]]></string>
 											<property name="args">
 												<string><![CDATA[]]></string>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
-											</property>
 										</object>
 										<object class="com.zerog.ia.installer.actions.CreateShortcut" objectID="a82f28de9259">
 											<property name="belongsToUninstallPhase">
@@ -3020,9 +2828,6 @@ and any path to a file to save to the file]]></string>
 											</property>
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
-											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
 											</property>
 											<property name="targetAction">
 												<object refID="a82f28de9252"/>
@@ -3045,9 +2850,6 @@ and any path to a file to save to the file]]></string>
 											<property name="args">
 												<string><![CDATA[]]></string>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
-											</property>
 										</object>
 									</installChildren>
 								</object>
@@ -3060,9 +2862,6 @@ and any path to a file to save to the file]]></string>
 									</property>
 									<property name="rollbackEnabledError">
 										<boolean>true</boolean>
-									</property>
-									<property name="ruleExpression">
-										<string><![CDATA[]]></string>
 									</property>
 									<property name="componentName">
 										<string><![CDATA[InstallAnywhere VM Component]]></string>
@@ -3103,9 +2902,6 @@ and any path to a file to save to the file]]></string>
 											<property name="rollbackEnabledError">
 												<boolean>true</boolean>
 											</property>
-											<property name="ruleExpression">
-												<string><![CDATA[]]></string>
-											</property>
 											<property name="matchesKeyFile">
 												<boolean>false</boolean>
 											</property>
@@ -3128,9 +2924,6 @@ and any path to a file to save to the file]]></string>
 													</property>
 													<property name="rollbackEnabledError">
 														<boolean>true</boolean>
-													</property>
-													<property name="ruleExpression">
-														<string><![CDATA[]]></string>
 													</property>
 													<property name="versionMajor">
 														<int>1</int>
@@ -3156,9 +2949,6 @@ and any path to a file to save to the file]]></string>
 													</property>
 													<property name="rollbackEnabledError">
 														<boolean>true</boolean>
-													</property>
-													<property name="ruleExpression">
-														<string><![CDATA[]]></string>
 													</property>
 													<property name="versionMajor">
 														<int>1</int>
@@ -3191,9 +2981,6 @@ and any path to a file to save to the file]]></string>
 									<property name="hasSomethingToInstall">
 										<boolean>true</boolean>
 									</property>
-									<property name="updateExistingRegistry">
-										<boolean>false</boolean>
-									</property>
 								</object>
 							</installChildren>
 						</object>
@@ -3213,9 +3000,6 @@ and any path to a file to save to the file]]></string>
 					<property name="rollbackEnabledError">
 						<boolean>true</boolean>
 					</property>
-					<property name="ruleExpression">
-						<string><![CDATA[]]></string>
-					</property>
 					<property name="rollbackEnabledCancel">
 						<boolean>true</boolean>
 					</property>
@@ -3224,9 +3008,6 @@ and any path to a file to save to the file]]></string>
 					</property>
 					<property name="belongsToUninstallPhase">
 						<boolean>false</boolean>
-					</property>
-					<property name="ruleExpression">
-						<string><![CDATA[]]></string>
 					</property>
 					<visualChildren>
 						<object class="com.zerog.ia.installer.GhostDirectory" objectID="a549fc3d925c">
@@ -3238,9 +3019,6 @@ and any path to a file to save to the file]]></string>
 							</property>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
-							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
 							</property>
 							<property name="destinationFolder">
 								<object refID="a54961c291ee"/>
@@ -3269,9 +3047,6 @@ and any path to a file to save to the file]]></string>
 							</property>
 							<property name="rollbackEnabledError">
 								<boolean>true</boolean>
-							</property>
-							<property name="ruleExpression">
-								<string><![CDATA[]]></string>
 							</property>
 							<property name="destinationFolder">
 								<object refID="a549b73591fb"/>
