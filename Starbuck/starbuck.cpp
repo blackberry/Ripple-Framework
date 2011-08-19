@@ -49,6 +49,7 @@ void Starbuck::init(void)
 	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,true);
+	webViewInternal->settings()->setWebSecurityEnabled(false);
 
     //Progress bar-------------------------
     progressBar = new QProgressBar(webViewInternal);
