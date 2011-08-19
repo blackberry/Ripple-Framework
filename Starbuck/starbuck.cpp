@@ -48,6 +48,7 @@ void Starbuck::init(void)
     webViewInternal = new QtStageWebView;
 	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
+    webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,true);
 
     //Progress bar-------------------------
     progressBar = new QProgressBar(webViewInternal);
@@ -66,7 +67,7 @@ void Starbuck::init(void)
 
     move(_config->windowPosition());
 
-    webViewInternal->load(QUrl(_config->toolingContent()));
+    webViewInternal->load(QUrl(QString("/Users/starbuck/ripple/index.html")));
 
     setCentralWidget(webViewInternal);
 
