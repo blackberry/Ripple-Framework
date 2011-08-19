@@ -67,7 +67,7 @@ void Starbuck::init(void)
 
     move(_config->windowPosition());
 
-    webViewInternal->load(QUrl(QString("/Users/starbuck/ripple/index.html")));
+    webViewInternal->load(QUrl(_config->toolingContent()));
 
     setCentralWidget(webViewInternal);
 
