@@ -35,7 +35,15 @@ const QString ConfigData::LOCAL_STORAGE_PATH_DEFAULT = "";
 
 ConfigData::ConfigData(void)
 {
-	QString config_path(QCoreApplication::applicationDirPath() + QDir::separator() + CONFIGURATION_FILE_NAME);
+#ifdef Q_WS_WIN
+	QString storage_path = QString(getenv("APPDATA"));
+	storage_path += (QDir::separator() + QCoreApplication::organizationName());
+	storage_path += (QDir::separator() + QCoreApplication::applicationName());
+#else
+	QString storage_path(QCoreApplication::applicationDirPath());
+#endif
+
+	QString config_path(storage_path + QDir::separator() + CONFIGURATION_FILE_NAME);
 	_settings = new QSettings(config_path, QSettings::IniFormat);
 
     readSettings();

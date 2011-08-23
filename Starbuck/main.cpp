@@ -25,7 +25,7 @@ int globalInt = 0;
 int main(int argc, char *argv[])
 {
   QApplication app(argc, argv);
-  app.setApplicationName("Webworks Desktop Emulation Tool");
+  app.setApplicationName("Ripple");
   app.setOrganizationName("Research in Motion");
   app.setOrganizationDomain("blackberry.com");
   Starbuck *mainWin = new Starbuck;
