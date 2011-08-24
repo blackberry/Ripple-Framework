@@ -269,7 +269,9 @@
                 <configuration>
                   <executable>${env.GIT_HOME}/bin/curl.exe</executable>
                   <arguments>
-                    <argument>${env.FRAMEWORK_BUILD_JOB_URL}</argument>
+                    <argument>--connect-timeout</argument>
+                    <argument>30</argument>
+                    <argument>${env.MAC_BUILD_SERVER_URL}/job/${env.JOB_NAME}/build</argument>
                   </arguments>
                 </configuration>
               </execution>
