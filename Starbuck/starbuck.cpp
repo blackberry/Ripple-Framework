@@ -96,5 +96,6 @@ void Starbuck::registerAPIs()
 
 void Starbuck::resizeEvent(QResizeEvent * e )
 {
+	progressBar->setGeometry(QRect(0, (e->size().height() - PROGRESS_BAR_HEIGHT), e->size().width(), PROGRESS_BAR_HEIGHT));
     e->accept();
 }
