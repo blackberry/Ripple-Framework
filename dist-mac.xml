@@ -10,7 +10,7 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 	<fileSets>
         <fileSet>            
             <directory>build/bin</directory>    
-			<outputDirectory>.</outputDirectory>
+			<outputDirectory>mac</outputDirectory>
 			<includes>
 				<include>Starbuck.app/**/*</include>
 			</includes>          

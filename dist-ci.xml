@@ -29,5 +29,12 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 				<include>phonond4.dll</include>
 			</includes>
         </fileSet> 
+        <fileSet>            
+            <directory>${env.FRAMEWORK_CI_SHARED_FOLDER}</directory>    
+			<outputDirectory>mac</outputDirectory>
+			<includes>
+				<include>Starbuck.app/**/*</include>
+			</includes>          
+        </fileSet>
 	</fileSets>
 </assembly>
