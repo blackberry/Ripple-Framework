@@ -195,7 +195,7 @@
                   <arguments>
                     <argument>cmake</argument>
                     <argument>..</argument>
-                    <!--<argument>-DCMAKE_BUILD_TYPE=Release</argument> -->
+                    <argument>-DCMAKE_BUILD_TYPE=Release</argument>
                     <argument>-G</argument>
                     <argument>NMake Makefiles</argument>
                   </arguments>
@@ -396,7 +396,7 @@
                   <executable>cmake</executable>
                   <arguments>
                     <argument>..</argument>
-                    <!--<argument>-DCMAKE_BUILD_TYPE=Release</argument> -->
+                    <argument>-DCMAKE_BUILD_TYPE=Release</argument>
                   </arguments>
                 </configuration>
               </execution>
