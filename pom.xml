@@ -241,18 +241,16 @@
         </plugins>
       </build>
     </profile>
-    <!-- pack artifact from windows and mac -->
-    <profile>
-      <id>CI Build On Windows</id>
+
+    <!-- CIBuildOnWindows profile triggers the corresponding build on Mac machine -->
+	<profile>
+      <id>CI_Build_on_Windows</id>
       <activation>
         <property>
-          <name>IsCIBuildOnWindows</name>
+          <name>isCIBuildOnWindows</name>
           <value>yes</value>
         </property>
       </activation>
-      <properties>
-        <ASSEMBLY_DESCRIPTOR>${project.build.sourceDirectory}/dist-ci.xml</ASSEMBLY_DESCRIPTOR>
-      </properties>
       <build>
         <plugins>
           <plugin>
@@ -275,6 +273,31 @@
                   </arguments>
                 </configuration>
               </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- IntegrationBuildOnWindows profile defines the special assembly descriptor and checks the availability of Mac build artifacts-->
+	<profile>
+      <id>Integration_Build_on_Windows</id>
+      <activation>
+        <property>
+          <name>isIntegrationBuildOnWindows</name>
+          <value>yes</value>
+        </property>
+      </activation>
+      <properties>
+        <ASSEMBLY_DESCRIPTOR>${project.build.sourceDirectory}/dist-ci.xml</ASSEMBLY_DESCRIPTOR>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
               <execution>
                 <id>Check if build job is finished on Mac</id>
                 <goals>
@@ -294,7 +317,8 @@
         </plugins>
       </build>
     </profile>
-    <profile>
+	
+	<profile>
       <id>mac</id>
       <activation>
         <os>
@@ -430,11 +454,13 @@
         </plugins>
       </build>
     </profile>
+
+	<!-- IntegrationBuildOnMac profile copies the build artifacts in Mac machine to the shared folder-->
     <profile>
-      <id>Copy Artifact from Mac to Shared Folder</id>
+      <id>IntegrationBuildOnMac</id>
       <activation>
         <property>
-          <name>IsCIBuildOnMac</name>
+          <name>isIntegrationBuildOnMac</name>
           <value>yes</value>
         </property>
       </activation>
