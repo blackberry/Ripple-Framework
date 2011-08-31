@@ -12,7 +12,7 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
             <directory>build/bin</directory>    
 			<outputDirectory>win</outputDirectory>
 			<includes>
-				<include>Starbuck.exe</include>
+				<include>Ripple.exe</include>
 				<include>*.dll</include>
 			</includes>          
         </fileSet>
