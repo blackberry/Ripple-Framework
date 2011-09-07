@@ -500,7 +500,7 @@
                       <directory>build/bin</directory>
                       <filtering>false</filtering>
                       <includes>
-                        <include>Starbuck.app/**/*</include>
+                        <include>Ripple.app/**/*</include>
                       </includes>
                     </resource>
                   </resources>
