@@ -29,7 +29,7 @@ PortScanner::~PortScanner()
 }
 
 // simple function to find open port on system
-int PortScanner::findUsablePort(unsigned short port)
+unsigned short PortScanner::findUsablePort(unsigned short port)
 {
     bool portFound = false;
 

@@ -25,7 +25,7 @@ class PortScanner : public QObject
 public:
     PortScanner();
     ~PortScanner();
-    int findUsablePort(unsigned short port);
+    unsigned short findUsablePort(unsigned short port);
 };
 
 #endif
