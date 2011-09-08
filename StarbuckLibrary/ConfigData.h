@@ -73,6 +73,8 @@ private:
 	QSize _mainWindowSize;
 	QPoint _mainWindowPosition;	
     QString _localStoragePath;
+	QString _applicationStoragePath;
     QString _buildServiceCommand;
     QString _buildServicePort;
+
 };
