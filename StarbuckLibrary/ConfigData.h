@@ -39,6 +39,12 @@ public:
     QString localStoragePath();
     void localStoragePath(QString path);
 
+    QString buildServiceCommand();
+    void buildServiceCommmand(QString cmd);
+
+    unsigned short buildServicePort();
+    void buildServicePort(unsigned short port);
+
 private:
 
 	ConfigData(void);	
@@ -54,6 +60,10 @@ private:
 	static const QString MAIN_WINDOW_POSITION_NAME_IN_SETTINGS;
 	static const QPoint MAIN_WINDOW_POSITION_DEFAULT;
     static const QString LOCAL_STORAGE_PATH_DEFAULT;
+    static const QString BUILD_SERVICE_COMMAND_IN_SETTINGS;
+    static const QString BUILD_SERVICE_COMMAND_DEFAULT;
+    static const QString BUILD_SERVICE_PORT_IN_SETTINGS;
+    static const QString BUILD_SERVICE_PORT_DEFAULT;
 
 	static ConfigData* _instance;
 	static bool _instanceFlag;
@@ -63,4 +73,6 @@ private:
 	QSize _mainWindowSize;
 	QPoint _mainWindowPosition;	
     QString _localStoragePath;
+    QString _buildServiceCommand;
+    QString _buildServicePort;
 };

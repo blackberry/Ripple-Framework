@@ -7,22 +7,24 @@ SET(STARBUCKLIBRARY_INCLUDE_DIRECTORIES
 )
 
 LIST(APPEND STARBUCKLIBRARY_HEADERS
-    ConfigData.h
     stdafx.h
+    ConfigData.h
+    PortScanner.h
 )
 
 LIST(APPEND STARBUCKLIBRARY_SOURCES
+    stdafx.cpp
     ConfigData.cpp
     QtStageWebView.cpp
     StageViewMsgHandler.cpp
-    stdafx.cpp
-	RequestObject.cpp
+    RequestObject.cpp
+    PortScanner.cpp
 )
 
 SET(STARBUCKLIBRARY_MOC_HEADERS
     QtStageWebView.h
     StageViewMsgHandler.h
-	RequestObject.h
+    RequestObject.h
 )
 
 QT4_WRAP_CPP(STARBUCKLIBRARY_MOC_SRCS ${STARBUCKLIBRARY_MOC_HEADERS})

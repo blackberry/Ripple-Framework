@@ -27,11 +27,14 @@ const QString ConfigData::TOOLING_CONTENT_NAME_IN_SETTINGS = "windowContent";
 const QString ConfigData::MAIN_WINDOW_SIZE_NAME_IN_SETTINGS = "windowSize";
 const QString ConfigData::MAIN_WINDOW_POSITION_NAME_IN_SETTINGS = "windowPos"; 
 const QString ConfigData::LOCAL_STORAGE_PATH_IN_SETTINGS = "localStoragePath";
-
+const QString ConfigData::BUILD_SERVICE_COMMAND_IN_SETTINGS = "buildServiceCommand";
+const QString ConfigData::BUILD_SERVICE_PORT_IN_SETTINGS = "buildServicePort";
 const QString ConfigData::TOOLING_CONTENT_DEFAULT = "index.html";
 const QSize ConfigData::MAIN_WINDOW_SIZE_DEFAULT = QSize(400, 400);
 const QPoint ConfigData::MAIN_WINDOW_POSITION_DEFAULT = QPoint(200, 200);
 const QString ConfigData::LOCAL_STORAGE_PATH_DEFAULT = "";
+const QString ConfigData::BUILD_SERVICE_COMMAND_DEFAULT = "rbd_service";
+const QString ConfigData::BUILD_SERVICE_PORT_DEFAULT = "9900";
 
 ConfigData::ConfigData(void)
 {
@@ -78,6 +81,8 @@ void ConfigData::writeSettings()
 	_settings->setValue(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, _mainWindowPosition);
 	_settings->setValue(TOOLING_CONTENT_NAME_IN_SETTINGS, _toolingContent);
 	_settings->setValue(LOCAL_STORAGE_PATH_IN_SETTINGS, _localStoragePath);
+    _settings->setValue(BUILD_SERVICE_COMMAND_IN_SETTINGS, _buildServiceCommand);
+    _settings->setValue(BUILD_SERVICE_PORT_IN_SETTINGS, QString(_buildServicePort));
 	_settings->endGroup();
 }
 
@@ -88,6 +93,8 @@ void ConfigData::readSettings()
 	_mainWindowPosition = _settings->value(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, MAIN_WINDOW_POSITION_DEFAULT).toPoint();    
 	_toolingContent = _settings->value(TOOLING_CONTENT_NAME_IN_SETTINGS, TOOLING_CONTENT_DEFAULT).toString();
 	_localStoragePath = _settings->value(LOCAL_STORAGE_PATH_IN_SETTINGS, LOCAL_STORAGE_PATH_DEFAULT).toString();
+	_buildServiceCommand = _settings->value(BUILD_SERVICE_COMMAND_IN_SETTINGS, BUILD_SERVICE_COMMAND_DEFAULT).toString();
+	_buildServicePort = _settings->value(BUILD_SERVICE_PORT_IN_SETTINGS, BUILD_SERVICE_PORT_DEFAULT).toUInt();
 	_settings->endGroup();
 }
 
@@ -136,4 +143,24 @@ void ConfigData::localStoragePath(QString path)
 {
     _localStoragePath = path;
     writeSettings();
+}
+
+QString ConfigData::buildServiceCommand()
+{
+    return _buildServiceCommand;
+}
+
+void ConfigData::buildServiceCommmand(QString cmd)
+{
+    _buildServiceCommand = cmd;
+}
+
+unsigned short ConfigData::buildServicePort()
+{
+    return _buildServicePort.toUInt();
+}
+
+void ConfigData::buildServicePort(unsigned short port)
+{
+    _buildServicePort = port;
 }
