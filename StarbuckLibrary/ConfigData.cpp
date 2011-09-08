@@ -39,14 +39,14 @@ const QString ConfigData::BUILD_SERVICE_PORT_DEFAULT = "9900";
 ConfigData::ConfigData(void)
 {
 #ifdef Q_WS_WIN
-	QString storage_path = QString(getenv("APPDATA"));
-	storage_path += (QDir::separator() + QCoreApplication::organizationName());
-	storage_path += (QDir::separator() + QCoreApplication::applicationName());
+	_applicationStoragePath = QString(getenv("APPDATA"));
+	_applicationStoragePath += (QDir::separator() + QCoreApplication::organizationName());
+	_applicationStoragePath += (QDir::separator() + QCoreApplication::applicationName());
 #else
-	QString storage_path(QCoreApplication::applicationDirPath());
+	_applicationStoragePath = QCoreApplication::applicationDirPath();
 #endif
 
-	QString config_path(storage_path + QDir::separator() + CONFIGURATION_FILE_NAME);
+	QString config_path(_applicationStoragePath + QDir::separator() + CONFIGURATION_FILE_NAME);
 	_settings = new QSettings(config_path, QSettings::IniFormat);
 
     readSettings();
@@ -82,7 +82,7 @@ void ConfigData::writeSettings()
 	_settings->setValue(TOOLING_CONTENT_NAME_IN_SETTINGS, _toolingContent);
 	_settings->setValue(LOCAL_STORAGE_PATH_IN_SETTINGS, _localStoragePath);
     _settings->setValue(BUILD_SERVICE_COMMAND_IN_SETTINGS, _buildServiceCommand);
-    _settings->setValue(BUILD_SERVICE_PORT_IN_SETTINGS, QString(_buildServicePort));
+    _settings->setValue(BUILD_SERVICE_PORT_IN_SETTINGS, _buildServicePort);
 	_settings->endGroup();
 }
 
@@ -94,7 +94,7 @@ void ConfigData::readSettings()
 	_toolingContent = _settings->value(TOOLING_CONTENT_NAME_IN_SETTINGS, TOOLING_CONTENT_DEFAULT).toString();
 	_localStoragePath = _settings->value(LOCAL_STORAGE_PATH_IN_SETTINGS, LOCAL_STORAGE_PATH_DEFAULT).toString();
 	_buildServiceCommand = _settings->value(BUILD_SERVICE_COMMAND_IN_SETTINGS, BUILD_SERVICE_COMMAND_DEFAULT).toString();
-	_buildServicePort = _settings->value(BUILD_SERVICE_PORT_IN_SETTINGS, BUILD_SERVICE_PORT_DEFAULT).toUInt();
+	_buildServicePort = _settings->value(BUILD_SERVICE_PORT_IN_SETTINGS, BUILD_SERVICE_PORT_DEFAULT).toString();
 	_settings->endGroup();
 }
 
@@ -134,7 +134,7 @@ void ConfigData::windowPosition(QPoint position)
 QString ConfigData::localStoragePath()
 {
     if (_localStoragePath == "")
-        return QCoreApplication::applicationDirPath();
+        return _applicationStoragePath;
     else
         return _localStoragePath;
 }
@@ -162,5 +162,5 @@ unsigned short ConfigData::buildServicePort()
 
 void ConfigData::buildServicePort(unsigned short port)
 {
-    _buildServicePort = port;
+    _buildServicePort = QString::number(port);
 }
