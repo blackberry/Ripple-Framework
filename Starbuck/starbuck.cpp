@@ -16,6 +16,7 @@
 
 #include "stdafx.h"
 #include "starbuck.h"
+#include "BuildServerManager.h"
 
 using namespace BlackBerry::Starbuck;
 
@@ -78,6 +79,9 @@ void Starbuck::init(void)
     //stagewebview interfaces
     m_pStageViewHandler = new StageViewMsgHandler(this);
     m_pStageViewHandler->Register(webViewInternal);
+
+    //start build server
+    BuildServerManager::getInstance()->start(_config->buildServiceCommand(), _config->buildServicePort());
 }
 
 void Starbuck::closeEvent(QCloseEvent *event)
@@ -85,6 +89,7 @@ void Starbuck::closeEvent(QCloseEvent *event)
     _config->windowPosition(pos());
     _config->windowSize(size());
     event->accept();
+    BuildServerManager::getInstance()->stop();
 }
 
 void Starbuck::registerAPIs()

@@ -1,0 +1,87 @@
+/*
+* Copyright 2010-2011 Research In Motion Limited.
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+* http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
+
+#include "stdafx.h"
+#include "BuildServerManager.h"
+#include "PortScanner.h"
+
+BuildServerManager* BuildServerManager::_instance = 0;
+
+BuildServerManager::BuildServerManager(QObject* parent) : QObject(parent)
+{
+    _serverProcess = new QProcess(this);
+    connect(_serverProcess, SIGNAL(started()), this, SLOT(serverStarted()));
+    connect(_serverProcess, SIGNAL(error(QProcess::ProcessError)), this, SLOT(onError(QProcess::ProcessError)));
+    connect(_serverProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(readStdOutput()));
+    connect(_serverProcess, SIGNAL(readyReadStandardError()), this, SLOT(readStdError()));
+}
+
+BuildServerManager::~BuildServerManager(void)
+{
+    if ( _instance )
+        delete _instance;
+    _instance = 0;
+}
+
+BuildServerManager* BuildServerManager::getInstance()
+{
+    if ( _instance = 0 )
+        _instance = new BuildServerManager();
+    return _instance;
+}
+
+void BuildServerManager::start(QString server, int port)
+{
+    QStringList arguments;
+    QString str;
+    str.setNum(validatePort(port));
+    arguments << str;
+
+    _serverProcess->start(server, arguments);
+}
+
+void BuildServerManager::stop()
+{
+    if ( _serverProcess )
+        _serverProcess->close();
+    delete this;
+}
+
+int BuildServerManager::validatePort(int port)
+{
+    PortScanner scanner;
+    return scanner.findUsablePort( (unsigned short)port);
+}
+
+void BuildServerManager::serverStarted()
+{
+    qDebug() << "Build Server started";
+}
+
+void BuildServerManager::onError(QProcess::ProcessError& err)
+{
+    qDebug() << "Server can not be started";
+}
+
+void BuildServerManager::readStdOutput()
+{
+    qDebug() << _serverProcess->readAllStandardOutput();
+}
+
+void BuildServerManager::readStdError()
+{
+    qDebug() << _serverProcess->readAllStandardError();
+}

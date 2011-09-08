@@ -17,14 +17,17 @@ LIST(APPEND STARBUCKLIBRARY_SOURCES
     ConfigData.cpp
     QtStageWebView.cpp
     StageViewMsgHandler.cpp
-    RequestObject.cpp
+    stdafx.cpp
+	RequestObject.cpp
+	BuildServerManager.cpp
     PortScanner.cpp
 )
 
 SET(STARBUCKLIBRARY_MOC_HEADERS
     QtStageWebView.h
     StageViewMsgHandler.h
-    RequestObject.h
+	RequestObject.h
+	BuildServerManager.h
 )
 
 QT4_WRAP_CPP(STARBUCKLIBRARY_MOC_SRCS ${STARBUCKLIBRARY_MOC_HEADERS})
