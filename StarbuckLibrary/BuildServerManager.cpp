@@ -31,9 +31,6 @@ BuildServerManager::BuildServerManager()
 
 BuildServerManager::~BuildServerManager(void)
 {
-    if ( _instance )
-        delete _instance;
-    _instance = 0;
 }
 
 BuildServerManager* BuildServerManager::getInstance()
@@ -68,6 +65,8 @@ void BuildServerManager::stop()
 {
     if ( _serverProcess )
         _serverProcess->close();
+    delete _instance;
+    _instance = 0;
 }
 
 int BuildServerManager::validatePort(int port)
