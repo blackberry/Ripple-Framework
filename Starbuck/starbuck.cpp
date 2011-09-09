@@ -81,7 +81,7 @@ void Starbuck::init(void)
     m_pStageViewHandler->Register(webViewInternal);
 
     //start build server
-
+    connect(BuildServerManager::getInstance(), SIGNAL(findUsablePort(int)), m_pStageViewHandler, SLOT(setServerPort(int)));    
     QFile cmd(_config->buildServiceCommand());
     if (cmd.open(QIODevice::ReadOnly | QIODevice::Text))
     {

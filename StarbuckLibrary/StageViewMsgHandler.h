@@ -26,6 +26,7 @@ namespace Starbuck {
 class StageViewMsgHandler : public QObject
 {
   Q_OBJECT
+  Q_PROPERTY(int serverPort READ getServerPort)
 
 public:
     StageViewMsgHandler(QObject *parent = 0);
@@ -53,11 +54,14 @@ public slots:
 	int historyLength();
 	int historyPosition();
 	void historyPosition(int position);
+    void setServerPort(int port);
+ 
     //following slots are used internal for emit signals which will be connected from js side
+private slots:
     void urlChanged(const QString& url);
 	void javaScriptWindowObjectCleared();
 	void reload();
-
+ 
 //stagewebview events
 signals:
 	void locationChanged(const QString& url);
@@ -80,7 +84,14 @@ private:
 		return dynamic_cast<QtStageWebView*>(m_pWebView);
 	}
 
+    int getServerPort()
+    {
+        return _buildServerPort;
+    }
+
+private:
 	IStarbuckWebView* m_pWebView;
+    int _buildServerPort;
 };
 }}
 #endif // STAGEVIEWMSGHANDLER_H

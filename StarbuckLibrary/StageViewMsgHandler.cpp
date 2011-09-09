@@ -21,7 +21,7 @@ using namespace BlackBerry::Starbuck;
 using namespace BlackBerry::Starbuck::IPCChannel;
 
 StageViewMsgHandler::StageViewMsgHandler(QObject *parent)
-	: QObject(parent)
+	: QObject(parent),m_pWebView(0), _buildServerPort(0)
 {
 }
 
@@ -150,3 +150,8 @@ void StageViewMsgHandler::resourceReply(QNetworkReply* reply)
   //qDebug() << " stagewebview.onResponse() emitted";
 }
 #endif
+
+void StageViewMsgHandler::setServerPort(int port)
+{
+    _buildServerPort = port;
+}

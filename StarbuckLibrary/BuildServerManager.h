@@ -30,6 +30,8 @@ public:
   	static BuildServerManager* getInstance();	
     void start(QString serverPath, int port);
     void stop();
+signals:
+    void findUsablePort(int port);
 
 private slots:
     void serverStarted();

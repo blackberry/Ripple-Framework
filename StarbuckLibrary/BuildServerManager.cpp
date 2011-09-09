@@ -72,7 +72,9 @@ void BuildServerManager::stop()
 int BuildServerManager::validatePort(int port)
 {
     PortScanner scanner;
-    return scanner.findUsablePort( (unsigned short)port);
+    int usablePort = scanner.findUsablePort( (unsigned short)port);
+    emit findUsablePort(usablePort);
+    return usablePort;
 }
 
 void BuildServerManager::serverStarted()
@@ -82,7 +84,10 @@ void BuildServerManager::serverStarted()
 
 void BuildServerManager::onError(QProcess::ProcessError err)
 {
-    qDebug() << "Server can not be started";
+    if ( err == QProcess::Crashed )
+        qDebug() << "Server is killed by Ripple";
+    else
+        qDebug() << "Build Server can not be started. Error code: " << err;
 }
 
 void BuildServerManager::readStdOutput()
