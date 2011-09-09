@@ -17,6 +17,9 @@
 #include "stdafx.h"
 #include "BuildServerManager.h"
 #include "PortScanner.h"
+#ifdef Q_WS_WIN
+#include <windows.h>
+#endif
 
 BuildServerManager* BuildServerManager::_instance = 0;
 
@@ -40,13 +43,14 @@ BuildServerManager* BuildServerManager::getInstance()
     return _instance;
 }
 
-void BuildServerManager::start(QString server, int port)
+unsigned short BuildServerManager::start(QString server, int port)
 {
+    unsigned short serverPort = 0;
     QStringList arguments = server.split(" ");
-    QString str;
+    QString portStr;
 
-    str.setNum(validatePort(port));
-    arguments.replaceInStrings(QString("$PORT"), str);
+    portStr.setNum(validatePort(port));
+    arguments.replaceInStrings(QString("$PORT"), portStr);
 
     QFile command(server);
 
@@ -58,7 +62,41 @@ void BuildServerManager::start(QString server, int port)
 #ifdef Q_WS_WIN
     server.append(".exe");
 #endif
-    _serverProcess->start(server, arguments);
+
+    QString tempDir = "/tmp";
+
+#ifdef Q_WS_WIN
+    tempDir = getenv("TEMP");
+#endif
+
+    QFile pidFile(tempDir + QString("/rbd_service.pid"));
+
+    if (pidFile.open(QIODevice::ReadWrite | QIODevice::Text))
+    {
+        QString s_pidInfo = pidFile.readLine();
+
+        if (s_pidInfo.split(";").length() > 1)
+            serverPort = s_pidInfo.split(";")[1].toUInt();
+
+        unsigned int pid = s_pidInfo.split(";")[0].toUInt();
+#ifdef Q_WS_WIN
+        HANDLE process = OpenProcess(SYNCHRONIZE, FALSE, pid);
+        CloseHandle(process);
+#else
+        // mac code goes here
+#endif
+        if (process == 0)
+        {
+            _serverProcess->start(server, arguments);
+            pidFile.close();
+            pidFile.open(QIODevice::WriteOnly | QIODevice::Text);
+            QString pidInfo = QString::number(_serverProcess->pid()->dwProcessId).toAscii() + ";" + portStr;
+            pidFile.write(pidInfo.toAscii());
+            pidFile.close();
+        }
+    }
+
+    return serverPort;
 }
 
 void BuildServerManager::stop()

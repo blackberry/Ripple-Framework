@@ -97,7 +97,7 @@ void Starbuck::init(void)
         QDir::setCurrent(dir + "/services/bin");
         QString curPath = QDir::currentPath();
 
-        BuildServerManager::getInstance()->start(buildCommand, _config->buildServicePort());
+        m_pStageViewHandler->setServerPort(BuildServerManager::getInstance()->start(buildCommand, _config->buildServicePort()));
 
         cmd.close();
     }

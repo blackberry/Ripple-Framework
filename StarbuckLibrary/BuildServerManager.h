@@ -28,7 +28,7 @@ public:
 
 public:
   	static BuildServerManager* getInstance();	
-    void start(QString serverPath, int port);
+    unsigned short start(QString serverPath, int port);
     void stop();
 signals:
     void findUsablePort(int port);
