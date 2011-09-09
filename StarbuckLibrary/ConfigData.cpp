@@ -33,7 +33,7 @@ const QString ConfigData::TOOLING_CONTENT_DEFAULT = "index.html";
 const QSize ConfigData::MAIN_WINDOW_SIZE_DEFAULT = QSize(400, 400);
 const QPoint ConfigData::MAIN_WINDOW_POSITION_DEFAULT = QPoint(200, 200);
 const QString ConfigData::LOCAL_STORAGE_PATH_DEFAULT = "";
-const QString ConfigData::BUILD_SERVICE_COMMAND_DEFAULT = "rbd_service";
+const QString ConfigData::BUILD_SERVICE_COMMAND_DEFAULT = "services/bin/rbd_service.command";
 const QString ConfigData::BUILD_SERVICE_PORT_DEFAULT = "9900";
 
 ConfigData::ConfigData(void)

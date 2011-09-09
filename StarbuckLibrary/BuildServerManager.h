@@ -39,7 +39,7 @@ private slots:
 
 private:
     static BuildServerManager* _instance;
-    static QProcess * _serverProcess;
+    QProcess * _serverProcess;
 
 private:
     int validatePort(int port);
