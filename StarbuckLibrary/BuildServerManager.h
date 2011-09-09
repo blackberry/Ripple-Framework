@@ -33,7 +33,7 @@ public:
 
 private slots:
     void serverStarted();
-    void onError(QProcess::ProcessError& err); 
+    void onError(QProcess::ProcessError err);
     void readStdOutput();
     void readStdError();
 

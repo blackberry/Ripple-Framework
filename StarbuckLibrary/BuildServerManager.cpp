@@ -31,14 +31,11 @@ BuildServerManager::BuildServerManager(QObject* parent) : QObject(parent)
 
 BuildServerManager::~BuildServerManager(void)
 {
-    if ( _instance )
-        delete _instance;
-    _instance = 0;
 }
 
 BuildServerManager* BuildServerManager::getInstance()
 {
-    if ( _instance = 0 )
+    if ( _instance == 0 )
         _instance = new BuildServerManager();
     return _instance;
 }
@@ -57,7 +54,8 @@ void BuildServerManager::stop()
 {
     if ( _serverProcess )
         _serverProcess->close();
-    delete this;
+    delete _instance;
+    _instance = 0;
 }
 
 int BuildServerManager::validatePort(int port)
@@ -71,7 +69,7 @@ void BuildServerManager::serverStarted()
     qDebug() << "Build Server started";
 }
 
-void BuildServerManager::onError(QProcess::ProcessError& err)
+void BuildServerManager::onError(QProcess::ProcessError err)
 {
     qDebug() << "Server can not be started";
 }
