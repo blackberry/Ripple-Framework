@@ -20,7 +20,7 @@
 
 BuildServerManager* BuildServerManager::_instance = 0;
 
-BuildServerManager::BuildServerManager(QObject* parent) : QObject(parent)
+BuildServerManager::BuildServerManager()
 {
     _serverProcess = new QProcess(this);
     connect(_serverProcess, SIGNAL(started()), this, SLOT(serverStarted()));
@@ -38,18 +38,29 @@ BuildServerManager::~BuildServerManager(void)
 
 BuildServerManager* BuildServerManager::getInstance()
 {
-    if ( _instance = 0 )
+    if ( _instance == 0 )
         _instance = new BuildServerManager();
     return _instance;
 }
 
 void BuildServerManager::start(QString server, int port)
 {
-    QStringList arguments;
+    QStringList arguments = server.split(" ");
     QString str;
-    str.setNum(validatePort(port));
-    arguments << str;
 
+    str.setNum(validatePort(port));
+    arguments.replaceInStrings(QString("$PORT"), str);
+
+    QFile command(server);
+
+    server = arguments[0];
+    QDir dir = server;
+    server = dir.absolutePath();
+    arguments.removeAt(0);
+    arguments.join("");
+#ifdef Q_WS_WIN
+    server.append(".exe");
+#endif
     _serverProcess->start(server, arguments);
 }
 
@@ -57,7 +68,6 @@ void BuildServerManager::stop()
 {
     if ( _serverProcess )
         _serverProcess->close();
-    delete this;
 }
 
 int BuildServerManager::validatePort(int port)
@@ -71,7 +81,7 @@ void BuildServerManager::serverStarted()
     qDebug() << "Build Server started";
 }
 
-void BuildServerManager::onError(QProcess::ProcessError& err)
+void BuildServerManager::onError(QProcess::ProcessError err)
 {
     qDebug() << "Server can not be started";
 }

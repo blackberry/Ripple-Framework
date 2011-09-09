@@ -81,7 +81,26 @@ void Starbuck::init(void)
     m_pStageViewHandler->Register(webViewInternal);
 
     //start build server
-    BuildServerManager::getInstance()->start(_config->buildServiceCommand(), _config->buildServicePort());
+
+    QFile cmd(_config->buildServiceCommand());
+    if (cmd.open(QIODevice::ReadOnly | QIODevice::Text))
+    {
+        QTextStream in(&cmd);
+        // read input
+        QString buildCommand = in.readLine();
+
+        // clean up path from config file
+        QStringList buildCmdList = _config->buildServiceCommand().split(QDir::separator());
+        buildCmdList.removeLast();
+        QDir buildCmdDir = buildCmdList.join("");
+        QString dir = buildCmdDir.absolutePath();
+        QDir::setCurrent(dir + "/services/bin");
+        QString curPath = QDir::currentPath();
+
+        BuildServerManager::getInstance()->start(buildCommand, _config->buildServicePort());
+
+        cmd.close();
+    }
 }
 
 void Starbuck::closeEvent(QCloseEvent *event)

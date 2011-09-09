@@ -23,7 +23,7 @@ class BuildServerManager : public QObject
 {
     Q_OBJECT;
 public:
-    BuildServerManager(QObject* parent = 0);
+    BuildServerManager();
     ~BuildServerManager(void);
 
 public:
@@ -33,7 +33,7 @@ public:
 
 private slots:
     void serverStarted();
-    void onError(QProcess::ProcessError& err); 
+    void onError(QProcess::ProcessError err); 
     void readStdOutput();
     void readStdError();
 
