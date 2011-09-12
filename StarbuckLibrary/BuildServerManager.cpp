@@ -90,7 +90,7 @@ unsigned short BuildServerManager::start(QString server, int port)
             _serverProcess->start(server, arguments);
             pidFile.close();
             pidFile.open(QIODevice::WriteOnly | QIODevice::Text);
-            QString pidInfo = QString::number((int)_serverProcess->pid()) + ";" + portStr;
+            QString pidInfo = QString::number((int)_serverProcess->pid() + ";" + portStr;
             pidFile.write(pidInfo.toAscii());
             pidFile.close();
         }
