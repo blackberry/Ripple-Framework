@@ -83,7 +83,7 @@ unsigned short BuildServerManager::start(QString server, int port)
         HANDLE process = OpenProcess(SYNCHRONIZE, FALSE, pid);
         CloseHandle(process);
 #else
-        int process = 0; // port is free, launch new proces
+        int process = system("ps axc|awk \"{if ($5==\"node\") print 1}");
 #endif
         if (process == 0)
         {
