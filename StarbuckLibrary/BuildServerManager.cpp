@@ -83,7 +83,7 @@ unsigned short BuildServerManager::start(QString server, int port)
         HANDLE process = OpenProcess(SYNCHRONIZE, FALSE, pid);
         CloseHandle(process);
 #else
-        // mac code goes here
+        process = 0; // port is free, launch new proces
 #endif
         if (process == 0)
         {
