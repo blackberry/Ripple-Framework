@@ -45,6 +45,7 @@ BuildServerManager* BuildServerManager::getInstance()
 
 unsigned short BuildServerManager::start(QString server, int port)
 {
+    qDebug() << " command text:" << server << "port:" << port;
     unsigned short serverPort = 0;
     QStringList arguments = server.split(" ");
     QString portStr;
@@ -88,6 +89,7 @@ unsigned short BuildServerManager::start(QString server, int port)
 #endif
         if (process == 0)
         {
+            qDebug() << "server:" << server << "arguments:" << arguments;
             _serverProcess->start(server, arguments);
             pidFile.close();
             pidFile.open(QIODevice::WriteOnly | QIODevice::Text);
