@@ -9,6 +9,14 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 
 	<fileSets>
         <fileSet>            
+            <directory>${basedir}</directory>    
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>config.ini</include>
+			</includes>          
+        </fileSet>
+	
+        <fileSet>            
             <directory>build/bin</directory>    
 			<outputDirectory>mac</outputDirectory>
 			<includes>
