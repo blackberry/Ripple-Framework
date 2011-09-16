@@ -20,10 +20,39 @@
 
 using namespace BlackBerry::Starbuck;
 
-int globalInt = 0;
+
+void write(const char * msg, QString type)
+{
+    QString fn("ripple_log_" + QDate::currentDate().toString(Qt::ISODate) + ".txt");
+    QFile file(fn);
+    if (!file.open(QIODevice::Append | QIODevice::WriteOnly | QIODevice::Text))
+        return;
+    QTextStream out(&file);
+    out << QDateTime::currentDateTime().toString() << ":" << type << ":" << msg << "\n";
+    file.close();
+}
+
+void fileDbgMsgOutput(QtMsgType type, const char *msg)
+{
+    switch (type) {
+    case QtDebugMsg:
+        write(msg, "Debug");
+        break;
+    case QtWarningMsg:
+        write(msg, "Warning");
+        break;
+    case QtCriticalMsg:
+        write(msg, "Critical");
+        break;
+    case QtFatalMsg:
+        write(msg, "Fatal");
+        abort();
+   }
+}
 
 int main(int argc, char *argv[])
 {
+  qInstallMsgHandler(fileDbgMsgOutput);
   QApplication app(argc, argv);
   app.setApplicationName("Ripple");
   app.setOrganizationName("Research in Motion");

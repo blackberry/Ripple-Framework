@@ -23,7 +23,7 @@
 
 BuildServerManager* BuildServerManager::_instance = 0;
 
-BuildServerManager::BuildServerManager()
+BuildServerManager::BuildServerManager() : _serverProcess(0)
 {
     _serverProcess = new QProcess(this);
     connect(_serverProcess, SIGNAL(started()), this, SLOT(serverStarted()));

@@ -101,6 +101,11 @@ void Starbuck::init(void)
 
         cmd.close();
     }
+    else
+    {
+        qDebug() << "Can not open file:" << cmd.fileName() << "Error:" << cmd.error();
+        cmd.close();
+    }
 }
 
 void Starbuck::closeEvent(QCloseEvent *event)
