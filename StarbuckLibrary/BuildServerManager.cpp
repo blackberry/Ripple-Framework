@@ -75,9 +75,9 @@ unsigned short BuildServerManager::start(QString server, int port)
         CloseHandle(process);
 #else
         // run shell script to check if process is running
-        int process = system("ps axc|awk ‘{if ($5==\"node\") print 1}’");
+        int process = system("ps acx | grep node 2>&1");
 #endif
-        if (process == 0)
+        if (process != 0)
         {
             qDebug() << "server:" << server << "arguments:" << arguments;
             _serverProcess->start(server, arguments);
