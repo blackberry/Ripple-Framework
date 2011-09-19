@@ -76,7 +76,8 @@ unsigned short BuildServerManager::start(QString server, int port)
 #else
         int process = 0;
         // run shell script to check if process is running
-        if (system("ps acx | grep node 2>&1") != 256)
+        QString psString("ps acx | grep " + QString(pid) + " 2>&1");
+        if (system(psString.toAscii()) != 256)
             process = 1;
 #endif
         if (process == 0)
