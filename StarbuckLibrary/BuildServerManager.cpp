@@ -53,40 +53,29 @@ unsigned short BuildServerManager::start(QString server, int port)
     portStr.setNum(validatePort(port));
     arguments.replaceInStrings(QString("$PORT"), portStr);
 
-    QFile command(server);
-
-    server = arguments[0];
-    QDir dir = server;
-    server = dir.absolutePath();
+    server = "services/bin/" + arguments[0];
     arguments.removeAt(0);
-    arguments.join("");
+    arguments.replaceInStrings("..", "services/bin/..");
 #ifdef Q_WS_WIN
     server.append(".exe");
 #endif
-
     QString tempDir = "/tmp";
-
 #ifdef Q_WS_WIN
     tempDir = getenv("TEMP");
 #endif
-
     QFile pidFile(tempDir + QString("/rbd_service.pid"));
-
     if (pidFile.open(QIODevice::ReadWrite | QIODevice::Text))
     {
         QString s_pidInfo = pidFile.readLine();
-
         if (s_pidInfo.split(";").length() > 1)
             serverPort = s_pidInfo.split(";")[1].toUInt();
-
         unsigned int pid = s_pidInfo.split(";")[0].toUInt();
 #ifdef Q_WS_WIN
         HANDLE process = OpenProcess(SYNCHRONIZE, FALSE, pid);
         CloseHandle(process);
 #else
         // run shell script to check if process is running
-        //int process = system("ps axc|awk \"{if ($5==\"node\") print 1}");
-        int process = 0;
+        int process = system("ps axc|awk ‘{if ($5==\"node\") print 1}’");
 #endif
         if (process == 0)
         {
@@ -106,7 +95,9 @@ unsigned short BuildServerManager::start(QString server, int port)
 void BuildServerManager::stop()
 {
     if ( _serverProcess )
+    {
         _serverProcess->close();
+    }
     delete _instance;
     _instance = 0;
 }

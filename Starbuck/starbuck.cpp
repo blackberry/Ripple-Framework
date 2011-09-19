@@ -81,24 +81,13 @@ void Starbuck::init(void)
     m_pStageViewHandler->Register(webViewInternal);
 
     //start build server
-    connect(BuildServerManager::getInstance(), SIGNAL(findUsablePort(int)), m_pStageViewHandler, SLOT(setServerPort(int)));    
+    connect(BuildServerManager::getInstance(), SIGNAL(findUsablePort(int)), m_pStageViewHandler, SLOT(setServerPort(int))); 
+    
     QFile cmd(_config->buildServiceCommand());
     if (cmd.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream in(&cmd);
-        // read input
-        QString buildCommand = in.readLine();
-
-        // clean up path from config file
-        QStringList buildCmdList = _config->buildServiceCommand().split(QDir::separator());
-        buildCmdList.removeLast();
-        QDir buildCmdDir = buildCmdList.join("");
-        QString dir = buildCmdDir.absolutePath();
-        QDir::setCurrent(dir + "/services/bin");
-        QString curPath = QDir::currentPath();
-
-        m_pStageViewHandler->setServerPort(BuildServerManager::getInstance()->start(buildCommand, _config->buildServicePort()));
-
+        m_pStageViewHandler->setServerPort(BuildServerManager::getInstance()->start(in.readLine(), _config->buildServicePort()));
         cmd.close();
     }
     else
