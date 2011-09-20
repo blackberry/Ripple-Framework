@@ -117,7 +117,7 @@ void BuildServerManager::stop()
     {
         QProcess *stopProcess = new QProcess(this);
         QStringList arguments = _serverArgs;
-        arguments.replaceInStrings(QString("$CMD"), "-stop");
+        arguments.replaceInStrings(QString("$CMD"), "-shutdown");
         stopProcess->start(_serverCmd, arguments);
         stopProcess->waitForFinished();
         delete stopProcess;
