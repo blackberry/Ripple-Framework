@@ -91,6 +91,8 @@ unsigned short BuildServerManager::start(QString server, int port)
         }
     }
 
+    _port = serverPort;
+
     return serverPort;
 }
 
@@ -98,7 +100,7 @@ void BuildServerManager::stop()
 {
     if ( _serverProcess )
     {
-        _serverProcess->close();
+        
     }
     delete _instance;
     _instance = 0;
