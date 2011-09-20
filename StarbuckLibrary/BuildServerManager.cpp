@@ -48,6 +48,7 @@ unsigned short BuildServerManager::start(QString server, int port)
     qDebug() << " command text:" << server << "port:" << port;
     unsigned short serverPort = 0;
     QStringList arguments = server.split(" ");
+
     QString portStr;
 
     portStr.setNum(validatePort(port));
@@ -59,11 +60,15 @@ unsigned short BuildServerManager::start(QString server, int port)
 #ifdef Q_WS_WIN
     server.append(".exe");
 #endif
+    _serverCmd = server;
+    _serverArgs = arguments;
+    arguments.replaceInStrings(QString("$CMD"), "-start");
     QString tempDir = "/tmp";
 #ifdef Q_WS_WIN
     tempDir = getenv("TEMP");
 #endif
-    QFile pidFile(tempDir + QString("/rbd_service.pid"));
+    _pidFilePath = tempDir + QString("/rbd_service.pid");
+    QFile pidFile(_pidFilePath);
     if (pidFile.open(QIODevice::ReadWrite | QIODevice::Text))
     {
         QString s_pidInfo = pidFile.readLine();
@@ -71,7 +76,9 @@ unsigned short BuildServerManager::start(QString server, int port)
             serverPort = s_pidInfo.split(";")[1].toUInt();
         unsigned int pid = s_pidInfo.split(";")[0].toUInt();
 #ifdef Q_WS_WIN
-        HANDLE process = OpenProcess(SYNCHRONIZE, FALSE, pid);
+        HANDLE process = 0;
+        process = OpenProcess(SYNCHRONIZE, FALSE, pid);
+        int result = GetLastError();
         CloseHandle(process);
 #else
         int process = 0;
@@ -89,7 +96,11 @@ unsigned short BuildServerManager::start(QString server, int port)
             _serverProcess->start(server, arguments);
             pidFile.close();
             pidFile.open(QIODevice::WriteOnly | QIODevice::Text);
+#ifdef Q_WS_WIN
+            QString pidInfo = QString::number((int)_serverProcess->pid()->dwProcessId) + ";" + portStr;
+#else
             QString pidInfo = QString::number((int)_serverProcess->pid()) + ";" + portStr;
+#endif
             pidFile.write(pidInfo.toAscii());
             pidFile.close();
         }
@@ -104,7 +115,13 @@ void BuildServerManager::stop()
 {
     if ( _serverProcess )
     {
-        
+        QProcess *stopProcess = new QProcess(this);
+        QStringList arguments = _serverArgs;
+        arguments.replaceInStrings(QString("$CMD"), "-stop");
+        stopProcess->start(_serverCmd, arguments);
+        stopProcess->waitForFinished();
+        delete stopProcess;
+        QFile::remove(_pidFilePath);
     }
     delete _instance;
     _instance = 0;

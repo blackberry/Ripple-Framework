@@ -41,7 +41,10 @@ private slots:
 
 private:
     static BuildServerManager* _instance;
+    QString _serverCmd;
+    QStringList _serverArgs;
     QProcess * _serverProcess;
+    QString _pidFilePath;
     unsigned short _port;
 
 private:
