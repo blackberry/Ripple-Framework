@@ -46,6 +46,10 @@ void Starbuck::init(void)
 
     QSize size = _config->windowSize();
 
+    // first run make the window the size of the desktop
+    if (size.width() == 0 && size.height() == 0)
+        size = QApplication::desktop()->size();
+
     webViewInternal = new QtStageWebView;
 	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
