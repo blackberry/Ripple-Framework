@@ -17,6 +17,10 @@
 #include "stdafx.h"
 #include "starbuck.h"
 #include <QtGui/QApplication>
+#ifdef Q_WS_WIN
+#include <windows.h>
+#include <tchar.h>
+#endif
 
 using namespace BlackBerry::Starbuck;
 
@@ -50,14 +54,35 @@ void fileDbgMsgOutput(QtMsgType type, const char *msg)
    }
 }
 
+#ifdef Q_WS_WIN
+int CALLBACK WinMain(
+  __in  HINSTANCE hInstance,
+  __in  HINSTANCE hPrevInstance,
+  __in  LPSTR lpCmdLine,
+  __in  int nCmdShow
+)
+#else
 int main(int argc, char *argv[])
+#endif
 {
-  qInstallMsgHandler(fileDbgMsgOutput);
-  QApplication app(argc, argv);
-  app.setApplicationName("Ripple");
-  app.setOrganizationName("Research in Motion");
-  app.setOrganizationDomain("blackberry.com");
-  Starbuck *mainWin = new Starbuck;
-  mainWin->show();
-  return app.exec();
+    qInstallMsgHandler(fileDbgMsgOutput);
+#ifdef Q_WS_WIN
+    TCHAR cmdline[4096];
+    TCHAR* argv[4096];
+    int argc = 0;
+    _tcscpy(cmdline, GetCommandLine());
+    argv[argc] = _tcstok(cmdline, TEXT(" \t"));
+    while(argv[argc] != 0)
+    {
+        argc++ ;
+        argv[argc] = _tcstok(0, TEXT(" \t"));
+    }
+#endif
+    QApplication app(argc, argv);
+    app.setApplicationName("Ripple");
+    app.setOrganizationName("Research in Motion");
+    app.setOrganizationDomain("blackberry.com");
+    Starbuck *mainWin = new Starbuck;
+    mainWin->show();
+    return app.exec();
 }
