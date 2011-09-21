@@ -43,6 +43,8 @@ void Starbuck::init(void)
 {
     _config = ConfigData::getInstance();
     setAttribute(Qt::WA_DeleteOnClose);
+    QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+
 
     QSize size = _config->windowSize();
 
@@ -99,6 +101,7 @@ void Starbuck::init(void)
         qDebug() << "Can not open file:" << cmd.fileName() << "Error:" << cmd.error();
         cmd.close();
     }
+
 }
 
 void Starbuck::closeEvent(QCloseEvent *event)
