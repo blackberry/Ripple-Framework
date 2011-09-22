@@ -27,8 +27,12 @@ using namespace BlackBerry::Starbuck;
 
 void write(const char * msg, QString type)
 {
+    QString tempDir = "/tmp";
+#ifdef Q_WS_WIN
+    tempDir = getenv("TEMP");
+#endif
     QString fn("ripple_log_" + QDate::currentDate().toString(Qt::ISODate) + ".txt");
-    QFile file(fn);
+    QFile file(QString(tempDir + QDir::separator()) + fn);
     if (!file.open(QIODevice::Append | QIODevice::WriteOnly | QIODevice::Text))
         return;
     QTextStream out(&file);
