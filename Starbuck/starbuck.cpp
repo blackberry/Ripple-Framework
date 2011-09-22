@@ -45,7 +45,6 @@ void Starbuck::init(void)
     setAttribute(Qt::WA_DeleteOnClose);
     QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
 
-
     QSize size = _config->windowSize();
 
     // first run make the window the size of the desktop
@@ -55,7 +54,8 @@ void Starbuck::init(void)
     webViewInternal = new QtStageWebView;
 	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
-    webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls,true);
+    webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
+    webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
 	webViewInternal->settings()->setWebSecurityEnabled(false);
 
     //Progress bar-------------------------
