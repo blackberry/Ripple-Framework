@@ -54,6 +54,7 @@ void Starbuck::init(void)
     webViewInternal = new QtStageWebView;
 	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
+    webViewInternal->settings()->setOfflineStorageDefaultQuota(512000);
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
 	webViewInternal->settings()->setWebSecurityEnabled(false);
