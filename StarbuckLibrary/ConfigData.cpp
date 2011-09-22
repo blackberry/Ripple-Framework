@@ -81,7 +81,7 @@ void ConfigData::writeSettings()
 	_settings->beginGroup(APPLICATION_NAME_IN_SETTINGS);
 	_settings->setValue(MAIN_WINDOW_SIZE_NAME_IN_SETTINGS, _mainWindowSize);
 	_settings->setValue(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, _mainWindowPosition);
-    _settings->setValue(MAIN_WINDOW_STATE_NAME_IN_SETTINGS, (unsigned int) _mainWindowState);
+    _settings->setValue(MAIN_WINDOW_STATE_NAME_IN_SETTINGS, _mainWindowState);
 	_settings->setValue(TOOLING_CONTENT_NAME_IN_SETTINGS, _toolingContent);
 	_settings->setValue(LOCAL_STORAGE_PATH_IN_SETTINGS, _localStoragePath);
     _settings->setValue(BUILD_SERVICE_COMMAND_IN_SETTINGS, _buildServiceCommand);
@@ -94,7 +94,7 @@ void ConfigData::readSettings()
 	_settings->beginGroup(APPLICATION_NAME_IN_SETTINGS);
 	_mainWindowSize = _settings->value(MAIN_WINDOW_SIZE_NAME_IN_SETTINGS, MAIN_WINDOW_SIZE_DEFAULT).toSize();
 	_mainWindowPosition = _settings->value(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, MAIN_WINDOW_POSITION_DEFAULT).toPoint();
-    _mainWindowState = (Qt::WindowStates) _settings->value(MAIN_WINDOW_STATE_NAME_IN_SETTINGS, MAIN_WINDOW_STATE_DEFAULT).toUInt();
+    _mainWindowState = _settings->value(MAIN_WINDOW_STATE_NAME_IN_SETTINGS, MAIN_WINDOW_STATE_DEFAULT).toUInt();
 	_toolingContent = _settings->value(TOOLING_CONTENT_NAME_IN_SETTINGS, TOOLING_CONTENT_DEFAULT).toString();
 	_localStoragePath = _settings->value(LOCAL_STORAGE_PATH_IN_SETTINGS, LOCAL_STORAGE_PATH_DEFAULT).toString();
 	_buildServiceCommand = _settings->value(BUILD_SERVICE_COMMAND_IN_SETTINGS, BUILD_SERVICE_COMMAND_DEFAULT).toString();
