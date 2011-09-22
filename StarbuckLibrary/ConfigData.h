@@ -36,6 +36,9 @@ public:
 	QPoint windowPosition();
 	void windowPosition(QPoint position);
 
+    unsigned int windowState();
+    void windowState(unsigned int state);
+
     QString localStoragePath();
     void localStoragePath(QString path);
 
@@ -47,7 +50,7 @@ public:
 
 private:
 
-	ConfigData(void);	
+	ConfigData(void);
 	void readSettings();
 
 	static const QString CONFIGURATION_FILE_NAME;
@@ -58,7 +61,9 @@ private:
     static const QString LOCAL_STORAGE_PATH_IN_SETTINGS;
 	static const QSize MAIN_WINDOW_SIZE_DEFAULT;
 	static const QString MAIN_WINDOW_POSITION_NAME_IN_SETTINGS;
+    static const QString MAIN_WINDOW_STATE_NAME_IN_SETTINGS;
 	static const QPoint MAIN_WINDOW_POSITION_DEFAULT;
+    static const unsigned int MAIN_WINDOW_STATE_DEFAULT;
     static const QString LOCAL_STORAGE_PATH_DEFAULT;
     static const QString BUILD_SERVICE_COMMAND_IN_SETTINGS;
     static const QString BUILD_SERVICE_COMMAND_DEFAULT;
@@ -71,7 +76,8 @@ private:
 
 	QString _toolingContent;
 	QSize _mainWindowSize;
-	QPoint _mainWindowPosition;	
+	QPoint _mainWindowPosition;
+    unsigned int _mainWindowState;
     QString _localStoragePath;
 	QString _applicationStoragePath;
     QString _buildServiceCommand;

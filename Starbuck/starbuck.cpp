@@ -43,13 +43,6 @@ void Starbuck::init(void)
 {
     _config = ConfigData::getInstance();
     setAttribute(Qt::WA_DeleteOnClose);
-    QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
-
-    QSize size = _config->windowSize();
-
-    // first run make the window the size of the desktop
-    if (size.width() == 0 && size.height() == 0)
-        size = QApplication::desktop()->size();
 
     webViewInternal = new QtStageWebView;
 	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
@@ -70,7 +63,15 @@ void Starbuck::init(void)
     //When page is finished loading, hide the progress bar
     connect(webViewInternal, SIGNAL(loadFinished(bool)), progressBar, SLOT( hide() ));
     //--------------------------------------
+    // init window
+
+    QCoreApplication::setAttribute(Qt::AA_DontShowIconsInMenus);
+    QSize size = _config->windowSize();
     resize(size);
+
+    if (_config->windowState() == 1)
+        setWindowState(Qt::WindowMaximized);
+
     //Set geometry for progressbar
     progressBar->setGeometry(QRect(0, (size.height() - PROGRESS_BAR_HEIGHT), size.width(), PROGRESS_BAR_HEIGHT));
 
@@ -109,6 +110,8 @@ void Starbuck::closeEvent(QCloseEvent *event)
 {
     _config->windowPosition(pos());
     _config->windowSize(size());
+    _config->windowState((this->windowState() == Qt::WindowMaximized) ? 1 : 0);
+    _config->writeSettings();
     event->accept();
     BuildServerManager::getInstance()->stop();
 }

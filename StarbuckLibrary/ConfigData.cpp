@@ -26,12 +26,14 @@ const QString ConfigData::APPLICATION_NAME_IN_SETTINGS = "Ripple";
 const QString ConfigData::TOOLING_CONTENT_NAME_IN_SETTINGS = "windowContent";
 const QString ConfigData::MAIN_WINDOW_SIZE_NAME_IN_SETTINGS = "windowSize";
 const QString ConfigData::MAIN_WINDOW_POSITION_NAME_IN_SETTINGS = "windowPos"; 
+const QString ConfigData::MAIN_WINDOW_STATE_NAME_IN_SETTINGS = "windowState";
 const QString ConfigData::LOCAL_STORAGE_PATH_IN_SETTINGS = "localStoragePath";
 const QString ConfigData::BUILD_SERVICE_COMMAND_IN_SETTINGS = "buildServiceCommand";
 const QString ConfigData::BUILD_SERVICE_PORT_IN_SETTINGS = "buildServicePort";
 const QString ConfigData::TOOLING_CONTENT_DEFAULT = "index.html";
-const QSize ConfigData::MAIN_WINDOW_SIZE_DEFAULT = QSize(0, 0);
+const QSize ConfigData::MAIN_WINDOW_SIZE_DEFAULT = QSize(1280, 1024);
 const QPoint ConfigData::MAIN_WINDOW_POSITION_DEFAULT = QPoint(0, 0);
+const unsigned int ConfigData::MAIN_WINDOW_STATE_DEFAULT = Qt::WindowMaximized;
 const QString ConfigData::LOCAL_STORAGE_PATH_DEFAULT = "";
 const QString ConfigData::BUILD_SERVICE_COMMAND_DEFAULT = "services/bin/rbd_service.command";
 const QString ConfigData::BUILD_SERVICE_PORT_DEFAULT = "9900";
@@ -79,6 +81,7 @@ void ConfigData::writeSettings()
 	_settings->beginGroup(APPLICATION_NAME_IN_SETTINGS);
 	_settings->setValue(MAIN_WINDOW_SIZE_NAME_IN_SETTINGS, _mainWindowSize);
 	_settings->setValue(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, _mainWindowPosition);
+    _settings->setValue(MAIN_WINDOW_STATE_NAME_IN_SETTINGS, (unsigned int) _mainWindowState);
 	_settings->setValue(TOOLING_CONTENT_NAME_IN_SETTINGS, _toolingContent);
 	_settings->setValue(LOCAL_STORAGE_PATH_IN_SETTINGS, _localStoragePath);
     _settings->setValue(BUILD_SERVICE_COMMAND_IN_SETTINGS, _buildServiceCommand);
@@ -90,7 +93,8 @@ void ConfigData::readSettings()
 {
 	_settings->beginGroup(APPLICATION_NAME_IN_SETTINGS);
 	_mainWindowSize = _settings->value(MAIN_WINDOW_SIZE_NAME_IN_SETTINGS, MAIN_WINDOW_SIZE_DEFAULT).toSize();
-	_mainWindowPosition = _settings->value(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, MAIN_WINDOW_POSITION_DEFAULT).toPoint();    
+	_mainWindowPosition = _settings->value(MAIN_WINDOW_POSITION_NAME_IN_SETTINGS, MAIN_WINDOW_POSITION_DEFAULT).toPoint();
+    _mainWindowState = (Qt::WindowStates) _settings->value(MAIN_WINDOW_STATE_NAME_IN_SETTINGS, MAIN_WINDOW_STATE_DEFAULT).toUInt();
 	_toolingContent = _settings->value(TOOLING_CONTENT_NAME_IN_SETTINGS, TOOLING_CONTENT_DEFAULT).toString();
 	_localStoragePath = _settings->value(LOCAL_STORAGE_PATH_IN_SETTINGS, LOCAL_STORAGE_PATH_DEFAULT).toString();
 	_buildServiceCommand = _settings->value(BUILD_SERVICE_COMMAND_IN_SETTINGS, BUILD_SERVICE_COMMAND_DEFAULT).toString();
@@ -129,6 +133,16 @@ void ConfigData::windowPosition(QPoint position)
 {
     _mainWindowPosition = position;
     writeSettings();
+}
+
+unsigned int ConfigData::windowState()
+{
+    return _mainWindowState;
+}
+
+void ConfigData::windowState(unsigned int state)
+{
+    _mainWindowState = state;
 }
 
 QString ConfigData::localStoragePath()
