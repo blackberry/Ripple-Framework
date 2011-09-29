@@ -56,7 +56,7 @@ void Starbuck::init(void)
     webViewInternal->settings()->setOfflineStorageDefaultQuota(512000000);
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
-    //webViewInternal->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
+    webViewInternal->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
     webViewInternal->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
     //webViewInternal->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, true);
     

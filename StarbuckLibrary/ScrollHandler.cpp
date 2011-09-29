@@ -25,12 +25,16 @@ ScrollHandler::~ScrollHandler()
 
 void ScrollHandler::unlock()
 {
-    m_pWebView->lock.lock();
-    m_flag = true;
-    
+    if (m_pWebView->page()->currentFrame()->scrollBarValue(Qt::Vertical) > m_pWebView->page()->currentFrame()->scrollBarMinimum(Qt::Vertical) &&m_pWebView->page()->currentFrame()->scrollBarValue(Qt::Vertical) < m_pWebView->page()->currentFrame()->scrollBarMaximum(Qt::Vertical))
+    {
+         m_pWebView->lock.lock();
+        m_flag = true;
+    }
+    else
+    {
+        m_flag = true;
+    }
 }
-
-QPoint blah;
 
 bool ScrollHandler::eventFilter(QObject *obj, QEvent *event)
 {
@@ -40,17 +44,13 @@ bool ScrollHandler::eventFilter(QObject *obj, QEvent *event)
             QObject::eventFilter(obj, event);
             m_flag = false;
             m_pTimer->singleShot(20, this, SLOT(unlock()));
-            
             return false;
         }
         else
             return true;
-    } else if (event->type() == QEvent::Paint) {
-        QObject::eventFilter(obj, event);
-        return false;
     } else {
         // standard event processing
-        qDebug() << event->type();
+        //qDebug() << event->type();
         
         return QObject::eventFilter(obj, event);
     }    
