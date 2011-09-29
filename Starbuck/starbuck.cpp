@@ -39,6 +39,12 @@ Starbuck::~Starbuck()
     delete webViewInternal;
 }
 
+void Starbuck::paintEvent(QPaintEvent *e)
+{
+    
+    
+}
+
 void Starbuck::init(void)
 {
     _config = ConfigData::getInstance();
@@ -47,11 +53,14 @@ void Starbuck::init(void)
     webViewInternal = new QtStageWebView;
 	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
-    //webViewInternal->settings()->setOfflineStorageDefaultQuota(512000000);
+    webViewInternal->settings()->setOfflineStorageDefaultQuota(512000000);
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
-    webViewInternal->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
+    //webViewInternal->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
     webViewInternal->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
+    //webViewInternal->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, true);
+    
+    webViewInternal->settings()->setWebSecurityEnabled(false);
 
     //Progress bar-------------------------
     progressBar = new QProgressBar(webViewInternal);
@@ -74,12 +83,12 @@ void Starbuck::init(void)
         setWindowState(Qt::WindowMaximized);
 
     //Set geometry for progressbar
-    progressBar->setGeometry(QRect(0, (size.height() - PROGRESS_BAR_HEIGHT), size.width(), PROGRESS_BAR_HEIGHT));
+    //progressBar->setGeometry(QRect(0, (size.height() - PROGRESS_BAR_HEIGHT), size.width(), PROGRESS_BAR_HEIGHT));
 
     move(_config->windowPosition());
 
-    webViewInternal->load(QUrl(_config->toolingContent()));
-
+    webViewInternal->load(QUrl("http://www.google.com/"));
+    
     setCentralWidget(webViewInternal);
 
     //register webview

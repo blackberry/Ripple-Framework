@@ -21,6 +21,7 @@ LIST(APPEND STARBUCKLIBRARY_SOURCES
 	RequestObject.cpp
 	BuildServerManager.cpp
     PortScanner.cpp
+    ScrollHandler.cpp
 )
 
 SET(STARBUCKLIBRARY_MOC_HEADERS
@@ -28,6 +29,7 @@ SET(STARBUCKLIBRARY_MOC_HEADERS
     StageViewMsgHandler.h
 	RequestObject.h
 	BuildServerManager.h
+    ScrollHandler.h
 )
 
 QT4_WRAP_CPP(STARBUCKLIBRARY_MOC_SRCS ${STARBUCKLIBRARY_MOC_HEADERS})

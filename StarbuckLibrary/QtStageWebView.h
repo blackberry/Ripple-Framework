@@ -27,18 +27,23 @@
 #include <QWebView>
 #include <QWebHistory>
 #include <QWebFrame>
+#include <QMutex>
+#include <QPaintEvent>
 #include "irimstagewebview.h"
+
+class ScrollHandler;
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
 class QtStageWebView :	public QWebView, public IStarbuckWebView
 {
 	Q_OBJECT
-
+    ScrollHandler *m_pScrollHandler;
+    void paintEvent(QPaintEvent *pe);
 public:
 	QtStageWebView(QWidget *parent = 0);
 	~QtStageWebView(void);
-
+    QMutex lock;
   /**
 	 * Loads the page at the specified URL.
 	 * @param url The URL of the content to display.

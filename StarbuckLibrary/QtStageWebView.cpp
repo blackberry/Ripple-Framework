@@ -16,6 +16,7 @@
 
 #include "stdafx.h"
 #include "QtStageWebView.h"
+#include "ScrollHandler.h"
 
 using namespace BlackBerry::Starbuck;
 
@@ -38,10 +39,19 @@ QtStageWebView::QtStageWebView(QWidget *p) : QWebView(p), waitForJsLoad(false)
 
 	//enable web inspector
 	this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+    
+    m_pScrollHandler = new ScrollHandler(this);
+    this->installEventFilter(m_pScrollHandler);
 }
 
 QtStageWebView::~QtStageWebView(void)
 {
+}
+
+void QtStageWebView::paintEvent(QPaintEvent *pe)
+{
+    lock.unlock();
+    QWebView::paintEvent(pe);
 }
 
 void QtStageWebView::loadURL(QString url)
