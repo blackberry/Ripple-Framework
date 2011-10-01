@@ -112,7 +112,7 @@ void Starbuck::init(void)
 void Starbuck::closeEvent(QCloseEvent *event)
 {
     _config->windowPosition(pos());
-    if (this->windowState() == Qt::WindowMaximized)
+    if (this->windowState() != Qt::WindowMaximized)
         _config->windowSize(size());
     _config->windowState((this->windowState() == Qt::WindowMaximized) ? 1 : 0);
     _config->writeSettings();
