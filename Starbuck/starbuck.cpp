@@ -50,9 +50,11 @@ void Starbuck::init(void)
     webViewInternal->settings()->setOfflineStorageDefaultQuota(512000000);
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
+#if QT_VERSION >= 0x040800
     webViewInternal->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
     webViewInternal->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
-
+#endif
+    
     //Progress bar-------------------------
     progressBar = new QProgressBar(webViewInternal);
     progressBar->setObjectName(QString::fromUtf8("progressBar"));
