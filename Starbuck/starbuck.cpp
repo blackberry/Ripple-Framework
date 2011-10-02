@@ -54,7 +54,8 @@ void Starbuck::init(void)
     webViewInternal->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
     webViewInternal->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
 #endif
-    
+    webViewInternal->settings()->setWebSecurityEnabled(false);
+
     //Progress bar-------------------------
     progressBar = new QProgressBar(webViewInternal);
     progressBar->setObjectName(QString::fromUtf8("progressBar"));
