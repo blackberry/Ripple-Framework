@@ -99,7 +99,14 @@ class QtGraphicsStageWebView : public QGraphicsView
 {
     Q_OBJECT
 public:
-    QtGraphicsStageWebView(QWidget *parent) : QGraphicsView(parent) { m_pWebView = new QtStageWebView; };
+    QtGraphicsStageWebView(QWidget *parent) : QGraphicsView(parent)
+    {
+        m_pWebView = new QtStageWebView;
+        setScene(new QGraphicsScene());
+        scene()->addItem(m_pWebView);
+        scene()->setFocusItem(m_pWebView);
+    
+    };
     QtStageWebView *qtStageWebView() const { return m_pWebView; };
 private:
     QtStageWebView *m_pWebView;

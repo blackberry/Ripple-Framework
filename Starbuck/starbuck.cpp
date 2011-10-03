@@ -17,6 +17,7 @@
 #include "stdafx.h"
 #include "starbuck.h"
 #include "BuildServerManager.h"
+#include <QGLWidget>
 
 using namespace BlackBerry::Starbuck;
 
@@ -82,6 +83,8 @@ void Starbuck::init(void)
     move(_config->windowPosition());
 
     webViewInternal->qtStageWebView()->load(QUrl("http://www.google.com/"));
+    webViewInternal->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
+    webViewInternal->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
     
     setCentralWidget(webViewInternal);
 
