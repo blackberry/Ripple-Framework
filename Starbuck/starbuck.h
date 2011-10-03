@@ -38,7 +38,6 @@ namespace BlackBerry
     public:
       Starbuck(QWidget *parent = 0, Qt::WFlags flags = 0);
       ~Starbuck();
-        void paintEvent(QPaintEvent *e);
 
     protected:
         void closeEvent(QCloseEvent *event);

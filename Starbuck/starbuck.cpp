@@ -39,12 +39,6 @@ Starbuck::~Starbuck()
     delete webViewInternal;
 }
 
-void Starbuck::paintEvent(QPaintEvent *e)
-{
-    
-    
-}
-
 void Starbuck::init(void)
 {
     _config = ConfigData::getInstance();
