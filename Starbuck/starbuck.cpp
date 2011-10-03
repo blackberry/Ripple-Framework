@@ -56,10 +56,10 @@ void Starbuck::init(void)
     webViewInternal->qtStageWebView()->settings()->setOfflineStorageDefaultQuota(512000000);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
+#if QT_VERSION >= 0x040800
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
-    //webViewInternal->settings()->setAttribute(QWebSettings::TiledBackingStoreEnabled, true);
-    
+#endif    
     webViewInternal->qtStageWebView()->settings()->setWebSecurityEnabled(false);
 
     //Progress bar-------------------------
@@ -83,7 +83,7 @@ void Starbuck::init(void)
         setWindowState(Qt::WindowMaximized);
 
     //Set geometry for progressbar
-    //progressBar->setGeometry(QRect(0, (size.height() - PROGRESS_BAR_HEIGHT), size.width(), PROGRESS_BAR_HEIGHT));
+    progressBar->setGeometry(QRect(0, (size.height() - PROGRESS_BAR_HEIGHT), size.width(), PROGRESS_BAR_HEIGHT));
 
     move(_config->windowPosition());
 
@@ -119,7 +119,8 @@ void Starbuck::init(void)
 void Starbuck::closeEvent(QCloseEvent *event)
 {
     _config->windowPosition(pos());
-    _config->windowSize(size());
+    if (this->windowState() != Qt::WindowMaximized)
+        _config->windowSize(size());
     _config->windowState((this->windowState() == Qt::WindowMaximized) ? 1 : 0);
     _config->writeSettings();
     event->accept();
