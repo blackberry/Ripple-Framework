@@ -23,6 +23,7 @@
 #include <QWebView>
 #include "ConfigData.h"
 #include "StageViewMsgHandler.h"
+#include "QtStageWebView.h"
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
@@ -48,7 +49,7 @@ namespace BlackBerry
 
     private:
         static const int PROGRESS_BAR_HEIGHT;
-        QtStageWebView* webViewInternal;
+        QtGraphicsStageWebView* webViewInternal;
         QProgressBar* progressBar;
         ConfigData *_config;
         StageViewMsgHandler* m_pStageViewHandler;

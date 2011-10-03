@@ -20,7 +20,7 @@
 
 using namespace BlackBerry::Starbuck;
 
-QtStageWebView::QtStageWebView(QWidget *p) : QWebView(p), waitForJsLoad(false)
+QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
 {	
     //Turn off context menu's (i.e. menu when right clicking, you will need to uncommment this if you want to use web inspector,
     //there is currently a conflict between the context menus when using two QWebView's
@@ -51,7 +51,7 @@ QtStageWebView::~QtStageWebView(void)
 void QtStageWebView::paintEvent(QPaintEvent *pe)
 {
     lock.unlock();
-    QWebView::paintEvent(pe);
+   // QGraphicsWebView::paintEvent(pe);
 }
 
 void QtStageWebView::loadURL(QString url)
@@ -67,7 +67,7 @@ void QtStageWebView::loadURL(QString url)
 
 void QtStageWebView::reload()
 {
-	QWebView::reload();
+	QGraphicsWebView::reload();
 }
 
 void QtStageWebView::notifyUrlChanged(const QUrl& url)

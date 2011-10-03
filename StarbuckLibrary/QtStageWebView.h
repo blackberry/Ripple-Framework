@@ -28,6 +28,8 @@
 #include <QWebHistory>
 #include <QWebFrame>
 #include <QMutex>
+#include <QGraphicsWebView>
+#include <QGraphicsView>
 #include <QPaintEvent>
 #include "irimstagewebview.h"
 
@@ -35,7 +37,7 @@ class ScrollHandler;
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
-class QtStageWebView :	public QWebView, public IStarbuckWebView
+class QtStageWebView :	public QGraphicsWebView, public IStarbuckWebView
 {
 	Q_OBJECT
     ScrollHandler *m_pScrollHandler;
@@ -91,7 +93,7 @@ public:
 
     void setWindowGeometry(int x, int y, int w, int h)
     {
-        setGeometry(x,y,w,h);
+        //setGeometry(x,y,w,h);
     }
 
 	/**
@@ -619,4 +621,15 @@ private slots:
 	void notifyUrlChanged(const QUrl& url);
 	void notifyJavaScriptWindowObjectCleared();
 };
+
+class QtGraphicsStageWebView : public QGraphicsView
+{
+    Q_OBJECT
+public:
+    QtGraphicsStageWebView(QWidget *parent) : QGraphicsView(parent) { m_pWebView = new QtStageWebView; };
+    QtStageWebView *qtStageWebView() const { return m_pWebView; };
+private:
+    QtStageWebView *m_pWebView;
+};
+
 #endif //QTSTAGEWEBVIEW_H
