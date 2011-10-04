@@ -20,9 +20,10 @@
 #include <QMainWindow>
 #include <QWebPage>
 #include <QProgressBar>
-#include <QWebView>
+#include <QGLWidget>
 #include "ConfigData.h"
 #include "StageViewMsgHandler.h"
+#include "QtStageWebView.h"
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
@@ -46,8 +47,9 @@ namespace BlackBerry
         void registerAPIs();
 
     private:
+        QGLWidget *_GLWidget;
         static const int PROGRESS_BAR_HEIGHT;
-        QtStageWebView* webViewInternal;
+        QtGraphicsStageWebView* webViewInternal;
         QProgressBar* progressBar;
         ConfigData *_config;
         StageViewMsgHandler* m_pStageViewHandler;

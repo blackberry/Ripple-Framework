@@ -17,6 +17,7 @@
 #include "stdafx.h"
 #include "starbuck.h"
 #include "BuildServerManager.h"
+#include <QGLWidget>
 
 using namespace BlackBerry::Starbuck;
 
@@ -44,20 +45,20 @@ void Starbuck::init(void)
     _config = ConfigData::getInstance();
     setAttribute(Qt::WA_DeleteOnClose);
 
-    webViewInternal = new QtStageWebView;
-	webViewInternal->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-	webViewInternal->settings()->enablePersistentStorage(_config->localStoragePath());
-    webViewInternal->settings()->setOfflineStorageDefaultQuota(512000000);
-    webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
-    webViewInternal->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
+    webViewInternal = new QtGraphicsStageWebView(this);
+	webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+	webViewInternal->qtStageWebView()->settings()->enablePersistentStorage(_config->localStoragePath());
+    webViewInternal->qtStageWebView()->settings()->setOfflineStorageDefaultQuota(512000000);
+    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
+    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
 #if QT_VERSION >= 0x040800
-    webViewInternal->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
-    webViewInternal->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
-#endif
-    webViewInternal->settings()->setWebSecurityEnabled(false);
+    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
+    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
+#endif    
+    webViewInternal->qtStageWebView()->settings()->setWebSecurityEnabled(false);
 
     //Progress bar-------------------------
-    progressBar = new QProgressBar(webViewInternal);
+    progressBar = new QProgressBar(this);
     progressBar->setObjectName(QString::fromUtf8("progressBar"));
     //When the loading of a new page has started, show and reset the progress bar
     connect(webViewInternal, SIGNAL(loadStarted()), progressBar, SLOT( show() ));
@@ -81,16 +82,28 @@ void Starbuck::init(void)
 
     move(_config->windowPosition());
 
-    webViewInternal->load(QUrl(_config->toolingContent()));
-
+    webViewInternal->qtStageWebView()->load(QUrl(_config->toolingContent()));
+    
+    // set up GL viewport
+    _GLWidget = new QGLWidget;
+    QGLFormat format;
+    format.setSampleBuffers(2);
+    format.setRgba(true);
+    format.setDoubleBuffer(true);
+    _GLWidget->setFormat(format);
+    webViewInternal->setViewport(_GLWidget);
+    webViewInternal->setViewportUpdateMode(QGraphicsView::MinimalViewportUpdate);
+    webViewInternal->qtStageWebView()->setGeometry(this->geometry());
+    
     setCentralWidget(webViewInternal);
+    _GLWidget->makeCurrent();
 
     //register webview
-    connect(webViewInternal->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerAPIs()));
+    connect(webViewInternal->qtStageWebView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerAPIs()));
   
     //stagewebview interfaces
     m_pStageViewHandler = new StageViewMsgHandler(this);
-    m_pStageViewHandler->Register(webViewInternal);
+    m_pStageViewHandler->Register(webViewInternal->qtStageWebView());
 
     //start build server
     connect(BuildServerManager::getInstance(), SIGNAL(findUsablePort(int)), m_pStageViewHandler, SLOT(setServerPort(int))); 
@@ -124,7 +137,7 @@ void Starbuck::closeEvent(QCloseEvent *event)
 void Starbuck::registerAPIs()
 {
     //register StageWebViewMsgHandler as JS object named stagewebview
-    QWebFrame* frame = webViewInternal->page()->mainFrame();
+    QWebFrame* frame = webViewInternal->qtStageWebView()->page()->mainFrame();
     frame->addToJavaScriptWindowObject(QString("stagewebview"), m_pStageViewHandler);
 }
 

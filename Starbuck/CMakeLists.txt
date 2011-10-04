@@ -1,4 +1,4 @@
-find_package(Qt4 COMPONENTS QtCore QtGui QtXml QtSql QtNetwork QtWebKit REQUIRED)
+find_package(Qt4 COMPONENTS QtCore QtGui QtXml QtSql QtNetwork QtWebKit QtOpenGL REQUIRED)
 include(${QT_USE_FILE})
 
 SET(STARBUCK_INCLUDE_DIRECTORIES
