@@ -52,7 +52,7 @@ void Starbuck::init(void)
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
 #if QT_VERSION >= 0x040800
-    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
+    //webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
 #endif    
     webViewInternal->qtStageWebView()->settings()->setWebSecurityEnabled(false);
@@ -82,11 +82,21 @@ void Starbuck::init(void)
 
     move(_config->windowPosition());
 
-    webViewInternal->qtStageWebView()->load(QUrl("http://www.google.com/"));
-    webViewInternal->setViewport(new QGLWidget(QGLFormat(QGL::SampleBuffers)));
-    webViewInternal->setViewportUpdateMode(QGraphicsView::SmartViewportUpdate);
+    webViewInternal->qtStageWebView()->load(QUrl(_config->toolingContent()));
+    
+    // set up GL viewport
+    _GLWidget = new QGLWidget;
+    QGLFormat format;
+    format.setSampleBuffers(2);
+    format.setRgba(true);
+    format.setDoubleBuffer(true);
+    _GLWidget->setFormat(format);
+    webViewInternal->setViewport(_GLWidget);
+    webViewInternal->setViewportUpdateMode(QGraphicsView::MinimalViewportUpdate);
+    webViewInternal->qtStageWebView()->setGeometry(this->geometry());
     
     setCentralWidget(webViewInternal);
+    _GLWidget->makeCurrent();
 
     //register webview
     connect(webViewInternal->qtStageWebView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerAPIs()));

@@ -55,7 +55,7 @@ public:
 	QString location();
     void setWindowGeometry(int x, int y, int w, int h)
     {
-        //setGeometry(x,y,w,h);
+        QGraphicsWidget::setGeometry(x, y, w, h);
     }
 	QString title();	
 	int historyLength();
@@ -105,6 +105,9 @@ public:
         setScene(new QGraphicsScene());
         scene()->addItem(m_pWebView);
         scene()->setFocusItem(m_pWebView);
+        setFrameShape(QFrame::NoFrame);
+        setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     
     };
     QtStageWebView *qtStageWebView() const { return m_pWebView; };

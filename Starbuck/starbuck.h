@@ -20,7 +20,7 @@
 #include <QMainWindow>
 #include <QWebPage>
 #include <QProgressBar>
-#include <QWebView>
+#include <QGLWidget>
 #include "ConfigData.h"
 #include "StageViewMsgHandler.h"
 #include "QtStageWebView.h"
@@ -47,6 +47,7 @@ namespace BlackBerry
         void registerAPIs();
 
     private:
+        QGLWidget *_GLWidget;
         static const int PROGRESS_BAR_HEIGHT;
         QtGraphicsStageWebView* webViewInternal;
         QProgressBar* progressBar;
