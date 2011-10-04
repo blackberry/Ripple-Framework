@@ -35,6 +35,7 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 				<include>QtXml4.dll</include>
 				<include>QtTest4.dll</include>
 				<include>phonon4.dll</include>
+				<include>QtOpenGL4.dll</include>
 			</includes>
         </fileSet> 
         <fileSet>            
