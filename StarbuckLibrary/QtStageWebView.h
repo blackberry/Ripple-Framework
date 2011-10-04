@@ -69,6 +69,8 @@ public:
 	QVariant executeJavaScript(QString script);
 	bool visible();
 	void visible(bool enable);
+  void setZoom(float zoom);
+  float zoom ();
 
 	//certificateInfo
 	//fullscreenClientGet

@@ -54,7 +54,9 @@ public slots:
 	int historyLength();
 	int historyPosition();
 	void historyPosition(int position);
-    void setServerPort(int port);
+  void setServerPort(int port);
+  void setZoomFactor(float zoom);
+  float zoomFactor();
  
     //following slots are used internal for emit signals which will be connected from js side
 private slots:
