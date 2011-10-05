@@ -18,6 +18,7 @@
 #include "starbuck.h"
 #include "BuildServerManager.h"
 #include <QGLWidget>
+#include "ScrollHandler.h"
 
 using namespace BlackBerry::Starbuck;
 
@@ -97,6 +98,10 @@ void Starbuck::init(void)
     
     setCentralWidget(webViewInternal);
     _GLWidget->makeCurrent();
+    
+    // init scroll handler
+    _scrollHandler = new ScrollHandler(webViewInternal->qtStageWebView());
+    _GLWidget->installEventFilter(_scrollHandler);
 
     //register webview
     connect(webViewInternal->qtStageWebView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerAPIs()));

@@ -48,6 +48,7 @@ namespace BlackBerry
 
     private:
         QGLWidget *_GLWidget;
+        ScrollHandler *_scrollHandler;
         static const int PROGRESS_BAR_HEIGHT;
         QtGraphicsStageWebView* webViewInternal;
         QProgressBar* progressBar;
