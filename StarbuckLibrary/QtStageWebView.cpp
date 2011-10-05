@@ -203,3 +203,11 @@ void QtStageWebView::visible(bool enable)
 
 	(enable) ? this->show():this->hide();
 }
+
+void QtStageWebView::setZoom(float zoom) {
+  this->setZoomFactor(zoom);
+}
+
+float QtStageWebView::zoom() {
+  return this->zoomFactor();
+}
