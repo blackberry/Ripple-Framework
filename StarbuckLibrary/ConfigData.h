@@ -47,6 +47,12 @@ public:
 
     unsigned short buildServicePort();
     void buildServicePort(unsigned short port);
+    
+    unsigned int hardwareAccelerationEnabled();
+    void hardwareAccelerationEnabled(unsigned int hwEnabled);
+    
+    unsigned int webGLEnabled();
+    void webGLEnabled(unsigned int glEnabled);
 
 private:
 
@@ -69,6 +75,10 @@ private:
     static const QString BUILD_SERVICE_COMMAND_DEFAULT;
     static const QString BUILD_SERVICE_PORT_IN_SETTINGS;
     static const QString BUILD_SERVICE_PORT_DEFAULT;
+    static const QString HARDWARE_ACCELERATION_IN_SETTINGS;
+    static const unsigned int HARDWARE_ACCELERATION_DEFAULT;
+    static const QString WEBGL_ENABLED_IN_SETTINGS;
+    static const unsigned int WEBGL_ENABLED_DEFAULT;
 
 	static ConfigData* _instance;
 	static bool _instanceFlag;
@@ -82,5 +92,6 @@ private:
 	QString _applicationStoragePath;
     QString _buildServiceCommand;
     QString _buildServicePort;
-
+    unsigned int _hardwareAccelerationEnabled;
+    unsigned int _webGLEnabled;
 };

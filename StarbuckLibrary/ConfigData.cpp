@@ -30,6 +30,8 @@ const QString ConfigData::MAIN_WINDOW_STATE_NAME_IN_SETTINGS = "windowState";
 const QString ConfigData::LOCAL_STORAGE_PATH_IN_SETTINGS = "localStoragePath";
 const QString ConfigData::BUILD_SERVICE_COMMAND_IN_SETTINGS = "buildServiceCommand";
 const QString ConfigData::BUILD_SERVICE_PORT_IN_SETTINGS = "buildServicePort";
+const QString ConfigData::HARDWARE_ACCELERATION_IN_SETTINGS = "enableHardwareAcceleration";
+const QString ConfigData::WEBGL_ENABLED_IN_SETTINGS = "webGLEnabled";
 const QString ConfigData::TOOLING_CONTENT_DEFAULT = "index.html";
 const QSize ConfigData::MAIN_WINDOW_SIZE_DEFAULT = QSize(1280, 1024);
 const QPoint ConfigData::MAIN_WINDOW_POSITION_DEFAULT = QPoint(0, 0);
@@ -37,6 +39,8 @@ const unsigned int ConfigData::MAIN_WINDOW_STATE_DEFAULT = 1;
 const QString ConfigData::LOCAL_STORAGE_PATH_DEFAULT = "";
 const QString ConfigData::BUILD_SERVICE_COMMAND_DEFAULT = "services/bin/rbd_service.command";
 const QString ConfigData::BUILD_SERVICE_PORT_DEFAULT = "9900";
+const unsigned int ConfigData::HARDWARE_ACCELERATION_DEFAULT = 1;
+const unsigned int ConfigData::WEBGL_ENABLED_DEFAULT = 0;
 
 ConfigData::ConfigData(void)
 {
@@ -86,6 +90,8 @@ void ConfigData::writeSettings()
 	_settings->setValue(LOCAL_STORAGE_PATH_IN_SETTINGS, _localStoragePath);
     _settings->setValue(BUILD_SERVICE_COMMAND_IN_SETTINGS, _buildServiceCommand);
     _settings->setValue(BUILD_SERVICE_PORT_IN_SETTINGS, _buildServicePort);
+    _settings->setValue(HARDWARE_ACCELERATION_IN_SETTINGS, _hardwareAccelerationEnabled);
+    _settings->setValue(WEBGL_ENABLED_IN_SETTINGS, _webGLEnabled);    
 	_settings->endGroup();
 }
 
@@ -99,6 +105,8 @@ void ConfigData::readSettings()
 	_localStoragePath = _settings->value(LOCAL_STORAGE_PATH_IN_SETTINGS, LOCAL_STORAGE_PATH_DEFAULT).toString();
 	_buildServiceCommand = _settings->value(BUILD_SERVICE_COMMAND_IN_SETTINGS, BUILD_SERVICE_COMMAND_DEFAULT).toString();
 	_buildServicePort = _settings->value(BUILD_SERVICE_PORT_IN_SETTINGS, BUILD_SERVICE_PORT_DEFAULT).toString();
+    _hardwareAccelerationEnabled = _settings->value(HARDWARE_ACCELERATION_IN_SETTINGS, HARDWARE_ACCELERATION_DEFAULT).toUInt();
+    _webGLEnabled = _settings->value(WEBGL_ENABLED_IN_SETTINGS, WEBGL_ENABLED_DEFAULT).toUInt();
 	_settings->endGroup();
 }
 
@@ -177,4 +185,24 @@ unsigned short ConfigData::buildServicePort()
 void ConfigData::buildServicePort(unsigned short port)
 {
     _buildServicePort = QString::number(port);
+}
+
+unsigned int ConfigData::hardwareAccelerationEnabled()
+{
+    return _hardwareAccelerationEnabled;
+}
+
+void ConfigData::hardwareAccelerationEnabled(unsigned int hwEnabled)
+{
+    _hardwareAccelerationEnabled = hwEnabled;
+}
+
+unsigned int ConfigData::webGLEnabled()
+{
+    return _webGLEnabled;
+}
+
+void ConfigData::webGLEnabled(unsigned int glEnabled)
+{
+    _webGLEnabled = glEnabled;
 }

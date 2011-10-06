@@ -41,8 +41,48 @@ Starbuck::~Starbuck()
     delete webViewInternal;
 }
 
+void Starbuck::enableHardwareAcceleration()
+{
+    if (!_hwToggleMenuItem->isChecked())
+    {
+        _config->hardwareAccelerationEnabled(0);
+        _hwToggleMenuItem->setChecked(false);
+    }
+    else
+    {
+        _config->hardwareAccelerationEnabled(1);        
+        _hwToggleMenuItem->setChecked(true);
+    }
+    
+    QMessageBox::information(this, "Restart Ripple", "Please restart Ripple for changes to take effect");
+}
+
+void Starbuck::enableWebGL()
+{
+    if (!_hwToggleMenuItem->isChecked())
+    {
+        _config->webGLEnabled(0);        
+        _hwToggleMenuItem->setChecked(false);
+        webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, false);
+    }
+    else
+    {
+        _config->webGLEnabled(1);
+        _hwToggleMenuItem->setChecked(true);
+        webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
+    }
+}
+
 void Starbuck::init(void)
 {
+    
+    // create menu items
+    _optionsMenu = menuBar()->addMenu("Options");
+    _hwToggleMenuItem = _optionsMenu->addAction("Enable Hardware Acceleration", this, SLOT(enableHardwareAcceleration()));
+    _hwToggleMenuItem->setCheckable(true);
+    _webGLToggleMenuItem = _optionsMenu->addAction("Enable WebGL", this, SLOT(enableWebGL()));
+    _webGLToggleMenuItem->setCheckable(true);
+    
     _config = ConfigData::getInstance();
     setAttribute(Qt::WA_DeleteOnClose);
 
@@ -54,10 +94,28 @@ void Starbuck::init(void)
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
 #if QT_VERSION >= 0x040800
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
-    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
 #endif    
     webViewInternal->qtStageWebView()->settings()->setWebSecurityEnabled(false);
 
+    if (_config->webGLEnabled() == 1)
+    {
+        _webGLToggleMenuItem->setChecked(true);
+        webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
+    }
+    
+    if (_config->hardwareAccelerationEnabled() == 1)
+    {
+        _hwToggleMenuItem->setChecked(true);
+        _GLWidget = new QGLWidget;
+        QGLFormat format;
+        format.setSampleBuffers(2);
+        format.setRgba(true);
+        format.setDoubleBuffer(true);
+        _GLWidget->setFormat(format);
+        webViewInternal->setViewport(_GLWidget);
+        webViewInternal->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+    }
+    
     //Progress bar-------------------------
     progressBar = new QProgressBar(this);
     progressBar->setObjectName(QString::fromUtf8("progressBar"));
@@ -85,23 +143,14 @@ void Starbuck::init(void)
 
     webViewInternal->qtStageWebView()->load(QUrl(_config->toolingContent()));
     
-    // set up GL viewport
-    _GLWidget = new QGLWidget;
-    QGLFormat format;
-    format.setSampleBuffers(2);
-    format.setRgba(true);
-    format.setDoubleBuffer(true);
-    _GLWidget->setFormat(format);
-    webViewInternal->setViewport(_GLWidget);
-    webViewInternal->setViewportUpdateMode(QGraphicsView::MinimalViewportUpdate);
     webViewInternal->qtStageWebView()->setGeometry(this->geometry());
     
     setCentralWidget(webViewInternal);
-    _GLWidget->makeCurrent();
+    //_GLWidget->makeCurrent();
     
     // init scroll handler
     _scrollHandler = new ScrollHandler(webViewInternal->qtStageWebView());
-    _GLWidget->installEventFilter(_scrollHandler);
+    //_GLWidget->installEventFilter(_scrollHandler);
 
     //register webview
     connect(webViewInternal->qtStageWebView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerAPIs()));
