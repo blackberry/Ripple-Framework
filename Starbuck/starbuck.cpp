@@ -59,16 +59,16 @@ void Starbuck::enableHardwareAcceleration()
 
 void Starbuck::enableWebGL()
 {
-    if (!_hwToggleMenuItem->isChecked())
+    if (!_webGLToggleMenuItem->isChecked())
     {
         _config->webGLEnabled(0);        
-        _hwToggleMenuItem->setChecked(false);
+        _webGLToggleMenuItem->setChecked(false);
         webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, false);
     }
     else
     {
         _config->webGLEnabled(1);
-        _hwToggleMenuItem->setChecked(true);
+        _webGLToggleMenuItem->setChecked(true);
         webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
     }
 }
