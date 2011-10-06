@@ -50,8 +50,8 @@ QtStageWebView::~QtStageWebView(void)
 
 void QtStageWebView::paintEvent(QPaintEvent *pe)
 {
-    lock.unlock();
-   // QGraphicsWebView::paintEvent(pe);
+    //lock.unlock();
+    //QGraphicsWebView::paintEvent(pe);
 }
 
 void QtStageWebView::loadURL(QString url)

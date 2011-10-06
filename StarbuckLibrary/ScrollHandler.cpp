@@ -51,7 +51,7 @@ bool ScrollHandler::eventFilter(QObject *obj, QEvent *event)
         {
             QObject::eventFilter(obj, event);
             m_flag = false;
-            m_pTimer->singleShot(25, this, SLOT(unlock()));
+            m_pTimer->singleShot(10, this, SLOT(unlock()));
             return false;
         }
         else

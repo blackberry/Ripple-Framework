@@ -113,6 +113,7 @@ public:
     
     };
     QtStageWebView *qtStageWebView() const { return m_pWebView; };
+    void paintEvent(QPaintEvent *pe) { QGraphicsView::paintEvent(pe); qtStageWebView()->lock.unlock(); };
 private:
     QtStageWebView *m_pWebView;
 };

@@ -114,6 +114,12 @@ void Starbuck::init(void)
         _GLWidget->setFormat(format);
         webViewInternal->setViewport(_GLWidget);
         webViewInternal->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+        _GLWidget->makeCurrent();
+        
+        // init scroll handler
+        _scrollHandler = new ScrollHandler(webViewInternal->qtStageWebView());
+        _GLWidget->installEventFilter(_scrollHandler);
+
     }
     
     //Progress bar-------------------------
@@ -141,16 +147,11 @@ void Starbuck::init(void)
 
     move(_config->windowPosition());
 
-    webViewInternal->qtStageWebView()->load(QUrl(_config->toolingContent()));
+    webViewInternal->qtStageWebView()->load(QUrl("http://www.joystiq.com"));
     
     webViewInternal->qtStageWebView()->setGeometry(this->geometry());
     
     setCentralWidget(webViewInternal);
-    //_GLWidget->makeCurrent();
-    
-    // init scroll handler
-    _scrollHandler = new ScrollHandler(webViewInternal->qtStageWebView());
-    //_GLWidget->installEventFilter(_scrollHandler);
 
     //register webview
     connect(webViewInternal->qtStageWebView()->page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(registerAPIs()));
