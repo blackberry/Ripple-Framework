@@ -33,7 +33,7 @@ ScrollHandler::~ScrollHandler()
 
 void ScrollHandler::unlock()
 {
-    if (m_pWebView->page()->currentFrame()->scrollBarValue(Qt::Vertical) > m_pWebView->page()->currentFrame()->scrollBarMinimum(Qt::Vertical) && m_pWebView->page()->currentFrame()->scrollBarValue(Qt::Vertical) < m_pWebView->page()->currentFrame()->scrollBarMaximum(Qt::Vertical))
+    if ((m_pWebView->page()->currentFrame()->scrollBarValue(Qt::Vertical) > m_pWebView->page()->currentFrame()->scrollBarMinimum(Qt::Vertical) && m_pWebView->page()->currentFrame()->scrollBarValue(Qt::Vertical) < m_pWebView->page()->currentFrame()->scrollBarMaximum(Qt::Vertical)) && (m_pWebView->page()->currentFrame()->scrollBarValue(Qt::Horizontal) > m_pWebView->page()->currentFrame()->scrollBarMinimum(Qt::Horizontal) && m_pWebView->page()->currentFrame()->scrollBarValue(Qt::Horizontal) < m_pWebView->page()->currentFrame()->scrollBarMaximum(Qt::Horizontal)))
     {
         m_pWebView->lock.lock();
         m_flag = true;
