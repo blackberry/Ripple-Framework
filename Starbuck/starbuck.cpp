@@ -147,7 +147,7 @@ void Starbuck::init(void)
 
     move(_config->windowPosition());
 
-    webViewInternal->qtStageWebView()->load(QUrl("http://www.joystiq.com"));
+    webViewInternal->qtStageWebView()->load(QUrl(config->toolingContent()));
     
     webViewInternal->qtStageWebView()->setGeometry(this->geometry());
     
