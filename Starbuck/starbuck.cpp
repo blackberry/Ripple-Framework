@@ -149,8 +149,6 @@ void Starbuck::init(void)
 
     webViewInternal->qtStageWebView()->load(QUrl(_config->toolingContent()));
     
-    webViewInternal->qtStageWebView()->setGeometry(this->geometry());
-    
     setCentralWidget(webViewInternal);
 
     //register webview
@@ -198,6 +196,7 @@ void Starbuck::registerAPIs()
 
 void Starbuck::resizeEvent(QResizeEvent * e )
 {
+    webViewInternal->qtStageWebView()->setGeometry(this->geometry());
 	progressBar->setGeometry(QRect(0, (e->size().height() - PROGRESS_BAR_HEIGHT), e->size().width(), PROGRESS_BAR_HEIGHT));
     e->accept();
 }
