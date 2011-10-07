@@ -106,20 +106,14 @@ void Starbuck::init(void)
     if (_config->hardwareAccelerationEnabled() == 1)
     {
         _hwToggleMenuItem->setChecked(true);
-        _GLWidget = new QGLWidget;
         QGLFormat format;
         format.setSampleBuffers(2);
-        format.setRgba(true);
-        format.setDoubleBuffer(true);
-        _GLWidget->setFormat(format);
-        webViewInternal->setViewport(_GLWidget);
+        webViewInternal->setViewport(new QGLWidget(format));
         webViewInternal->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
-        _GLWidget->makeCurrent();
         
         // init scroll handler
         _scrollHandler = new ScrollHandler(webViewInternal->qtStageWebView());
-        _GLWidget->installEventFilter(_scrollHandler);
-
+        webViewInternal->viewport()->installEventFilter(_scrollHandler);
     }
     
     //Progress bar-------------------------
