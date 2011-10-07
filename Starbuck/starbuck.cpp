@@ -97,27 +97,36 @@ void Starbuck::init(void)
 #endif    
     webViewInternal->qtStageWebView()->settings()->setWebSecurityEnabled(false);
 
-    if (_config->webGLEnabled() == 1)
+    if (QGLFormat::hasOpenGL())
     {
-        _webGLToggleMenuItem->setChecked(true);
-        webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
-    }
-    
-    if (_config->hardwareAccelerationEnabled() == 1)
-    {
-        _hwToggleMenuItem->setChecked(true);
-        QGLFormat format;
-        format.setSampleBuffers(2);
-        webViewInternal->setViewport(new QGLWidget(format));
-        webViewInternal->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+        if (_config->webGLEnabled() == 1)
+        {
+            _webGLToggleMenuItem->setChecked(true);
+            webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::WebGLEnabled, true);
+        }
         
-        // init scroll handler
-        _scrollHandler = new ScrollHandler(webViewInternal->qtStageWebView());
-        webViewInternal->viewport()->installEventFilter(_scrollHandler);
+        if (_config->hardwareAccelerationEnabled() == 1)
+        {
+            _hwToggleMenuItem->setChecked(true);
+            QGLFormat format;
+            format.setSampleBuffers(2);
+            webViewInternal->setViewport(new QGLWidget(format));
+            webViewInternal->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
+            
+            // init scroll handler
+            _scrollHandler = new ScrollHandler(webViewInternal->qtStageWebView());
+            webViewInternal->viewport()->installEventFilter(_scrollHandler);
+        }
+    }
+    else
+    {
+        _hwToggleMenuItem->setDisabled(true);
+        _webGLToggleMenuItem->setDisabled(true);
     }
     
     //Progress bar-------------------------
     progressBar = new QProgressBar(this);
+    progressBar->setVisible(false);
     progressBar->setObjectName(QString::fromUtf8("progressBar"));
     //When the loading of a new page has started, show and reset the progress bar
     connect(webViewInternal, SIGNAL(loadStarted()), progressBar, SLOT( show() ));
