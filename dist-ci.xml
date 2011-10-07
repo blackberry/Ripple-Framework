@@ -38,6 +38,14 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 				<include>QtOpenGL4.dll</include>
 			</includes>
         </fileSet> 
+        <fileSet>
+            <directory>${env.QTDIR}/plugins/imageformats</directory>                    
+            <outputDirectory>win/imageformats</outputDirectory>
+			<includes>
+				<include>*.dll</include>
+			</includes>
+        </fileSet> 
+		
         <fileSet>            
             <directory>${env.FRAMEWORK_CI_SHARED_FOLDER}</directory>    
 			<outputDirectory>mac</outputDirectory>
