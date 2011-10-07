@@ -56,9 +56,3 @@ TARGET_LINK_LIBRARIES(Starbuck ${STARBUCK_LIBRARIES} ${QT_LIBRARIES} ${optionalL
 
 INSTALL(TARGETS Starbuck DESTINATION ${CMAKE_BINARY_DIR}/bin)
 
-IF (WTF_OS_MAC_OS_X)
-    INSTALL(CODE "
-        include(BundleUtilities)
-            fixup_bundle(\"${APPS}\" \"\" \"${DIRS}\")
-                " COMPONENT Runtime)
-ENDIF()
