@@ -49,7 +49,6 @@ namespace BlackBerry
         void enableWebGL();
 
     private:
-        QGLWidget *_GLWidget;
         QMenu *_optionsMenu;
         QAction *_hwToggleMenuItem;
         QAction *_webGLToggleMenuItem;
