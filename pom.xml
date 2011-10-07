@@ -456,6 +456,22 @@
                   </arguments>
                 </configuration>
               </execution>
+			  <!-- run macdeployqt-->
+              <execution>
+                <id>runMacdeployqt</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>process-classes</phase>
+                <configuration>
+                  <workingDirectory>${project.build.sourceDirectory}/build/bin</workingDirectory>
+                  <executable>macdeployqt</executable>
+                  <arguments>
+                    <argument>./Ripple.app</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+			  
             </executions>
           </plugin>
         </plugins>
