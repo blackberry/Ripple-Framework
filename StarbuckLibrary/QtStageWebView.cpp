@@ -16,32 +16,42 @@
 
 #include "stdafx.h"
 #include "QtStageWebView.h"
-#include "BlackBerryBus.h"
+#include "ScrollHandler.h"
 
 using namespace BlackBerry::Starbuck;
 
-QtStageWebView::QtStageWebView(QWidget *p) : QWebView(p), waitForJsLoad(true)
+QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
 {	
-  //Turn off context menu's (i.e. menu when right clicking)
-	this->setContextMenuPolicy(Qt::NoContextMenu);
+    //Turn off context menu's (i.e. menu when right clicking, you will need to uncommment this if you want to use web inspector,
+    //there is currently a conflict between the context menus when using two QWebView's
+    //this->setContextMenuPolicy(Qt::NoContextMenu);
 
 	// Connect signals for events
 	connect(this, SIGNAL(urlChanged(const QUrl&)), this, SLOT(notifyUrlChanged(const QUrl&)));
 
 	if (page() && page()->mainFrame())
-  {
-		connect(page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(notifyJavaScriptWindowObjectCleared()));
-  }
+    {
+        connect(page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(notifyJavaScriptWindowObjectCleared()));
+    }
 
 	//Initialize headers to 0
 	_headersSize = 0;
 
 	//enable web inspector
 	this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+    
+    m_pScrollHandler = new ScrollHandler(this);
+    this->installEventFilter(m_pScrollHandler);
 }
 
 QtStageWebView::~QtStageWebView(void)
 {
+}
+
+void QtStageWebView::paintEvent(QPaintEvent *pe)
+{
+    //lock.unlock();
+    //QGraphicsWebView::paintEvent(pe);
 }
 
 void QtStageWebView::loadURL(QString url)
@@ -57,7 +67,7 @@ void QtStageWebView::loadURL(QString url)
 
 void QtStageWebView::reload()
 {
-	QWebView::reload();
+	QGraphicsWebView::reload();
 }
 
 void QtStageWebView::notifyUrlChanged(const QUrl& url)
@@ -67,30 +77,35 @@ void QtStageWebView::notifyUrlChanged(const QUrl& url)
 
 void QtStageWebView::notifyJavaScriptWindowObjectCleared()
 {
-  registerEventbus();
+//  registerEventbus();
   QEventLoop loop;
   QObject::connect(this, SIGNAL(jsLoaded()), &loop, SLOT(quit()));
-	emit javaScriptWindowObjectCleared();
-  if ( waitForJsLoad )
-  {
-    loop.exec();
-  }
+    emit javaScriptWindowObjectCleared();
+
+  if (waitForJsLoad)
+      loop.exec();
 }
 
+#if 0
 void QtStageWebView::registerEventbus()
 {
-  QWebFrame* frame = page()->mainFrame();
-  frame->addToJavaScriptWindowObject(QString("eventbus"), new BlackBerryBus(this, frame));
+    QWebFrame* frame = page()->mainFrame();
+    frame->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame));
+    frame->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
 
-  // check for iframes, if found add to window object
-  for(int i = 0; i < frame->childFrames().length(); i++)
-      frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus"), new BlackBerryBus(this, frame->childFrames()[i]));
+    // check for iframes, if found add to window object
+    for(int i = 0; i < frame->childFrames().length(); i++)
+    {
+        frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame->childFrames()[i]));
+        frame->childFrames()[i]->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
+  }
 }
+#endif
 
 void QtStageWebView::continueLoad()
 {
-  emit jsLoaded();
-  waitForJsLoad = false;
+    emit jsLoaded();
+    waitForJsLoad = false;
 }
 
 bool QtStageWebView::enableCrossSiteXHR()
@@ -100,7 +115,7 @@ bool QtStageWebView::enableCrossSiteXHR()
 
 void QtStageWebView::enableCrossSiteXHR(bool xhr)
 {
-   return this->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, xhr);
+    return this->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, xhr);
 }
 
 QVariant QtStageWebView::executeJavaScript(QString script)
@@ -160,7 +175,8 @@ void QtStageWebView::customHTTPHeaders(char *headers[], unsigned int headersSize
 {
 	_headers = new char*[headersSize];
 	
-	for (unsigned int i = 0; i < headersSize; i++){
+	for (unsigned int i = 0; i < headersSize; i++)
+    {
         _headers[i] = new char[strlen(headers[i]) + 1];
 		strcpy(_headers[i], headers[i]);
 	}
@@ -185,5 +201,13 @@ void QtStageWebView::visible(bool enable)
 	if (this->isVisible() == enable)
 		return;
 
-	(enable)? this->show():this->hide();
+	(enable) ? this->show():this->hide();
+}
+
+void QtStageWebView::setZoom(float zoom) {
+  this->setZoomFactor(zoom);
+}
+
+float QtStageWebView::zoom() {
+  return this->zoomFactor();
 }
