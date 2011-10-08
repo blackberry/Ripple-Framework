@@ -113,6 +113,12 @@ void Starbuck::init(void)
     m_pStageViewHandler = new StageViewMsgHandler(this);
     m_pStageViewHandler->Register(webViewInternal->qtStageWebView());
 
+    m_inspector = new QWebInspector();
+    m_inspector->setPage(webViewInternal->qtStageWebView()->page());
+    connect(webViewInternal->qtStageWebView(), SIGNAL(destroyed()), m_inspector, SLOT(deleteLater()));
+
+    webViewInternal->qtStageWebView()->page()->setProperty("_q_webInspectorServerPort", 9292);
+
     //start build server
     connect(BuildServerManager::getInstance(), SIGNAL(findUsablePort(int)), m_pStageViewHandler, SLOT(setServerPort(int))); 
     

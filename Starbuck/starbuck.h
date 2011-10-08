@@ -22,6 +22,7 @@
 #include <QProgressBar>
 #include <QGLWidget>
 #include "ConfigData.h"
+#include <qwebinspector.h>
 #include "StageViewMsgHandler.h"
 #include "QtStageWebView.h"
 
@@ -51,6 +52,7 @@ namespace BlackBerry
         ScrollHandler *_scrollHandler;
         static const int PROGRESS_BAR_HEIGHT;
         QtGraphicsStageWebView* webViewInternal;
+        QWebInspector* m_inspector;
         QProgressBar* progressBar;
         ConfigData *_config;
         StageViewMsgHandler* m_pStageViewHandler;
