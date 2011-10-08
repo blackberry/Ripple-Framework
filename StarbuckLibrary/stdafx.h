@@ -22,3 +22,4 @@
 #include <QTimer>
 #include <QBuffer>
 #include <QDataStream>
+#include <QStringList>

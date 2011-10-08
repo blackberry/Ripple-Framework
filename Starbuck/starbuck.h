@@ -20,13 +20,10 @@
 #include <QMainWindow>
 #include <QWebPage>
 #include <QProgressBar>
-#include <QWebView>
+#include <QGLWidget>
 #include "ConfigData.h"
-#include "ipcbridge.h"
-#include "stageviewmsghandler.h"
-#include "xhrmsghandler.h"
-#include "blackberrybus.h"
-#include "RequestObject.h"
+#include "StageViewMsgHandler.h"
+#include "QtStageWebView.h"
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
@@ -36,31 +33,29 @@ namespace BlackBerry
   {
     class Starbuck : public QMainWindow
     {
-      Q_OBJECT
+        Q_OBJECT
 
     public:
       Starbuck(QWidget *parent = 0, Qt::WFlags flags = 0);
       ~Starbuck();
 
     protected:
-      void closeEvent(QCloseEvent *event);
-      void resizeEvent(QResizeEvent * e );
+        void closeEvent(QCloseEvent *event);
+        void resizeEvent(QResizeEvent * e );
 
-      private slots:
+    private slots:
         void registerAPIs();
-        void registerInternalAPIs();
 
     private:
-      static const int PROGRESS_BAR_HEIGHT;
-      QWebView* webView;
-      QtStageWebView* webViewInternal;
-      QProgressBar* progressBar;
-      ConfigData *_config;
-      IPCBridge* m_pBridge;
-      StageViewMsgHandler* m_pStageViewHandler;
-      XHRMsgHandler* m_pXHRHandler;
+        QGLWidget *_GLWidget;
+        ScrollHandler *_scrollHandler;
+        static const int PROGRESS_BAR_HEIGHT;
+        QtGraphicsStageWebView* webViewInternal;
+        QProgressBar* progressBar;
+        ConfigData *_config;
+        StageViewMsgHandler* m_pStageViewHandler;
 
-      void init(void);    
+        void init(void);    
     };
   }
 }

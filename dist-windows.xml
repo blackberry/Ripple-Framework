@@ -1,0 +1,51 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+    <id>Starbuck</id>
+    <formats>
+        <format>zip</format>
+    </formats>  
+    <includeBaseDirectory>false</includeBaseDirectory> 
+
+	<fileSets>
+        <fileSet>            
+            <directory>${basedir}</directory>    
+			<outputDirectory>/</outputDirectory>
+			<includes>
+				<include>config.ini</include>
+			</includes>          
+        </fileSet>
+	
+        <fileSet>            
+            <directory>build/bin</directory>    
+			<outputDirectory>win</outputDirectory>
+			<includes>
+				<include>Ripple.exe</include>
+				<include>*.dll</include>
+			</includes>          
+        </fileSet>
+        <fileSet>            
+            <directory>${env.QTDIR}/bin</directory>                    
+            <outputDirectory>win</outputDirectory>
+			<includes>
+				<include>QtGui4.dll</include>
+				<include>QtCore4.dll</include>
+				<include>QtWebKit4.dll</include>
+				<include>QtNetwork4.dll</include>
+				<include>QtXml4.dll</include>
+				<include>QtTest4.dll</include>
+				<include>phonon4.dll</include>
+				<include>QtOpenGL4.dll</include>
+			</includes>
+        </fileSet> 
+		
+        <fileSet>
+            <directory>${env.QTDIR}/plugins/imageformats</directory>                    
+            <outputDirectory>win/imageformats</outputDirectory>
+			<includes>
+				<include>*.dll</include>
+			</includes>
+        </fileSet> 
+		
+	</fileSets>
+</assembly>
