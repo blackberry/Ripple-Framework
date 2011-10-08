@@ -40,7 +40,7 @@ const QString ConfigData::LOCAL_STORAGE_PATH_DEFAULT = "";
 const QString ConfigData::BUILD_SERVICE_COMMAND_DEFAULT = "services/bin/rbd_service.command";
 const QString ConfigData::BUILD_SERVICE_PORT_DEFAULT = "9900";
 const unsigned int ConfigData::HARDWARE_ACCELERATION_DEFAULT = 1;
-const unsigned int ConfigData::WEBGL_ENABLED_DEFAULT = 0;
+const unsigned int ConfigData::WEBGL_ENABLED_DEFAULT = 1;
 
 ConfigData::ConfigData(void)
 {
