@@ -45,13 +45,9 @@ namespace BlackBerry
 
     private slots:
         void registerAPIs();
-        void enableHardwareAcceleration();
-        void enableWebGL();
 
     private:
-        QMenu *_optionsMenu;
-        QAction *_hwToggleMenuItem;
-        QAction *_webGLToggleMenuItem;
+        QGLWidget *_GLWidget;
         ScrollHandler *_scrollHandler;
         static const int PROGRESS_BAR_HEIGHT;
         QtGraphicsStageWebView* webViewInternal;
