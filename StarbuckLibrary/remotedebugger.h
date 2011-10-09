@@ -20,10 +20,7 @@
 #include <QMainWindow>
 #include <QWebView>
 
-namespace BlackBerry 
-{
-  namespace Starbuck 
-  {
+
     class RemoteDebugger : public QMainWindow
     {
         Q_OBJECT
@@ -31,15 +28,14 @@ namespace BlackBerry
     public:
       RemoteDebugger(QWidget *parent = 0, Qt::WFlags flags = 0);
       ~RemoteDebugger();
-
+        void show(void);
     protected:
         void closeEvent(QCloseEvent *event);
         void resizeEvent(QResizeEvent * e );
 
     private:
-        QWebView* debugerView;
-        void init(void);    
+        QWebView* debuggerView;
+        void init(void);
     };
-  }
-}
+
 #endif // REMOTEDEBUGGER_H

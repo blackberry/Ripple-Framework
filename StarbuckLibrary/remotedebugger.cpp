@@ -17,7 +17,6 @@
 #include "stdafx.h"
 #include "RemoteDebugger.h"
 
-using namespace BlackBerry::Starbuck;
 
 
 RemoteDebugger::RemoteDebugger(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, flags)
@@ -27,20 +26,29 @@ RemoteDebugger::RemoteDebugger(QWidget *parent, Qt::WFlags flags) : QMainWindow(
 
 RemoteDebugger::~RemoteDebugger()
 {
-    if ( debugerView != NULL )
-    delete debugerView;
+    if ( debuggerView != NULL )
+    delete debuggerView;
 }
 
 void RemoteDebugger::init(void)
 {
     setAttribute(Qt::WA_DeleteOnClose);
-    debugerView = new QWebView(this);
-	debugerView->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-    debugerView->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
-    debugerView->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
-    debugerView->settings()->setWebSecurityEnabled(false);
-    debugerView->load(QUrl("http://localhost:9292/webkit/inspector/inspector.html?page=1"));
-    setCentralWidget(debugerView);
+    debuggerView = new QWebView(this);
+	debuggerView->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, false);
+    debuggerView->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
+    debuggerView->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
+    debuggerView->settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, false);
+    debuggerView->settings()->enablePersistentStorage("/tmp");
+    debuggerView->settings()->setOfflineStoragePath("/tmp");
+    
+    debuggerView->settings()->setWebSecurityEnabled(false);
+    setCentralWidget(debuggerView);
+}
+
+void RemoteDebugger::show()
+{
+    debuggerView->load(QUrl("http://localhost:9292/webkit/inspector/inspector.html?page=1"));
+    QWidget::show();
 }
 
 void RemoteDebugger::closeEvent(QCloseEvent *event)

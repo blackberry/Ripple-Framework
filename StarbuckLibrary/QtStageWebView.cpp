@@ -44,6 +44,7 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
 	this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
     
     m_pScrollHandler = new ScrollHandler(this);
+    m_pRemoteDebugger = new RemoteDebugger();
     this->installEventFilter(m_pScrollHandler);
 }
 
@@ -58,10 +59,9 @@ void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     if (inspectAction == selectedAction) {
         //TODO: Create a new window that has a seperate JS context
         //Point that window to 'http://localhost:9292/webkit/inspector/inspector.html?page=1'
-        QEventLoop loop;
-        RemoteDebugger remoteDebugger;
-        remoteDebugger.show();
-        loop.exec();
+        //QEventLoop loop;
+        m_pRemoteDebugger->show();
+        //loop.exec();
     }
 }
 void QtStageWebView::paintEvent(QPaintEvent *pe)

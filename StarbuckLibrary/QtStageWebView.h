@@ -35,6 +35,7 @@
 #include "irimstagewebview.h"
 
 class ScrollHandler;
+class RemoteDebugger;
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
@@ -42,6 +43,7 @@ class QtStageWebView :	public QGraphicsWebView, public IStarbuckWebView
 {
 	Q_OBJECT
     ScrollHandler *m_pScrollHandler;
+    RemoteDebugger *m_pRemoteDebugger;
     void paintEvent(QPaintEvent *pe);
 protected:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
