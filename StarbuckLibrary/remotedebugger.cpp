@@ -17,17 +17,17 @@
 #include "stdafx.h"
 #include "RemoteDebugger.h"
 
+#define INSPECTOR_URL "http://localhost:$PORT/webkit/inspector/inspector.html?page=1";
 
-
-RemoteDebugger::RemoteDebugger(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, flags)
+RemoteDebugger::RemoteDebugger(QString port)
 {
+    m_port = port;
     init();
 }
 
 RemoteDebugger::~RemoteDebugger()
 {
-    if ( debuggerView != NULL )
-    delete debuggerView;
+    
 }
 
 void RemoteDebugger::init(void)
@@ -38,16 +38,16 @@ void RemoteDebugger::init(void)
     debuggerView->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     debuggerView->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
     debuggerView->settings()->setAttribute(QWebSettings::OfflineStorageDatabaseEnabled, false);
-    debuggerView->settings()->enablePersistentStorage("/tmp");
-    debuggerView->settings()->setOfflineStoragePath("/tmp");
-    
     debuggerView->settings()->setWebSecurityEnabled(false);
+    debuggerView->setGeometry(this->geometry());
     setCentralWidget(debuggerView);
 }
 
 void RemoteDebugger::show()
 {
-    debuggerView->load(QUrl("http://localhost:9292/webkit/inspector/inspector.html?page=1"));
+    QString url = INSPECTOR_URL;
+    url.replace("$PORT", m_port);
+    debuggerView->load(QUrl(url));
     QWidget::show();
 }
 
@@ -57,5 +57,7 @@ void RemoteDebugger::closeEvent(QCloseEvent *event)
 
 void RemoteDebugger::resizeEvent(QResizeEvent * e )
 {
+    QRect vRect(QPoint(0, 0), size());
+    debuggerView->setGeometry(vRect);
     e->accept();
 }

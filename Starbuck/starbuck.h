@@ -46,13 +46,13 @@ namespace BlackBerry
 
     private slots:
         void registerAPIs();
+        void urlChanged(QUrl &url);
 
     private:
         QGLWidget *_GLWidget;
         ScrollHandler *_scrollHandler;
         static const int PROGRESS_BAR_HEIGHT;
         QtGraphicsStageWebView* webViewInternal;
-        QWebInspector* m_inspector;
         QProgressBar* progressBar;
         ConfigData *_config;
         StageViewMsgHandler* m_pStageViewHandler;

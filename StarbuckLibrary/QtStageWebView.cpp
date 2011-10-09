@@ -19,6 +19,7 @@
 #include "ScrollHandler.h"
 #include <QMenu> 
 #include <QAction>
+#include <QMessageBox>
 #include "remotedebugger.h"
 
 using namespace BlackBerry::Starbuck;
@@ -44,12 +45,18 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
 	this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
     
     m_pScrollHandler = new ScrollHandler(this);
-    m_pRemoteDebugger = new RemoteDebugger();
+    m_inspector = new QWebInspector();
+    page()->setProperty("_q_webInspectorServerPort", 9292);
     this->installEventFilter(m_pScrollHandler);
 }
 
 QtStageWebView::~QtStageWebView(void)
 {
+    if (m_pScrollHandler != 0)
+        delete m_pScrollHandler;
+    
+    if (m_inspector != 0)
+        delete m_inspector;
 }
 void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
@@ -60,14 +67,9 @@ void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
         //TODO: Create a new window that has a seperate JS context
         //Point that window to 'http://localhost:9292/webkit/inspector/inspector.html?page=1'
         //QEventLoop loop;
-        m_pRemoteDebugger->show();
+        //m_pRemoteDebugger->show();
         //loop.exec();
     }
-}
-void QtStageWebView::paintEvent(QPaintEvent *pe)
-{
-    //lock.unlock();
-    //QGraphicsWebView::paintEvent(pe);
 }
 
 void QtStageWebView::loadURL(QString url)
@@ -89,6 +91,7 @@ void QtStageWebView::reload()
 void QtStageWebView::notifyUrlChanged(const QUrl& url)
 {
 	emit urlChanged(url.toString());
+    m_inspector->setPage(page());
 }
 
 void QtStageWebView::notifyJavaScriptWindowObjectCleared()

@@ -17,6 +17,7 @@
 #include "stdafx.h"
 #include "starbuck.h"
 #include <QtGui/QApplication>
+#include "RemoteDebugger.h"
 #ifdef Q_WS_WIN
 #include <windows.h>
 #include <tchar.h>
@@ -81,12 +82,32 @@ int main(int argc, char *argv[])
         argc++ ;
         argv[argc] = _tcstok(0, TEXT(" \t"));
     }
-#endif
+#endif    
     QApplication app(argc, argv);
     app.setApplicationName("Ripple");
     app.setOrganizationName("Research in Motion");
     app.setOrganizationDomain("blackberry.com");
-    Starbuck *mainWin = new Starbuck;
-    mainWin->show();
+    
+    if (argc == 3)
+    {
+        QString paramName = argv[1];
+        QString paramVal = argv[2];
+        
+        if (paramName == "-inspect")
+        {
+            QEventLoop loop;
+            RemoteDebugger *remoteDebugger;
+            remoteDebugger = new RemoteDebugger(paramVal);
+            remoteDebugger->show();
+            loop.exec();
+            if (remoteDebugger != 0)
+                delete remoteDebugger;
+        }
+    }
+    else
+    {
+        Starbuck *mainWin = new Starbuck;
+        mainWin->show();
+    }
     return app.exec();
 }

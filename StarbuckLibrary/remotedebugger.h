@@ -21,21 +21,20 @@
 #include <QWebView>
 
 
-    class RemoteDebugger : public QMainWindow
-    {
-        Q_OBJECT
-
-    public:
-      RemoteDebugger(QWidget *parent = 0, Qt::WFlags flags = 0);
-      ~RemoteDebugger();
-        void show(void);
-    protected:
-        void closeEvent(QCloseEvent *event);
-        void resizeEvent(QResizeEvent * e );
-
-    private:
-        QWebView* debuggerView;
-        void init(void);
-    };
+class RemoteDebugger : public QMainWindow
+{
+    Q_OBJECT
+public:
+    RemoteDebugger(QString port);
+    ~RemoteDebugger();
+    void show(void);
+protected:
+    void closeEvent(QCloseEvent *event);
+    void resizeEvent(QResizeEvent * e );
+private:
+    QWebView *debuggerView;
+    QString m_port;
+    void init(void);
+};
 
 #endif // REMOTEDEBUGGER_H
