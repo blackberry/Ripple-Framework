@@ -19,9 +19,8 @@
 
 #define INSPECTOR_URL "http://localhost:$PORT/webkit/inspector/inspector.html?page=1";
 
-RemoteDebugger::RemoteDebugger(QString port)
+RemoteDebugger::RemoteDebugger()
 {
-    m_port = port;
     init();
 }
 
@@ -43,10 +42,10 @@ void RemoteDebugger::init(void)
     setCentralWidget(debuggerView);
 }
 
-void RemoteDebugger::show()
+void RemoteDebugger::show(QString port)
 {
     QString url = INSPECTOR_URL;
-    url.replace("$PORT", m_port);
+    url.replace("$PORT", port);
     debuggerView->load(QUrl(url));
     QWidget::show();
 }

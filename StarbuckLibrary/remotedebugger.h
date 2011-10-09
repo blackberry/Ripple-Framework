@@ -25,15 +25,14 @@ class RemoteDebugger : public QMainWindow
 {
     Q_OBJECT
 public:
-    RemoteDebugger(QString port);
+    RemoteDebugger();
     ~RemoteDebugger();
-    void show(void);
+    void show(QString port);
 protected:
     void closeEvent(QCloseEvent *event);
     void resizeEvent(QResizeEvent * e );
 private:
     QWebView *debuggerView;
-    QString m_port;
     void init(void);
 };
 

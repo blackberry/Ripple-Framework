@@ -88,6 +88,8 @@ int main(int argc, char *argv[])
     app.setOrganizationName("Research in Motion");
     app.setOrganizationDomain("blackberry.com");
     
+    RemoteDebugger *remoteDebugger = new RemoteDebugger();
+    
     if (argc == 3)
     {
         QString paramName = argv[1];
@@ -95,13 +97,7 @@ int main(int argc, char *argv[])
         
         if (paramName == "-inspect")
         {
-            QEventLoop loop;
-            RemoteDebugger *remoteDebugger;
-            remoteDebugger = new RemoteDebugger(paramVal);
-            remoteDebugger->show();
-            loop.exec();
-            if (remoteDebugger != 0)
-                delete remoteDebugger;
+            remoteDebugger->show(paramVal);
         }
     }
     else

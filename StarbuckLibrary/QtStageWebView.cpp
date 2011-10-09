@@ -73,6 +73,7 @@ void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *inspectAction = menu.addAction("Inspect");
     QAction *selectedAction = menu.exec(event->screenPos());
     if (inspectAction == selectedAction) {
+        m_inspector->setPage(page());
         QString cmd = QString(QApplication::applicationFilePath() + QString(" -inspect 9292"));
         m_inspectorProcess->start(cmd);
     }
