@@ -83,6 +83,7 @@ int main(int argc, char *argv[])
     }
 #endif
     QApplication app(argc, argv);
+    app.setStyle("plastique");
     app.setApplicationName("Ripple");
     app.setOrganizationName("Research in Motion");
     app.setOrganizationDomain("blackberry.com");
