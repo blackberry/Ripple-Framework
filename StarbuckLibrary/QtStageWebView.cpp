@@ -19,6 +19,8 @@
 #include "ScrollHandler.h"
 #include <QMenu> 
 #include <QAction>
+#include "remotedebugger.h"
+
 using namespace BlackBerry::Starbuck;
 
 QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
@@ -56,6 +58,10 @@ void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     if (inspectAction == selectedAction) {
         //TODO: Create a new window that has a seperate JS context
         //Point that window to 'http://localhost:9292/webkit/inspector/inspector.html?page=1'
+        QEventLoop loop;
+        RemoteDebugger remoteDebugger;
+        remoteDebugger.show();
+        loop.exec();
     }
 }
 void QtStageWebView::paintEvent(QPaintEvent *pe)

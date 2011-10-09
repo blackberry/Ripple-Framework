@@ -19,7 +19,7 @@ LIST(APPEND STARBUCK_SOURCES
     )
 
 set(STARBUCK_MOC_HEADERS
-    starbuck.h    
+    starbuck.h   
     )
 
 QT4_WRAP_CPP(STARBUCK_MOC_SRCS ${STARBUCK_MOC_HEADERS})
