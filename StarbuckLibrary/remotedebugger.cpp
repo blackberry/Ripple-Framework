@@ -17,7 +17,7 @@
 #include "stdafx.h"
 #include "RemoteDebugger.h"
 
-#define INSPECTOR_URL "http://localhost:$PORT/webkit/inspector/inspector.html?page=1";
+#define INSPECTOR_URL "http://localhost:$PORT/webkit/inspector/inspector.html?page=2";
 
 RemoteDebugger::RemoteDebugger()
 {
