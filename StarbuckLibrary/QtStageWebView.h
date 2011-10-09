@@ -33,6 +33,7 @@
 #include <QGraphicsSceneContextMenuEvent>
 #include <QPaintEvent>
 #include <QWebInspector>
+#include <QProcess>
 #include "irimstagewebview.h"
 
 class ScrollHandler;
@@ -46,6 +47,7 @@ class QtStageWebView :	public QGraphicsWebView, public IStarbuckWebView
     ScrollHandler *m_pScrollHandler;
     RemoteDebugger *m_pRemoteDebugger;
     QWebInspector *m_inspector;
+    QProcess *m_inspectorProcess;
 protected:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 public:

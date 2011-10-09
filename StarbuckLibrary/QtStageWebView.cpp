@@ -43,10 +43,15 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
 
 	//enable web inspector
 	this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-    
+
     m_pScrollHandler = new ScrollHandler(this);
     m_inspector = new QWebInspector();
+    m_inspectorProcess = new QProcess();
+
+    //init the remote inspector and set the port
     page()->setProperty("_q_webInspectorServerPort", 9292);
+
+    //install scroll handler
     this->installEventFilter(m_pScrollHandler);
 }
 
@@ -54,21 +59,22 @@ QtStageWebView::~QtStageWebView(void)
 {
     if (m_pScrollHandler != 0)
         delete m_pScrollHandler;
-    
+
     if (m_inspector != 0)
         delete m_inspector;
+
+    if (m_inspectorProcess != 0)
+        delete m_inspectorProcess;
 }
+
 void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
     QMenu menu;
-    QAction *inspectAction = menu.addAction("Inspector Gadget");
+    QAction *inspectAction = menu.addAction("Inspect");
     QAction *selectedAction = menu.exec(event->screenPos());
     if (inspectAction == selectedAction) {
-        //TODO: Create a new window that has a seperate JS context
-        //Point that window to 'http://localhost:9292/webkit/inspector/inspector.html?page=1'
-        //QEventLoop loop;
-        //m_pRemoteDebugger->show();
-        //loop.exec();
+        QString cmd = QString(QApplication::applicationFilePath() + QString(" -inspect 9292"));
+        m_inspectorProcess->start(cmd);
     }
 }
 
