@@ -17,7 +17,8 @@
 #include "stdafx.h"
 #include "QtStageWebView.h"
 #include "ScrollHandler.h"
-
+#include <QMenu> 
+#include <QAction>
 using namespace BlackBerry::Starbuck;
 
 QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
@@ -47,7 +48,16 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
 QtStageWebView::~QtStageWebView(void)
 {
 }
-
+void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
+{
+    QMenu menu;
+    QAction *inspectAction = menu.addAction("Inspector Gadget");
+    QAction *selectedAction = menu.exec(event->screenPos());
+    if (inspectAction == selectedAction) {
+        //TODO: Create a new window that has a seperate JS context
+        //Point that window to 'http://localhost:9292/webkit/inspector/inspector.html?page=1'
+    }
+}
 void QtStageWebView::paintEvent(QPaintEvent *pe)
 {
     //lock.unlock();

@@ -30,6 +30,7 @@
 #include <QMutex>
 #include <QGraphicsWebView>
 #include <QGraphicsView>
+#include <QGraphicsSceneContextMenuEvent>
 #include <QPaintEvent>
 #include "irimstagewebview.h"
 
@@ -42,6 +43,8 @@ class QtStageWebView :	public QGraphicsWebView, public IStarbuckWebView
 	Q_OBJECT
     ScrollHandler *m_pScrollHandler;
     void paintEvent(QPaintEvent *pe);
+protected:
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 public:
 	QtStageWebView(QWidget *parent = 0);
 	~QtStageWebView(void);

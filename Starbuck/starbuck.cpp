@@ -115,7 +115,6 @@ void Starbuck::init(void)
 
     m_inspector = new QWebInspector();
     m_inspector->setPage(webViewInternal->qtStageWebView()->page());
-    connect(webViewInternal->qtStageWebView(), SIGNAL(destroyed()), m_inspector, SLOT(deleteLater()));
 
     webViewInternal->qtStageWebView()->page()->setProperty("_q_webInspectorServerPort", 9292);
 
