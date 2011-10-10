@@ -112,10 +112,10 @@ void Starbuck::init(void)
     //stagewebview interfaces
     m_pStageViewHandler = new StageViewMsgHandler(this);
     m_pStageViewHandler->Register(webViewInternal->qtStageWebView());
-
+    
     //start build server
     connect(BuildServerManager::getInstance(), SIGNAL(findUsablePort(int)), m_pStageViewHandler, SLOT(setServerPort(int))); 
-    
+
     QFile cmd(_config->buildServiceCommand());
     if (cmd.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -156,4 +156,9 @@ void Starbuck::resizeEvent(QResizeEvent * e )
     webViewInternal->qtStageWebView()->setGeometry(vRect);
 	progressBar->setGeometry(QRect(0, (e->size().height() - PROGRESS_BAR_HEIGHT), e->size().width(), PROGRESS_BAR_HEIGHT));
     e->accept();
+}
+
+void Starbuck::urlChanged(QUrl &url)
+{
+  
 }
