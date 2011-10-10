@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
     TCHAR cmdline[4096];
     TCHAR* argv[4096];
     int argc = 0;
-    _tcscpy(cmdline, GetCommandLine());
+    _tcscpy(cmdline, lpCmdLine);
     argv[argc] = _tcstok(cmdline, TEXT(" \t"));
     while(argv[argc] != 0)
     {
@@ -90,10 +90,10 @@ int main(int argc, char *argv[])
     
     RemoteDebugger *remoteDebugger = new RemoteDebugger();
     
-    if (argc == 3)
+    if (argc == 2)
     {
-        QString paramName = argv[1];
-        QString paramVal = argv[2];
+        QString paramName = argv[0];
+        QString paramVal = argv[1];
         
         if (paramName == "-inspect")
         {
