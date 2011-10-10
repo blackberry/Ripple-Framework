@@ -48,6 +48,9 @@ void RemoteDebugger::show(QString port)
     url.replace("$PORT", port);
     debuggerView->load(QUrl(url));
     QWidget::show();
+    showNormal();
+    raise();
+    activateWindow();
 }
 
 void RemoteDebugger::closeEvent(QCloseEvent *event)
