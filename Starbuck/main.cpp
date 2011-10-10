@@ -89,12 +89,18 @@ int main(int argc, char *argv[])
     app.setOrganizationDomain("blackberry.com");
     
     RemoteDebugger *remoteDebugger = new RemoteDebugger();
-    
-    if (argc == 2)
+
+#ifdef Q_WS_WIN    
+    if (argc == 2 )
     {
         QString paramName = argv[0];
         QString paramVal = argv[1];
-        
+#else
+    if ( argc == 3 )
+    {
+        QString paramName = argv[1];
+        QString paramVal = argv[2];
+#endif
         if (paramName == "-inspect")
         {
             remoteDebugger->show(paramVal);
