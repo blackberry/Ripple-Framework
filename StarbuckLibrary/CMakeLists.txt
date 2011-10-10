@@ -10,6 +10,7 @@ LIST(APPEND STARBUCKLIBRARY_HEADERS
     stdafx.h
     ConfigData.h
     PortScanner.h
+    remotedebugger.h
 )
 
 LIST(APPEND STARBUCKLIBRARY_SOURCES
@@ -22,6 +23,7 @@ LIST(APPEND STARBUCKLIBRARY_SOURCES
 	BuildServerManager.cpp
     PortScanner.cpp
     ScrollHandler.cpp
+    remotedebugger.cpp
 )
 
 SET(STARBUCKLIBRARY_MOC_HEADERS
@@ -30,6 +32,7 @@ SET(STARBUCKLIBRARY_MOC_HEADERS
 	RequestObject.h
 	BuildServerManager.h
     ScrollHandler.h
+    remotedebugger.h
 )
 
 QT4_WRAP_CPP(STARBUCKLIBRARY_MOC_SRCS ${STARBUCKLIBRARY_MOC_HEADERS})

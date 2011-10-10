@@ -22,6 +22,7 @@
 #include <QProgressBar>
 #include <QGLWidget>
 #include "ConfigData.h"
+#include <qwebinspector.h>
 #include "StageViewMsgHandler.h"
 #include "QtStageWebView.h"
 
@@ -45,6 +46,7 @@ namespace BlackBerry
 
     private slots:
         void registerAPIs();
+        void urlChanged(QUrl &url);
 
     private:
         QGLWidget *_GLWidget;

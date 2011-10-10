@@ -30,10 +30,14 @@
 #include <QMutex>
 #include <QGraphicsWebView>
 #include <QGraphicsView>
+#include <QGraphicsSceneContextMenuEvent>
 #include <QPaintEvent>
+#include <QWebInspector>
+#include <QProcess>
 #include "irimstagewebview.h"
 
 class ScrollHandler;
+class RemoteDebugger;
 
 using namespace BlackBerry::Starbuck::IPCChannel;
 
@@ -41,7 +45,11 @@ class QtStageWebView :	public QGraphicsWebView, public IStarbuckWebView
 {
 	Q_OBJECT
     ScrollHandler *m_pScrollHandler;
-    void paintEvent(QPaintEvent *pe);
+    RemoteDebugger *m_pRemoteDebugger;
+    QWebInspector *m_inspector;
+    QProcess *m_inspectorProcess;
+protected:
+    void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 public:
 	QtStageWebView(QWidget *parent = 0);
 	~QtStageWebView(void);

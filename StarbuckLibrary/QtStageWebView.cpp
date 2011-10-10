@@ -17,6 +17,10 @@
 #include "stdafx.h"
 #include "QtStageWebView.h"
 #include "ScrollHandler.h"
+#include <QMenu> 
+#include <QAction>
+#include <QMessageBox>
+#include "remotedebugger.h"
 
 using namespace BlackBerry::Starbuck;
 
@@ -39,19 +43,45 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
 
 	//enable web inspector
 	this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-    
+
     m_pScrollHandler = new ScrollHandler(this);
+    m_inspector = new QWebInspector();
+    m_inspectorProcess = new QProcess();
+
+    //init the remote inspector and set the port
+    page()->setProperty("_q_webInspectorServerPort", 9292);
+
+    //install scroll handler
     this->installEventFilter(m_pScrollHandler);
 }
 
 QtStageWebView::~QtStageWebView(void)
 {
+    if (m_pScrollHandler != 0)
+        delete m_pScrollHandler;
+
+    if (m_inspector != 0)
+        delete m_inspector;
+
+    if (m_inspectorProcess != 0)
+        delete m_inspectorProcess;
 }
 
-void QtStageWebView::paintEvent(QPaintEvent *pe)
+void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    //lock.unlock();
-    //QGraphicsWebView::paintEvent(pe);
+    QMenu menu;
+    QAction *inspectAction = menu.addAction("Inspect");
+    QAction *selectedAction = menu.exec(event->screenPos());
+    if (inspectAction == selectedAction) {
+        m_inspector->setPage(page());
+#ifdef Q_WS_WIN
+        QString quotation = "\"";
+        QString cmd = QString(quotation + QApplication::applicationFilePath() + quotation + QString(" -inspect 9292"));
+#else
+        QString cmd = QString(QApplication::applicationFilePath() + QString(" -inspect 9292"));
+#endif
+        m_inspectorProcess->start(cmd);
+    }
 }
 
 void QtStageWebView::loadURL(QString url)
@@ -73,6 +103,7 @@ void QtStageWebView::reload()
 void QtStageWebView::notifyUrlChanged(const QUrl& url)
 {
 	emit urlChanged(url.toString());
+    m_inspector->setPage(page());
 }
 
 void QtStageWebView::notifyJavaScriptWindowObjectCleared()
