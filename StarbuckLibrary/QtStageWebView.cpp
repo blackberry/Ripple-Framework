@@ -74,8 +74,11 @@ void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
     QAction *selectedAction = menu.exec(event->screenPos());
     if (inspectAction == selectedAction) {
         m_inspector->setPage(page());
-        QString qutation = "\"";
-        QString cmd = QString(qutation + QApplication::applicationFilePath() + qutation + QString(" -inspect 9292"));
+        QString quotation = "";
+#ifdef Q_WS_WIN
+        quotation = "\"";
+#endif
+        QString cmd = QString(quotation + QApplication::applicationFilePath() + quotation + QString(" -inspect 9292"));
         m_inspectorProcess->start(cmd);
     }
 }
