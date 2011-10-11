@@ -21,6 +21,7 @@
 #include <QAction>
 #include <QMessageBox>
 #include "RemoteDebugger.h"
+#include "PortScanner.h"
 
 using namespace BlackBerry::Starbuck;
 
@@ -49,7 +50,8 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
     m_inspectorProcess = new QProcess();
 
     //init the remote inspector and set the port
-    page()->setProperty("_q_webInspectorServerPort", 9292);
+    m_remoteInspectorPort = PortScanner::findUsablePort(9292);
+    page()->setProperty("_q_webInspectorServerPort", m_remoteInspectorPort);
 
     //install scroll handler
     this->installEventFilter(m_pScrollHandler);

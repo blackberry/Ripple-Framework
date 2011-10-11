@@ -48,6 +48,7 @@ class QtStageWebView :	public QGraphicsWebView, public IStarbuckWebView
     RemoteDebugger *m_pRemoteDebugger;
     QWebInspector *m_inspector;
     QProcess *m_inspectorProcess;
+    unsigned short m_remoteInspectorPort;
 protected:
     void contextMenuEvent(QGraphicsSceneContextMenuEvent *event);
 public:

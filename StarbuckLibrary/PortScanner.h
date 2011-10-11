@@ -21,11 +21,10 @@
 
 class PortScanner : public QObject
 {
-    QTcpServer *m_pServer;
 public:
     PortScanner();
     ~PortScanner();
-    unsigned short findUsablePort(unsigned short port);
+    static unsigned short findUsablePort(unsigned short port);
 };
 
 #endif
