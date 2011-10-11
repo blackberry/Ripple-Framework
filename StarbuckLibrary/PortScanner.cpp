@@ -33,7 +33,7 @@ unsigned short PortScanner::findUsablePort(unsigned short port)
 {
     bool portFound = false;
 
-    QTcpServer server = new QTcpServer();
+    QTcpServer *server = new QTcpServer();
 
     while (!portFound)
     {
