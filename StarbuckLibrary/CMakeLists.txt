@@ -10,7 +10,7 @@ LIST(APPEND STARBUCKLIBRARY_HEADERS
     stdafx.h
     ConfigData.h
     PortScanner.h
-    remotedebugger.h
+    RemoteDebugger.h
 )
 
 LIST(APPEND STARBUCKLIBRARY_SOURCES
@@ -19,20 +19,20 @@ LIST(APPEND STARBUCKLIBRARY_SOURCES
     QtStageWebView.cpp
     StageViewMsgHandler.cpp
     stdafx.cpp
-	RequestObject.cpp
-	BuildServerManager.cpp
+    RequestObject.cpp
+    BuildServerManager.cpp
     PortScanner.cpp
     ScrollHandler.cpp
-    remotedebugger.cpp
+    RemoteDebugger.cpp
 )
 
 SET(STARBUCKLIBRARY_MOC_HEADERS
     QtStageWebView.h
     StageViewMsgHandler.h
-	RequestObject.h
-	BuildServerManager.h
+    RequestObject.h
+    BuildServerManager.h
     ScrollHandler.h
-    remotedebugger.h
+    RemoteDebugger.h
 )
 
 QT4_WRAP_CPP(STARBUCKLIBRARY_MOC_SRCS ${STARBUCKLIBRARY_MOC_HEADERS})
