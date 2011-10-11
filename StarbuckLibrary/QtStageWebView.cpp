@@ -20,7 +20,7 @@
 #include <QMenu> 
 #include <QAction>
 #include <QMessageBox>
-#include "remotedebugger.h"
+#include "RemoteDebugger.h"
 
 using namespace BlackBerry::Starbuck;
 
