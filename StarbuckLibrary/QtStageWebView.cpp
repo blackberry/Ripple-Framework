@@ -25,12 +25,8 @@
 
 using namespace BlackBerry::Starbuck;
 
-QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
-{	
-    //Turn off context menu's (i.e. menu when right clicking, you will need to uncommment this if you want to use web inspector,
-    //there is currently a conflict between the context menus when using two QWebView's
-    //this->setContextMenuPolicy(Qt::NoContextMenu);
-
+QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false),_headersSize(0), m_inspector(0), m_inspectorProcess(0)
+{
 	// Connect signals for events
 	connect(this, SIGNAL(urlChanged(const QUrl&)), this, SLOT(notifyUrlChanged(const QUrl&)));
 
@@ -39,20 +35,19 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false)
         connect(page()->mainFrame(), SIGNAL(javaScriptWindowObjectCleared()), this, SLOT(notifyJavaScriptWindowObjectCleared()));
     }
 
-	//Initialize headers to 0
-	_headersSize = 0;
-
 	//enable web inspector
 	this->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
 
     m_pScrollHandler = new ScrollHandler(this);
+
+#ifndef Q_WS_WIN
     m_inspector = new QWebInspector();
     m_inspectorProcess = new QProcess();
 
     //init the remote inspector and set the port
     m_remoteInspectorPort = PortScanner::findUsablePort(9292);
     page()->setProperty("_q_webInspectorServerPort", m_remoteInspectorPort);
-
+#endif
     //install scroll handler
     this->installEventFilter(m_pScrollHandler);
 }
@@ -71,15 +66,20 @@ QtStageWebView::~QtStageWebView(void)
 
 void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
 {
-    QMenu menu;
-    QAction *inspectAction = menu.addAction("Inspect");
-    QAction *selectedAction = menu.exec(event->screenPos());
-    if (inspectAction == selectedAction) {
-        m_inspector->setPage(page());
-        QString quotation = "\"";
-        QString cmd = QString(quotation + QApplication::applicationFilePath() + quotation + QString(" -inspect 9292"));
-        m_inspectorProcess->start(cmd);
-    }
+  QMenu menu;
+  QAction *inspectAction = menu.addAction("Inspect");
+  QAction *selectedAction = menu.exec(event->screenPos());
+  if (inspectAction == selectedAction) {
+    #ifdef Q_WS_WIN
+      this->page()->triggerAction(QWebPage::InspectElement);
+    #else 
+      m_inspector->setPage(page());
+      QString quotation = "\"";
+      QString cmd = QString(quotation + QApplication::applicationFilePath() + quotation + QString(" -inspect 9292"));
+      m_inspectorProcess->start(cmd);
+    #endif
+  }
+
 }
 
 void QtStageWebView::loadURL(QString url)
@@ -101,6 +101,7 @@ void QtStageWebView::reload()
 void QtStageWebView::notifyUrlChanged(const QUrl& url)
 {
 	emit urlChanged(url.toString());
+  if(m_inspector)
     m_inspector->setPage(page());
 }
 
