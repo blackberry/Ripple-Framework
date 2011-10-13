@@ -40,7 +40,7 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false),_headersSize(0
 
     m_pScrollHandler = new ScrollHandler(this);
 
-#ifndef Q_WS_WIN
+#if 0
     m_inspector = new QWebInspector();
     m_inspectorProcess = new QProcess();
 
@@ -48,6 +48,7 @@ QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false),_headersSize(0
     m_remoteInspectorPort = PortScanner::findUsablePort(9292);
     page()->setProperty("_q_webInspectorServerPort", m_remoteInspectorPort);
 #endif
+
     //install scroll handler
     this->installEventFilter(m_pScrollHandler);
 }
@@ -70,14 +71,7 @@ void QtStageWebView::contextMenuEvent(QGraphicsSceneContextMenuEvent *event)
   QAction *inspectAction = menu.addAction("Inspect");
   QAction *selectedAction = menu.exec(event->screenPos());
   if (inspectAction == selectedAction) {
-    #ifdef Q_WS_WIN
-      this->page()->triggerAction(QWebPage::InspectElement);
-    #else 
-      m_inspector->setPage(page());
-      QString quotation = "\"";
-      QString cmd = QString(quotation + QApplication::applicationFilePath() + quotation + QString(" -inspect 9292"));
-      m_inspectorProcess->start(cmd);
-    #endif
+    this->page()->triggerAction(QWebPage::InspectElement);
   }
 
 }
