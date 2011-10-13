@@ -67,7 +67,7 @@ void Starbuck::init(void)
         if (_config->hardwareAccelerationEnabled() == 1)
         {
             QGLFormat format;
-            format.setSampleBuffers(2);
+            format.setSampleBuffers(true);
             webViewInternal->setViewport(new QGLWidget(format));
             webViewInternal->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
             
