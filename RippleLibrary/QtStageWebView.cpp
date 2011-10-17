@@ -23,7 +23,7 @@
 #include "RemoteDebugger.h"
 #include "PortScanner.h"
 
-using namespace BlackBerry::Starbuck;
+using namespace BlackBerry::Ripple;
 
 QtStageWebView::QtStageWebView(QWidget *p) : waitForJsLoad(false),_headersSize(0), m_inspector(0), m_inspectorProcess(0)
 {
@@ -115,13 +115,13 @@ void QtStageWebView::registerEventbus()
 {
     QWebFrame* frame = page()->mainFrame();
     frame->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame));
-    frame->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
+    frame->evaluateJavaScript(BlackBerry::Ripple::eventbusSource);
 
     // check for iframes, if found add to window object
     for(int i = 0; i < frame->childFrames().length(); i++)
     {
         frame->childFrames()[i]->addToJavaScriptWindowObject(QString("eventbus2"), new BlackBerryBus(this, frame->childFrames()[i]));
-        frame->childFrames()[i]->evaluateJavaScript(BlackBerry::Starbuck::eventbusSource);
+        frame->childFrames()[i]->evaluateJavaScript(BlackBerry::Ripple::eventbusSource);
   }
 }
 #endif

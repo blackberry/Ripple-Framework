@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="Starbuck Library Qt Source Generation" basedir="." default="generateSources">
+<project name="Ripple Qt Source Generation" basedir="." default="generateSources">
 	<property name="generatedFiles" value="${basedir}\GeneratedFiles"/>
 	<property name="searchString" value="Q_OBJECT"/>
 	
@@ -31,5 +31,13 @@
 			<fileset refid="QObjectFiles"/>
 			<mapper type="glob" from="*.h" to="moc_*.cpp"/>
 		</apply>
+		
+		<!-- Generate qrc source file for Qt resources -->
+		<echo message="Generating qrc_ripple.cpp..."/>
+		<exec executable="rcc.exe">
+			<arg line="-name ripple"/>
+			<arg path="${basedir}\ripple.qrc"/>
+			<arg line="-o ${generatedFiles}\qrc_ripple.cpp"/>
+		</exec>
 	</target>
 </project>

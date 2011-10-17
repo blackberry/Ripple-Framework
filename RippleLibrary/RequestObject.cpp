@@ -17,7 +17,7 @@
 #include "stdafx.h"
 #include "RequestObject.h"
 
-using namespace BlackBerry::Starbuck;
+using namespace BlackBerry::Ripple;
 
 RequestObject::RequestObject(QString& url, QObject *parent, QWebFrame* frame) : QObject(parent), m_url(url), m_pWebFrame(frame)
 {

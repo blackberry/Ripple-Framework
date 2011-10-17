@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-#ifndef Starbuck_ScrollHandler_h
-#define Starbuck_ScrollHandler_h
+#ifndef Ripple_ScrollHandler_h
+#define Ripple_ScrollHandler_h
 
 #include <QObject>
 #include <QTimer>

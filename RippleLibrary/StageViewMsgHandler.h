@@ -18,10 +18,10 @@
 #define STAGEVIEWMSGHANDLER_H
 #include "QtStageWebView.h"
 
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 namespace BlackBerry {
-namespace Starbuck {
+namespace Ripple {
 
 class StageViewMsgHandler : public QObject
 {
@@ -32,7 +32,7 @@ public:
     StageViewMsgHandler(QObject *parent = 0);
     ~StageViewMsgHandler();
    
-    void Register(IStarbuckWebView* pWebView)
+    void Register(IRippleWebView* pWebView)
     {
       m_pWebView = pWebView;
       registerEvents();
@@ -76,9 +76,9 @@ protected:
     void registerEvents();
 
 private:
-	virtual IStarbuckWebView* stageWebview()
+	virtual IRippleWebView* stageWebview()
 	{
-		return dynamic_cast<IStarbuckWebView*>(m_pWebView);
+		return dynamic_cast<IRippleWebView*>(m_pWebView);
 	}
 
 	virtual QtStageWebView* rimStageWebview()
@@ -92,7 +92,7 @@ private:
     }
 
 private:
-	IStarbuckWebView* m_pWebView;
+	IRippleWebView* m_pWebView;
     int _buildServerPort;
 };
 }}
