@@ -20,7 +20,7 @@
 #include "message.h"
 #include <QSignalSpy>
 
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 class MessageSignalSpy : public QObject
 {
