@@ -47,10 +47,14 @@ void Ripple::init(void)
     setAttribute(Qt::WA_DeleteOnClose);
 
     webViewInternal = new QtGraphicsStageWebView(this);
-	webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-	webViewInternal->qtStageWebView()->settings()->enablePersistentStorage(_config->localStoragePath());
+    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+    webViewInternal->qtStageWebView()->settings()->enablePersistentStorage(_config->localStoragePath());
+    webViewInternal->qtStageWebView()->settings()->setOfflineStoragePath(_config->localStoragePath());
+    webViewInternal->qtStageWebView()->settings()->setOfflineWebApplicationCachePath(_config->localStoragePath());
     webViewInternal->qtStageWebView()->settings()->setOfflineStorageDefaultQuota(512000000);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
+    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
+    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
 #if QT_VERSION >= 0x040800
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::AcceleratedCompositingEnabled, true);
