@@ -8,7 +8,7 @@ Currently Ripple is a Chrome Extension that will soon be migrating to this QT fr
  
 The project is Open Sourced under the Apache 2.0 license 
  
-[Read more about Ripple](http://ripple.tinyhippos.com) 
+[Read more about Ripple](http://developer.blackberry.com/html5/download/ripple) 
 
 ## Build Requirements
  
@@ -21,7 +21,7 @@ The project is Open Sourced under the Apache 2.0 license
 You can also find associated reference material for the Ripple tool as well as contributor forums at the following locations.
 
 * [Contributor Forums](http://supportforums.blackberry.com/t5/Ripple-Contributions/bd-p/ripple)
-* [Documentation](http://rippledocs.tinyhippos.com/index.html)
+* [Documentation](http://developer.blackberry.com/html5/documentation)
 
 ## Getting Started
 * Coming Soon
