@@ -15,7 +15,7 @@
 */
 
 #include "stdafx.h"
-#include "starbuck.h"
+#include "ripple.h"
 #include <QtGui/QApplication>
 #include "RemoteDebugger.h"
 #ifdef Q_WS_WIN
@@ -23,7 +23,7 @@
 #include <tchar.h>
 #endif
 
-using namespace BlackBerry::Starbuck;
+using namespace BlackBerry::Ripple;
 
 
 void write(const char * msg, QString type)
@@ -109,7 +109,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        Starbuck *mainWin = new Starbuck;
+        Ripple *mainWin = new Ripple;
         mainWin->show();
     }
     return app.exec();

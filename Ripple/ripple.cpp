@@ -15,21 +15,21 @@
 */
 
 #include "stdafx.h"
-#include "starbuck.h"
+#include "ripple.h"
 #include "BuildServerManager.h"
 #include <QGLWidget>
 #include "ScrollHandler.h"
 
-using namespace BlackBerry::Starbuck;
+using namespace BlackBerry::Ripple;
 
-const int Starbuck::PROGRESS_BAR_HEIGHT = 23;
+const int Ripple::PROGRESS_BAR_HEIGHT = 23;
 
-Starbuck::Starbuck(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, flags)
+Ripple::Ripple(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, flags)
 {
     init();
 }
 
-Starbuck::~Starbuck()
+Ripple::~Ripple()
 {
     if (_config != NULL)
     delete _config;
@@ -41,7 +41,7 @@ Starbuck::~Starbuck()
     delete webViewInternal;
 }
 
-void Starbuck::init(void)
+void Ripple::init(void)
 {
     _config = ConfigData::getInstance();
     setAttribute(Qt::WA_DeleteOnClose);
@@ -131,7 +131,7 @@ void Starbuck::init(void)
 
 }
 
-void Starbuck::closeEvent(QCloseEvent *event)
+void Ripple::closeEvent(QCloseEvent *event)
 {
     _config->windowPosition(pos());
     if (this->windowState() != Qt::WindowMaximized)
@@ -142,14 +142,14 @@ void Starbuck::closeEvent(QCloseEvent *event)
     BuildServerManager::getInstance()->stop();
 }
 
-void Starbuck::registerAPIs()
+void Ripple::registerAPIs()
 {
     //register StageWebViewMsgHandler as JS object named stagewebview
     QWebFrame* frame = webViewInternal->qtStageWebView()->page()->mainFrame();
     frame->addToJavaScriptWindowObject(QString("stagewebview"), m_pStageViewHandler);
 }
 
-void Starbuck::resizeEvent(QResizeEvent * e )
+void Ripple::resizeEvent(QResizeEvent * e )
 {
     QRect vRect(QPoint(0, 0), size());
     webViewInternal->scene()->setSceneRect(vRect);
@@ -158,7 +158,7 @@ void Starbuck::resizeEvent(QResizeEvent * e )
     e->accept();
 }
 
-void Starbuck::urlChanged(QUrl &url)
+void Ripple::urlChanged(QUrl &url)
 {
   
 }

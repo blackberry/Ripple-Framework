@@ -39,9 +39,9 @@
 class ScrollHandler;
 class RemoteDebugger;
 
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple::IPCChannel;
 
-class QtStageWebView :	public QGraphicsWebView, public IStarbuckWebView
+class QtStageWebView :	public QGraphicsWebView, public IRippleWebView
 {
 	Q_OBJECT
     ScrollHandler *m_pScrollHandler;

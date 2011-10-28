@@ -17,9 +17,9 @@
 #pragma once
 
 namespace BlackBerry {
-namespace Starbuck {
+namespace Ripple {
 namespace IPCChannel {
-class IStarbuckWebView
+class IRippleWebView
 {
 public:
 	virtual void loadURL(QString url) = 0;

@@ -24,12 +24,12 @@
 using ::testing::Return;
 using ::testing::Invoke;
 
-using namespace BlackBerry::Starbuck;
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 //Q_DECLARE_METATYPE(Message *);
 
-class MockRIMStageWebView : public IStarbuckWebView
+class MockRIMStageWebView : public IRippleWebView
 {
 public:
 	MockRIMStageWebView() {}
@@ -57,5 +57,5 @@ public:
 	TestStageViewMsgHandler() {}
 	virtual ~TestStageViewMsgHandler() {}
 
-	MOCK_METHOD0(stageWebview, IStarbuckWebView*());
+	MOCK_METHOD0(stageWebview, IRippleWebView*());
 };

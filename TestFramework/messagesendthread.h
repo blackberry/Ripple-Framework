@@ -20,7 +20,7 @@
 #include <QThread>
 #include "samplemessagehandler.h"
 
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 class MessageSendThread : public QThread
 {

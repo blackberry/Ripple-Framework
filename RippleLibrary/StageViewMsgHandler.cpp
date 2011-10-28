@@ -17,8 +17,8 @@
 #include "stdafx.h"
 #include "StageViewMsgHandler.h"
 
-using namespace BlackBerry::Starbuck;
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 StageViewMsgHandler::StageViewMsgHandler(QObject *parent)
 	: QObject(parent),m_pWebView(0), _buildServerPort(0)
