@@ -31,19 +31,16 @@ public:
     RequestObject(QString& url, QObject *parent = 0, QWebFrame* frame = 0 );
     ~RequestObject();
     Q_PROPERTY(QString url READ getUrl WRITE setUrl)
-
     void setUrl(QString& url);
     void setWebFrame(QWebFrame* frame);
 public slots:
-  void allow();
-  void deny();
-  void respond(QString code, QString url);
-
-
+    void allow();
+    void deny();
+    void respond(QString code, QString url);
 private:
-  QString m_url;
-  QWebFrame* m_pWebFrame;
-  QString getUrl() const { return m_url; }
+    QString m_url;
+    QWebFrame* m_pWebFrame;
+    QString getUrl() const { return m_url; }
 };
 
 }

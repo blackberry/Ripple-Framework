@@ -19,6 +19,8 @@
 TEST(QtStageWebView, CanRetrieveEmptyLocation)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location("");
 	
 	// Create an event loop to wait for the loadFinished when loading webpages
@@ -34,6 +36,8 @@ TEST(QtStageWebView, CanRetrieveEmptyLocation)
 TEST(QtStageWebView, CanRetrieveValidLocation)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location("http://www.google.ca/");
 
 	// Create an event loop to wait for the loadFinished when loading webpages
@@ -49,6 +53,8 @@ TEST(QtStageWebView, CanRetrieveValidLocation)
 TEST(QtStageWebView, CannotGoBackWhenOnePageLoaded)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location("http://www.google.ca/");
 
 	// Create an event loop to wait for the loadFinished when loading webpages
@@ -66,6 +72,8 @@ TEST(QtStageWebView, CannotGoBackWhenOnePageLoaded)
 TEST(QtStageWebView, CanGoBackWhenMultiplePagesLoaded)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location_0("http://www.google.ca/");
 	QString location_1("http://www.thestar.com/mobile");
 	
@@ -100,6 +108,8 @@ TEST(QtStageWebView, CanGoBackWhenMultiplePagesLoaded)
 TEST(QtStageWebView, CannotGoForwardWhenOnePageLoaded)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location_0("http://www.thestar.com/mobile");
 
 	// Create an event loop to wait for the loadFinished when loading webpages
@@ -117,6 +127,8 @@ TEST(QtStageWebView, CannotGoForwardWhenOnePageLoaded)
 TEST(QtStageWebView, CanGoForwardWhenMultiplePagesLoaded)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location_0("http://www.thestar.com/mobile");
 	QString location_1("http://www.google.ca/");
 	
@@ -158,6 +170,8 @@ TEST(QtStageWebView, CanGoForwardWhenMultiplePagesLoaded)
 TEST(QtStageWebView, CanRetrieveHistoryLength)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location_0("http://www.thestar.com/mobile");
 	QString location_1("http://www.google.ca/");
 
@@ -184,6 +198,8 @@ TEST(QtStageWebView, CanRetrieveHistoryLength)
 TEST(QtStageWebView, CanRetrieveHistoryPosition)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location_0("http://www.thestar.com/mobile");
 	QString location_1("http://www.google.ca/");
 	QString location_2("http://www.wikipedia.org/");
@@ -224,6 +240,8 @@ TEST(QtStageWebView, CanRetrieveHistoryPosition)
 TEST(QtStageWebView, CanGoToSpecificHistoryLocation)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location_0("http://www.thestar.com/mobile");
 	QString location_1("http://www.google.ca/");
 	QString location_2("http://www.wikipedia.org/");
@@ -274,6 +292,7 @@ TEST(QtStageWebView, CanGoToSpecificHistoryLocation)
 
 TEST (QtStageWebView, CanSetVisable){
 	QtStageWebView webview;
+	webview.continueLoad();
 
 	webview.loadURL("http://www.google.ca/");
 	
@@ -283,6 +302,7 @@ TEST (QtStageWebView, CanSetVisable){
 
 TEST (QtStageWebView, CanSetInvisable){
 	QtStageWebView webview;
+	webview.continueLoad();
 
 	webview.loadURL("http://www.google.ca/");
 
@@ -319,6 +339,7 @@ TEST (QtStageWebView, CanAddCustomHeaderArray){
 TEST(QtStageWebView, CanEnableCrossOrigin)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
 
 	webview.loadURL("http://www.google.ca");
 
@@ -329,6 +350,7 @@ TEST(QtStageWebView, CanEnableCrossOrigin)
 TEST(QtStageWebView, CanDisableCrossOrigin)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
 
 	webview.loadURL("http://www.google.ca");
 
@@ -339,6 +361,7 @@ TEST(QtStageWebView, CanDisableCrossOrigin)
 TEST(QtStageWebView, CanExecuteJavaScript)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
 
 	webview.loadURL("http://www.google.ca");
 
@@ -347,6 +370,8 @@ TEST(QtStageWebView, CanExecuteJavaScript)
 
 TEST (QtStageWebView, CanSignalUrlChanged){
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location("http://www.google.ca/");
 
 	QSignalSpy spy(&webview, SIGNAL(urlChanged(QString)));
@@ -368,6 +393,8 @@ TEST (QtStageWebView, CanSignalUrlChanged){
 TEST(QtStageWebView, CanSignalJavaScriptWindowCleared)
 {
 	QtStageWebView webview;
+	webview.continueLoad();
+
 	QString location("http://www.google.ca/");
 
 	QSignalSpy spy(&webview, SIGNAL(javaScriptWindowObjectCleared()));
@@ -381,4 +408,25 @@ TEST(QtStageWebView, CanSignalJavaScriptWindowCleared)
 	loop.exec();
 
 	EXPECT_EQ(1, spy.count());
+}
+
+TEST(QtStageWebView, CanReloadPage)
+{
+	QtStageWebView webview;
+	webview.continueLoad();
+
+	webview.loadURL("http://www.google.ca");
+
+    // Create an event loop to wait for the loadFinished when loading webpages
+	QEventLoop loop;
+    QTimer::singleShot(5000, &loop, SLOT(quit()));
+
+    // Change the document title, this should get reset when we reload the page
+    webview.executeJavaScript("document.title = 'testing'");
+
+    webview.reload();
+
+    QVariant result = webview.executeJavaScript("document.title");
+
+    EXPECT_NE(result.toString(), "testing");
 }
