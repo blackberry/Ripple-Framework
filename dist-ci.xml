@@ -9,12 +9,6 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 
 	<fileSets>
         <fileSet>            
-<<<<<<< HEAD
-            <directory>build/bin</directory>    
-			<outputDirectory>win</outputDirectory>
-			<includes>
-				<include>Starbuck.exe</include>
-=======
             <directory>${basedir}</directory>    
 			<outputDirectory>/</outputDirectory>
 			<includes>
@@ -27,7 +21,6 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 			<outputDirectory>win</outputDirectory>
 			<includes>
 				<include>Ripple.exe</include>
->>>>>>> Beta1
 				<include>*.dll</include>
 			</includes>          
         </fileSet>
@@ -35,17 +28,6 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
             <directory>${env.QTDIR}/bin</directory>                    
             <outputDirectory>win</outputDirectory>
 			<includes>
-<<<<<<< HEAD
-				<include>QtGuid4.dll</include>
-				<include>QtCored4.dll</include>
-				<include>QtWebKitd4.dll</include>
-				<include>QtNetworkd4.dll</include>
-				<include>QtXmld4.dll</include>
-				<include>QtTestd4.dll</include>
-				<include>phonond4.dll</include>
-			</includes>
-        </fileSet> 
-=======
 				<include>QtGui4.dll</include>
 				<include>QtCore4.dll</include>
 				<include>QtWebKit4.dll</include>
@@ -64,16 +46,11 @@ xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assemb
 			</includes>
         </fileSet> 
 		
->>>>>>> Beta1
         <fileSet>            
             <directory>${env.FRAMEWORK_CI_SHARED_FOLDER}</directory>    
 			<outputDirectory>mac</outputDirectory>
 			<includes>
-<<<<<<< HEAD
-				<include>Starbuck.app/**/*</include>
-=======
 				<include>Ripple.app/**/*</include>
->>>>>>> Beta1
 			</includes>          
         </fileSet>
 	</fileSets>
