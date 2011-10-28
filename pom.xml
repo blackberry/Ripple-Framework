@@ -111,6 +111,7 @@
             </executions>
           </plugin>
           <!-- update QtLibrary -->
+		  <!--
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
             <version>2.5</version>
@@ -175,6 +176,8 @@
               </execution>
             </executions>
           </plugin>
+		  -->
+		  
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
@@ -195,7 +198,7 @@
                   <arguments>
                     <argument>cmake</argument>
                     <argument>..</argument>
-                    <!--<argument>-DCMAKE_BUILD_TYPE=Release</argument> -->
+                    <argument>-DCMAKE_BUILD_TYPE=Release</argument>
                     <argument>-G</argument>
                     <argument>NMake Makefiles</argument>
                   </arguments>
@@ -241,18 +244,16 @@
         </plugins>
       </build>
     </profile>
-    <!-- pack artifact from windows and mac -->
-    <profile>
-      <id>CI Build On Windows</id>
+
+    <!-- CIBuildOnWindows profile triggers the corresponding build on Mac machine -->
+	<profile>
+      <id>CI_Build_on_Windows</id>
       <activation>
         <property>
-          <name>IsCIBuildOnWindows</name>
+          <name>isCIBuildOnWindows</name>
           <value>yes</value>
         </property>
       </activation>
-      <properties>
-        <ASSEMBLY_DESCRIPTOR>${project.build.sourceDirectory}/dist-ci.xml</ASSEMBLY_DESCRIPTOR>
-      </properties>
       <build>
         <plugins>
           <plugin>
@@ -275,6 +276,31 @@
                   </arguments>
                 </configuration>
               </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <!-- IntegrationBuildOnWindows profile defines the special assembly descriptor and checks the availability of Mac build artifacts-->
+	<profile>
+      <id>Integration_Build_on_Windows</id>
+      <activation>
+        <property>
+          <name>isIntegrationBuildOnWindows</name>
+          <value>yes</value>
+        </property>
+      </activation>
+      <properties>
+        <ASSEMBLY_DESCRIPTOR>${project.build.sourceDirectory}/dist-ci.xml</ASSEMBLY_DESCRIPTOR>
+      </properties>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>exec-maven-plugin</artifactId>
+            <version>1.1</version>
+            <executions>
               <execution>
                 <id>Check if build job is finished on Mac</id>
                 <goals>
@@ -294,7 +320,8 @@
         </plugins>
       </build>
     </profile>
-    <profile>
+	
+	<profile>
       <id>mac</id>
       <activation>
         <os>
@@ -335,7 +362,9 @@
               </execution>
             </executions>
           </plugin>
+		  
           <!-- update QtLibrary -->
+		  <!--
           <plugin>
             <artifactId>maven-resources-plugin</artifactId>
             <version>2.5</version>
@@ -380,6 +409,8 @@
               </execution>
             </executions>
           </plugin>
+		  -->
+		  
           <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
@@ -396,7 +427,7 @@
                   <executable>cmake</executable>
                   <arguments>
                     <argument>..</argument>
-                    <!--<argument>-DCMAKE_BUILD_TYPE=Release</argument> -->
+                    <argument>-DCMAKE_BUILD_TYPE=Release</argument>
                   </arguments>
                 </configuration>
               </execution>
@@ -425,16 +456,34 @@
                   </arguments>
                 </configuration>
               </execution>
+			  <!-- run macdeployqt-->
+              <execution>
+                <id>runMacdeployqt</id>
+                <goals>
+                  <goal>exec</goal>
+                </goals>
+                <phase>process-classes</phase>
+                <configuration>
+                  <workingDirectory>${project.build.sourceDirectory}/build/bin</workingDirectory>
+                  <executable>macdeployqt</executable>
+                  <arguments>
+                    <argument>./Ripple.app</argument>
+                  </arguments>
+                </configuration>
+              </execution>
+			  
             </executions>
           </plugin>
         </plugins>
       </build>
     </profile>
+
+	<!-- IntegrationBuildOnMac profile copies the build artifacts in Mac machine to the shared folder-->
     <profile>
-      <id>Copy Artifact from Mac to Shared Folder</id>
+      <id>IntegrationBuildOnMac</id>
       <activation>
         <property>
-          <name>IsCIBuildOnMac</name>
+          <name>isIntegrationBuildOnMac</name>
           <value>yes</value>
         </property>
       </activation>
@@ -474,7 +523,7 @@
                       <directory>build/bin</directory>
                       <filtering>false</filtering>
                       <includes>
-                        <include>Starbuck.app/**/*</include>
+                        <include>Ripple.app/**/*</include>
                       </includes>
                     </resource>
                   </resources>
