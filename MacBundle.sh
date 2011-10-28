@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo Cleaning up Starbuck.app
-cd build/bin/Starbuck.app/Contents/MacOS
+echo Cleaning up Ripple.app
+cd build/bin/Ripple.app/Contents/MacOS
 
 echo Moving libpng
 cp /Library/Frameworks/libpng.framework/Versions/1.4.5/libpng ../Frameworks/libpng.framework/Versions/1.4.5/
@@ -20,4 +20,4 @@ install_name_tool -change libAmanithVG_SRE.dylib @executable_path/../MacOS/libAm
 install_name_tool -change libEGL_AM.dylib @executable_path/../MacOS/libEGL_AM.dylib libEGL_AM.dylib
 
 
-echo Done cleaning up Starbuck.app
+echo Done cleaning up Ripple.app
