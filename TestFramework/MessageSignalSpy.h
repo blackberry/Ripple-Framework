@@ -17,10 +17,10 @@
 #ifndef MESSAGESPY_H
 #define MESSAGESPY_H
 
-#include "Message.h"
+#include "message.h"
 #include <QSignalSpy>
 
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 class MessageSignalSpy : public QObject
 {

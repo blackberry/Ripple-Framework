@@ -1,5 +1,5 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
-PROJECT(Starbuck)
+PROJECT(Ripple)
 
 
 # -----------------------------------------------------------------------------
@@ -42,15 +42,13 @@ ENDIF ()
 # Default target names (can be overrriden in Options${PORT}.cmake file)
 # -----------------------------------------------------------------------------
 SET(WebKit_LIBRARY_NAME WebKit)
-SET(IPC_LIBRARY_NAME IPC)
-SET(STARBUCKLIBRARY_LIBRARY_NAME StarbuckLibrary)
+SET(RIPPLELIBRARY_LIBRARY_NAME RippleLibrary)
 
 
 # -----------------------------------------------------------------------------
 # Default library types (can be overrriden in Options${PORT}.cmake file)
 # -----------------------------------------------------------------------------
-SET(IPC_LIBRARY_TYPE STATIC)
-SET(STARBUCKLIBRARY_LIBRARY_TYPE STATIC)
+SET(RIPPLELIBRARY_LIBRARY_TYPE STATIC)
 
 # -----------------------------------------------------------------------------
 # Port-specific options
@@ -58,37 +56,27 @@ SET(STARBUCKLIBRARY_LIBRARY_TYPE STATIC)
 #INCLUDE(OptionsCommon)
 
 SET(CMAKE_SRC ${CMAKE_SOURCE_DIR})
-#SET(CMAKE_SOURCE_DIR "${OLYMPIA_DIR}")
-#INCLUDE(Options${PORT})
 SET(CMAKE_SOURCE_DIR ${CMAKE_SRC})
 
 
 # -----------------------------------------------------------------------------
 # Add module directories
 # -----------------------------------------------------------------------------
-ADD_SUBDIRECTORY(IPC)
-ADD_SUBDIRECTORY(StarbuckLibrary)
-ADD_SUBDIRECTORY(Starbuck)
-ADD_SUBDIRECTORY(TestFramework)
+#ADD_SUBDIRECTORY(IPC)
+ADD_SUBDIRECTORY(RippleLibrary)
+ADD_SUBDIRECTORY(Ripple)
+#ADD_SUBDIRECTORY(TestFramework)
 
-#ADD_DEPENDENCIES(${IPC_LIBRARY_NAME} ${WebKit_LIBRARY_NAME})
 
-ADD_DEPENDENCIES(${STARBUCKLIBRARY_LIBRARY_NAME} 
-    ${IPC_LIBRARY_NAME} 
-#    ${WebKit_LIBRARY_NAME}
+ADD_DEPENDENCIES(Ripple
+    ${RIPPLELIBRARY_LIBRARY_NAME} 
 )
 
-ADD_DEPENDENCIES(Starbuck
-    ${STARBUCKLIBRARY_LIBRARY_NAME} 
-    ${IPC_LIBRARY_NAME} 
+#ADD_DEPENDENCIES(TestFramework
+#    ${RIPPLELIBRARY_LIBRARY_NAME} 
+#    ${IPC_LIBRARY_NAME} 
 #    ${WebKit_LIBRARY_NAME}
-)
-
-ADD_DEPENDENCIES(TestFramework
-    ${STARBUCKLIBRARY_LIBRARY_NAME} 
-    ${IPC_LIBRARY_NAME} 
-#    ${WebKit_LIBRARY_NAME}
-)
+#)
 
 #install olympia output to target
 #INSTALL(DIRECTORY ${OLYMPIA_DIR}/build/bin DESTINATION ${CMAKE_BINARY_DIR})   

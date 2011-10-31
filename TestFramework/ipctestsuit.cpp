@@ -31,7 +31,7 @@ IPCTestSuit::~IPCTestSuit()
 void IPCTestSuit::initTestCase()
 {
   qDebug("create a IPCBridge instance");
-	QString ssm = QString("StarbuckSM");
+	QString ssm = QString("RippleSM");
   m_bridge = new IPCBridge(ssm,this); //one way communication
   m_pHandler = new SampleMessagehandler(this);  
   m_bridge->RegisterMessageHandler(m_pHandler);

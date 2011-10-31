@@ -24,12 +24,12 @@
 using ::testing::Return;
 using ::testing::Invoke;
 
-using namespace BlackBerry::Starbuck;
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 //Q_DECLARE_METATYPE(Message *);
 
-class MockRIMStageWebView : public IStarbuckWebView
+class MockRIMStageWebView : public IRippleWebView
 {
 public:
 	MockRIMStageWebView() {}
@@ -47,6 +47,7 @@ public:
 	MOCK_METHOD0(historyPosition, int());
 	MOCK_METHOD1(historyPosition, void(int));
 	MOCK_METHOD4(setWindowGeometry, void(int,int,int,int));
+    MOCK_METHOD0(reload, void());
 //	MOCK_METHOD1(injectJavaScriptObj, void(const QObject *jsObj));
 };
 
@@ -56,5 +57,5 @@ public:
 	TestStageViewMsgHandler() {}
 	virtual ~TestStageViewMsgHandler() {}
 
-	MOCK_METHOD0(stageWebview, IStarbuckWebView*());
+	MOCK_METHOD0(stageWebview, IRippleWebView*());
 };
