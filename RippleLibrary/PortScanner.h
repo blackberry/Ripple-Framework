@@ -1,4 +1,4 @@
-﻿/*
+/*
 * Copyright 2010-2011 Research In Motion Limited.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,29 +14,17 @@
 * limitations under the License.
 */
 
-#ifndef MESSAGESENDTHREAD_H
-#define MESSAGESENDTHREAD_H
+#ifndef PORTSCANNER_H
 
-#include <QThread>
-#include "samplemessagehandler.h"
+#include <QObject>
+#include <QTcpServer>
 
-using namespace BlackBerry::Ripple::IPCChannel;
-
-class MessageSendThread : public QThread
+class PortScanner : public QObject
 {
-  Q_OBJECT
-
 public:
-    MessageSendThread(MessageHandler* pHandler, QObject *parent);
-    ~MessageSendThread();
-protected:
-  void run();
-
-  public slots:
-    void sendMessage();
-
-private:
-  MessageHandler* m_pHandler;
+    PortScanner();
+    ~PortScanner();
+    static unsigned short findUsablePort(unsigned short port);
 };
 
-#endif // MESSAGESENDTHREAD_H
+#endif

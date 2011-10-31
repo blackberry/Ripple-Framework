@@ -15,21 +15,21 @@
 */
 
 #include "stdafx.h"
-#include "starbuck.h"
+#include "ripple.h"
 #include "BuildServerManager.h"
 #include <QGLWidget>
 #include "ScrollHandler.h"
 
-using namespace BlackBerry::Starbuck;
+using namespace BlackBerry::Ripple;
 
-const int Starbuck::PROGRESS_BAR_HEIGHT = 23;
+const int Ripple::PROGRESS_BAR_HEIGHT = 23;
 
-Starbuck::Starbuck(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, flags)
+Ripple::Ripple(QWidget *parent, Qt::WFlags flags) : QMainWindow(parent, flags)
 {
     init();
 }
 
-Starbuck::~Starbuck()
+Ripple::~Ripple()
 {
     if (_config != NULL)
     delete _config;
@@ -41,14 +41,16 @@ Starbuck::~Starbuck()
     delete webViewInternal;
 }
 
-void Starbuck::init(void)
+void Ripple::init(void)
 {
     _config = ConfigData::getInstance();
     setAttribute(Qt::WA_DeleteOnClose);
 
     webViewInternal = new QtGraphicsStageWebView(this);
-	webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
-	webViewInternal->qtStageWebView()->settings()->enablePersistentStorage(_config->localStoragePath());
+    webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled, true);
+    webViewInternal->qtStageWebView()->settings()->enablePersistentStorage(_config->localStoragePath());
+    webViewInternal->qtStageWebView()->settings()->setOfflineStoragePath(_config->localStoragePath());
+    webViewInternal->qtStageWebView()->settings()->setOfflineWebApplicationCachePath(_config->localStoragePath());
     webViewInternal->qtStageWebView()->settings()->setOfflineStorageDefaultQuota(512000000);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessRemoteUrls, true);
     webViewInternal->qtStageWebView()->settings()->setAttribute(QWebSettings::LocalContentCanAccessFileUrls, true);
@@ -67,7 +69,7 @@ void Starbuck::init(void)
         if (_config->hardwareAccelerationEnabled() == 1)
         {
             QGLFormat format;
-            format.setSampleBuffers(2);
+            format.setSampleBuffers(true);
             webViewInternal->setViewport(new QGLWidget(format));
             webViewInternal->setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
             
@@ -112,10 +114,10 @@ void Starbuck::init(void)
     //stagewebview interfaces
     m_pStageViewHandler = new StageViewMsgHandler(this);
     m_pStageViewHandler->Register(webViewInternal->qtStageWebView());
-
+    
     //start build server
     connect(BuildServerManager::getInstance(), SIGNAL(findUsablePort(int)), m_pStageViewHandler, SLOT(setServerPort(int))); 
-    
+
     QFile cmd(_config->buildServiceCommand());
     if (cmd.open(QIODevice::ReadOnly | QIODevice::Text))
     {
@@ -131,7 +133,7 @@ void Starbuck::init(void)
 
 }
 
-void Starbuck::closeEvent(QCloseEvent *event)
+void Ripple::closeEvent(QCloseEvent *event)
 {
     _config->windowPosition(pos());
     if (this->windowState() != Qt::WindowMaximized)
@@ -142,18 +144,23 @@ void Starbuck::closeEvent(QCloseEvent *event)
     BuildServerManager::getInstance()->stop();
 }
 
-void Starbuck::registerAPIs()
+void Ripple::registerAPIs()
 {
     //register StageWebViewMsgHandler as JS object named stagewebview
     QWebFrame* frame = webViewInternal->qtStageWebView()->page()->mainFrame();
     frame->addToJavaScriptWindowObject(QString("stagewebview"), m_pStageViewHandler);
 }
 
-void Starbuck::resizeEvent(QResizeEvent * e )
+void Ripple::resizeEvent(QResizeEvent * e )
 {
     QRect vRect(QPoint(0, 0), size());
     webViewInternal->scene()->setSceneRect(vRect);
     webViewInternal->qtStageWebView()->setGeometry(vRect);
 	progressBar->setGeometry(QRect(0, (e->size().height() - PROGRESS_BAR_HEIGHT), e->size().width(), PROGRESS_BAR_HEIGHT));
     e->accept();
+}
+
+void Ripple::urlChanged(QUrl &url)
+{
+  
 }

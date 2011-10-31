@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = starbuck 
+TARGET = ripple 
 DEPENDPATH += .
 INCLUDEPATH += .
 
@@ -11,12 +11,12 @@ INCLUDEPATH += .
 # in some configuration file
 INCLUDEPATH += ../build ../IPC
 
-LIBS += -L../build -lipc -lstarbucklibrary
+LIBS += -L../build -lipc -lripplelibrary
 
 # Required QT modules
 QT += webkit network xml
 
 # Input
-HEADERS += application.h starbuck.h ../StarbuckLibrary/*.h
-SOURCES += application.cpp main.cpp starbuck.cpp
-RESOURCES += starbuck.qrc
+HEADERS += application.h ripple.h ../RippleLibrary/*.h
+SOURCES += application.cpp main.cpp ripple.cpp
+RESOURCES += ripple.qrc

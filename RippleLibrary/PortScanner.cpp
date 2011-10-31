@@ -33,11 +33,11 @@ unsigned short PortScanner::findUsablePort(unsigned short port)
 {
     bool portFound = false;
 
-    this->m_pServer = new QTcpServer(this);
+    QTcpServer *server = new QTcpServer();
 
     while (!portFound)
     {
-        if (!m_pServer->listen(QHostAddress::LocalHost, port))
+        if (!server->listen(QHostAddress::LocalHost, port))
         {
             qDebug() << "Cannot start server, port" << port << "in use.";
             // try a random port
@@ -47,7 +47,7 @@ unsigned short PortScanner::findUsablePort(unsigned short port)
             portFound = true;
     }
 
-    if (m_pServer) delete m_pServer;
+    if (server) delete server;
 
     return port;
 }

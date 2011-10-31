@@ -1,4 +1,4 @@
-/*
+﻿/*
 * Copyright 2010-2011 Research In Motion Limited.
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,26 @@
 * limitations under the License.
 */
 
-#ifndef PORTSCANNER_H
+#ifndef RMOTEDEBUGGER_H
+#define RMOTEDEBUGGER_H
 
-#include <QObject>
-#include <QTcpServer>
+#include <QMainWindow>
+#include <QWebView>
 
-class PortScanner : public QObject
+
+class RemoteDebugger : public QMainWindow
 {
-    QTcpServer *m_pServer;
+    Q_OBJECT
 public:
-    PortScanner();
-    ~PortScanner();
-    unsigned short findUsablePort(unsigned short port);
+    RemoteDebugger();
+    ~RemoteDebugger();
+    void show(QString port);
+protected:
+    void closeEvent(QCloseEvent *event);
+    void resizeEvent(QResizeEvent * e );
+private:
+    QWebView *debuggerView;
+    void init(void);
 };
 
-#endif
+#endif // REMOTEDEBUGGER_H

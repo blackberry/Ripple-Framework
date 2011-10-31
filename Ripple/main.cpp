@@ -15,14 +15,15 @@
 */
 
 #include "stdafx.h"
-#include "starbuck.h"
+#include "ripple.h"
 #include <QtGui/QApplication>
+#include "RemoteDebugger.h"
 #ifdef Q_WS_WIN
 #include <windows.h>
 #include <tchar.h>
 #endif
 
-using namespace BlackBerry::Starbuck;
+using namespace BlackBerry::Ripple;
 
 
 void write(const char * msg, QString type)
@@ -74,19 +75,42 @@ int main(int argc, char *argv[])
     TCHAR cmdline[4096];
     TCHAR* argv[4096];
     int argc = 0;
-    _tcscpy(cmdline, GetCommandLine());
+    _tcscpy(cmdline, lpCmdLine);
     argv[argc] = _tcstok(cmdline, TEXT(" \t"));
     while(argv[argc] != 0)
     {
         argc++ ;
         argv[argc] = _tcstok(0, TEXT(" \t"));
     }
-#endif
+#endif    
     QApplication app(argc, argv);
+    app.setStyle("plastique");
     app.setApplicationName("Ripple");
     app.setOrganizationName("Research in Motion");
     app.setOrganizationDomain("blackberry.com");
-    Starbuck *mainWin = new Starbuck;
-    mainWin->show();
+    
+    RemoteDebugger *remoteDebugger = new RemoteDebugger();
+
+#ifdef Q_WS_WIN    
+    if (argc == 2 )
+    {
+        QString paramName = argv[0];
+        QString paramVal = argv[1];
+#else
+    if ( argc == 3 )
+    {
+        QString paramName = argv[1];
+        QString paramVal = argv[2];
+#endif
+        if (paramName == "-inspect")
+        {
+            remoteDebugger->show(paramVal);
+        }
+    }
+    else
+    {
+        Ripple *mainWin = new Ripple;
+        mainWin->show();
+    }
     return app.exec();
 }

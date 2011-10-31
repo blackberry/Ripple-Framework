@@ -22,7 +22,7 @@
 #include <QWebPage>
 
 namespace BlackBerry {
-namespace Starbuck {
+namespace Ripple {
 
 class RequestObject : public QObject
 {

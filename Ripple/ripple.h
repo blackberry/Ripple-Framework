@@ -14,30 +14,31 @@
 * limitations under the License.
 */
 
-#ifndef STARBUCK_H
-#define STARBUCK_H
+#ifndef RIPPLE_H
+#define RIPPLE_H
 
 #include <QMainWindow>
 #include <QWebPage>
 #include <QProgressBar>
 #include <QGLWidget>
 #include "ConfigData.h"
+#include <qwebinspector.h>
 #include "StageViewMsgHandler.h"
 #include "QtStageWebView.h"
 
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 namespace BlackBerry 
 {
-  namespace Starbuck 
+  namespace Ripple 
   {
-    class Starbuck : public QMainWindow
+    class Ripple : public QMainWindow
     {
         Q_OBJECT
 
     public:
-      Starbuck(QWidget *parent = 0, Qt::WFlags flags = 0);
-      ~Starbuck();
+      Ripple(QWidget *parent = 0, Qt::WFlags flags = 0);
+      ~Ripple();
 
     protected:
         void closeEvent(QCloseEvent *event);
@@ -45,6 +46,7 @@ namespace BlackBerry
 
     private slots:
         void registerAPIs();
+        void urlChanged(QUrl &url);
 
     private:
         QGLWidget *_GLWidget;
@@ -59,4 +61,4 @@ namespace BlackBerry
     };
   }
 }
-#endif // STARBUCK_H
+#endif // RIPPLE_H
