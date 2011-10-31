@@ -23,7 +23,7 @@
 #include <QThread>
 #include "ipcbridge.h"
 
-using namespace BlackBerry::Starbuck::IPCChannel;
+using namespace BlackBerry::Ripple::IPCChannel;
 
 class IPCTestSuit : public QObject
 {

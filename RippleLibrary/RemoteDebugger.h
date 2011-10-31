@@ -14,29 +14,26 @@
 * limitations under the License.
 */
 
-#ifndef MESSAGESENDTHREAD_H
-#define MESSAGESENDTHREAD_H
+#ifndef RMOTEDEBUGGER_H
+#define RMOTEDEBUGGER_H
 
-#include <QThread>
-#include "samplemessagehandler.h"
+#include <QMainWindow>
+#include <QWebView>
 
-using namespace BlackBerry::Ripple::IPCChannel;
 
-class MessageSendThread : public QThread
+class RemoteDebugger : public QMainWindow
 {
-  Q_OBJECT
-
+    Q_OBJECT
 public:
-    MessageSendThread(MessageHandler* pHandler, QObject *parent);
-    ~MessageSendThread();
+    RemoteDebugger();
+    ~RemoteDebugger();
+    void show(QString port);
 protected:
-  void run();
-
-  public slots:
-    void sendMessage();
-
+    void closeEvent(QCloseEvent *event);
+    void resizeEvent(QResizeEvent * e );
 private:
-  MessageHandler* m_pHandler;
+    QWebView *debuggerView;
+    void init(void);
 };
 
-#endif // MESSAGESENDTHREAD_H
+#endif // REMOTEDEBUGGER_H

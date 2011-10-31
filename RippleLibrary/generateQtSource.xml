@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<project name="Ripple Library Qt Source Generation" basedir="." default="generateSources">
+	<property name="generatedFiles" value="${basedir}\GeneratedFiles"/>
+	<property name="searchString" value="Q_OBJECT"/>
+	
+	<fileset id="QObjectFiles" dir="${basedir}">
+		<patternset>
+			<include name="*.h"/>
+		</patternset>
+		<contains text="${searchString}"/>
+	</fileset>
+	
+	<target name="generateSources">
+		<mkdir dir="${generatedFiles}"/>
+		
+		<!-- Empty the generated files directory so that we do not include old code -->
+		<delete>
+			<fileset dir="${generatedFiles}" includes="*.cpp"/>
+		</delete>
+		
+		<!-- Generate moc source files -->
+		<echo message="Generating moc files..."/>
+		<apply executable="moc.exe" dest="${generatedFiles}" force="true">
+			<arg line="${defines}"/>
+			<arg line="${qtIncludePath}"/>
+			<arg line="-D_MSC_VER=1500 -DWIN32"/>
+			<srcfile/>
+			<arg value="-o"/>
+			<targetfile/>
+			
+			<fileset refid="QObjectFiles"/>
+			<mapper type="glob" from="*.h" to="moc_*.cpp"/>
+		</apply>
+	</target>
+</project>

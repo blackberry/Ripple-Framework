@@ -1,0 +1,1 @@
+"%MSVS_HOME%/VC/vcvarsall.bat" x86 && %*
