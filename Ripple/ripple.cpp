@@ -104,7 +104,12 @@ void Ripple::init(void)
 
     move(_config->windowPosition());
 
-    webViewInternal->qtStageWebView()->load(QUrl(_config->toolingContent()));
+    //workaround in case the toolingContent point to a folder without end '/', append one, so the offline mode still works
+    QUrl url(_config->toolingContent());
+    QString path = url.path();
+    if ( url.toLocalFile().isEmpty() && !path.endsWith('/'))
+        url.setPath(path + "/");
+    webViewInternal->qtStageWebView()->load(url);
     
     setCentralWidget(webViewInternal);
 
