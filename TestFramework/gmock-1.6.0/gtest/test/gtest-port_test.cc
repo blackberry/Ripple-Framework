@@ -789,7 +789,7 @@ TEST(MatchRegexAtHeadTest, WorksWhenRegexStartsWithRepetition) {
 }
 
 TEST(MatchRegexAtHeadTest,
-     WorksWhenRegexStartsWithRepetionOfEscapeSequence) {
+     WorksWhenRegexStartsWithRepetitionOfEscapeSequence) {
   EXPECT_FALSE(MatchRegexAtHead("\\.+a", "abc"));
   EXPECT_FALSE(MatchRegexAtHead("\\s?b", "  b"));
 
