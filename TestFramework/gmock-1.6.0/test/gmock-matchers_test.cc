@@ -738,7 +738,7 @@ TEST(TypedEqTest, CanDescribeSelf) {
 // Type<T>::IsTypeOf(v) compiles iff the type of value v is T, where T
 // is a "bare" type (i.e. not in the form of const U or U&).  If v's
 // type is not T, the compiler will generate a message about
-// "undefined referece".
+// "undefined reference".
 template <typename T>
 struct Type {
   static bool IsTypeOf(const T& /* v */) { return true; }
