@@ -1663,7 +1663,7 @@ def BuilderFromSource(source, filename):
     return AstBuilder(tokenize.GetTokens(source), filename)
 
 
-def PrintIndentifiers(filename, should_print):
+def PrintIdentifiers(filename, should_print):
     """Prints all identifiers for a C++ source file.
 
     Args:
@@ -1687,7 +1687,7 @@ def PrintIndentifiers(filename, should_print):
         pass
 
 
-def PrintAllIndentifiers(filenames, should_print):
+def PrintAllIdentifiers(filenames, should_print):
     """Prints all identifiers for each C++ source file in filenames.
 
     Args:
@@ -1695,7 +1695,7 @@ def PrintAllIndentifiers(filenames, should_print):
       should_print: predicate with signature: bool Function(token)
     """
     for path in filenames:
-        PrintIndentifiers(path, should_print)
+        PrintIdentifiers(path, should_print)
 
 
 def main(argv):
