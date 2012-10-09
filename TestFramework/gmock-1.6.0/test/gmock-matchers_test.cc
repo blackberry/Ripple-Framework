@@ -844,7 +844,7 @@ TEST(IsNullTest, MatchesNullPointer) {
   //     MatcherInterface<void *> *)'
   // gmock-matchers.h:  (point of instantiation: 'testing::
   //     gmock_matchers_test::IsNullTest_MatchesNullPointer_Test::TestBody()')
-  // gmock-matchers.h:   (instantiating: 'testing::PolymorphicMatc
+  // gmock-matchers.h:   (instantiating: 'testing::PolymorphicMatcher'
   Matcher<void*> m3 = IsNull();
   void* p3 = NULL;
   EXPECT_TRUE(m3.Matches(p3));
