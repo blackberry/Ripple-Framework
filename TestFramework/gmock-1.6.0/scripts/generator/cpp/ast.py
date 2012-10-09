@@ -337,7 +337,7 @@ class Class(_GenericDeclaration):
         # TODO(nnorwitz): handle namespaces, etc.
         if self.bases:
             for token_list in self.bases:
-                # TODO(nnorwitz): bases are tokens, do name comparision.
+                # TODO(nnorwitz): bases are tokens, do name comparison.
                 for token in token_list:
                     if token.name == node.name:
                         return True
@@ -380,7 +380,7 @@ class Function(_GenericDeclaration):
 
     def Requires(self, node):
         if self.parameters:
-            # TODO(nnorwitz): parameters are tokens, do name comparision.
+            # TODO(nnorwitz): parameters are tokens, do name comparison.
             for p in self.parameters:
                 if p.name == node.name:
                     return True
