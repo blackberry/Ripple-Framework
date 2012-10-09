@@ -1971,7 +1971,7 @@ if test -n "$_LT_TAGVAR(hardcode_libdir_flag_spec, $1)" ||
     # Linking always hardcodes the temporary library directory.
     _LT_TAGVAR(hardcode_action, $1)=relink
   else
-    # We can link without hardcoding, and we can hardcode nonexisting dirs.
+    # We can link without hardcoding, and we can hardcode nonexistent dirs.
     _LT_TAGVAR(hardcode_action, $1)=immediate
   fi
 else
