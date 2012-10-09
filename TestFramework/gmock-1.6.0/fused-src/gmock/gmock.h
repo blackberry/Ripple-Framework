@@ -6472,7 +6472,7 @@ class ResultOfMatcher {
 
    private:
     // Functors often define operator() as non-const method even though
-    // they are actualy stateless. But we need to use them even when
+    // they are actually stateless. But we need to use them even when
     // 'this' is a const pointer. It's the user's responsibility not to
     // use stateful callables with ResultOf(), which does't guarantee
     // how many times the callable will be invoked.
