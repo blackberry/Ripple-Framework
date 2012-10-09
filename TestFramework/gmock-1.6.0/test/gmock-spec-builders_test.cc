@@ -1352,7 +1352,7 @@ TEST(SequenceTest, Retirement) {
 
 // Tests Expectation.
 
-TEST(ExpectationTest, ConstrutorsWork) {
+TEST(ExpectationTest, ConstructorsWork) {
   MockA a;
   Expectation e1;  // Default ctor.
 
