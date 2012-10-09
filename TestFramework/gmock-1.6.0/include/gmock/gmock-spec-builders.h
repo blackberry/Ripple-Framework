@@ -859,7 +859,7 @@ class ExpectationBase {
   GTEST_DISALLOW_ASSIGN_(ExpectationBase);
 };  // class ExpectationBase
 
-// Impements an expectation for the given function type.
+// Implements an expectation for the given function type.
 template <typename F>
 class TypedExpectation : public ExpectationBase {
  public:
