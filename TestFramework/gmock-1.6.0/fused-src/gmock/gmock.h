@@ -9022,7 +9022,7 @@ class FunctionMockerBase : public UntypedFunctionMockerBase {
   }
 
   // Performs the default action of this mock function on the given arguments
-  // and returns the result. Asserts with a helpful call descrption if there is
+  // and returns the result. Asserts with a helpful call description if there is
   // no valid return value. This method doesn't depend on the mutable state of
   // this object, and thus can be called concurrently without locking.
   // L = *
