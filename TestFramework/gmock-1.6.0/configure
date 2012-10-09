@@ -15032,7 +15032,7 @@ if test "x${HAVE_BUILT_GTEST}" = "xyes"; then :
 else
   subdirs="$subdirs gtest"
 
-      # GTEST_CONFIG needs to be executable both in a Makefile environmont and
+      # GTEST_CONFIG needs to be executable both in a Makefile environment and
       # in a shell script environment, so resolve an absolute path for it here.
       GTEST_CONFIG="`pwd -P`/gtest/scripts/gtest-config"
       GTEST_CPPFLAGS='-I$(top_srcdir)/gtest/include'
