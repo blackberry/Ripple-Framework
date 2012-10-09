@@ -857,7 +857,7 @@ class AstBuilder(object):
             last_token = self._GetNextToken()
         return tokens, last_token
 
-    # TODO(nnorwitz): remove _IgnoreUpTo() it shouldn't be necesary.
+    # TODO(nnorwitz): remove _IgnoreUpTo() it shouldn't be necessary.
     def _IgnoreUpTo(self, token_type, token):
         unused_tokens = self._GetTokensUpTo(token_type, token)
 
