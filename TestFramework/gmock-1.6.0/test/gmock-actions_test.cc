@@ -276,7 +276,7 @@ TEST(DefaultValueOfReferenceTest, IsInitiallyUnset) {
   EXPECT_FALSE(DefaultValue<UserType&>::IsSet());
 }
 
-// Tests that DefaultValue<T&>::Exists is false initiallly.
+// Tests that DefaultValue<T&>::Exists is false initially.
 TEST(DefaultValueOfReferenceTest, IsInitiallyNotExisting) {
   EXPECT_FALSE(DefaultValue<int&>::Exists());
   EXPECT_FALSE(DefaultValue<UserType&>::Exists());
