@@ -2429,7 +2429,7 @@ typedef struct {
 	  case $host in
 	  *cygwin* | *mingw* | *cegcc* )
 	    $ECHO >> "$output_objdir/$my_dlsyms" "\
-/* DATA imports from DLLs on WIN32 con't be const, because
+/* DATA imports from DLLs on WIN32 can't be const, because
    runtime relocations are performed -- see ld's documentation
    on pseudo-relocs.  */"
 	    lt_dlsym_const= ;;
