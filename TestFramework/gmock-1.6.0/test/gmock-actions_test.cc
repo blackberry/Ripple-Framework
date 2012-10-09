@@ -348,7 +348,7 @@ TEST(ActionInterfaceTest, MakeAction) {
   EXPECT_EQ(5, action.Perform(make_tuple(true, 5)));
 }
 
-// Tests that Action<F> can be contructed from a pointer to
+// Tests that Action<F> can be constructed from a pointer to
 // ActionInterface<F>.
 TEST(ActionTest, CanBeConstructedFromActionInterface) {
   Action<MyFunction> action(new MyActionImpl);
