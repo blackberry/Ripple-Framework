@@ -172,7 +172,7 @@ QString ConfigData::buildServiceCommand()
     return _buildServiceCommand;
 }
 
-void ConfigData::buildServiceCommmand(QString cmd)
+void ConfigData::buildServiceCommand(QString cmd)
 {
     _buildServiceCommand = cmd;
 }
