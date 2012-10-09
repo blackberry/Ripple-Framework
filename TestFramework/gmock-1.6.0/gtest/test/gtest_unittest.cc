@@ -4891,7 +4891,7 @@ TEST_F(TestLifeCycleTest, Test2) {
 
 // Tests that the copy constructor works when it is NOT optimized away by
 // the compiler.
-TEST(AssertionResultTest, CopyConstructorWorksWhenNotOptimied) {
+TEST(AssertionResultTest, CopyConstructorWorksWhenNotOptimized) {
   // Checks that the copy constructor doesn't try to dereference NULL pointers
   // in the source object.
   AssertionResult r1 = AssertionSuccess();
