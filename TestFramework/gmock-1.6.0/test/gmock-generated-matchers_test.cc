@@ -792,7 +792,7 @@ TEST(MatcherPnMacroTest, WorksWhenExplicitlyInstantiatedWithReferences) {
 }
 
 TEST(MatcherPnMacroTest,
-     GeneratesCorretDescriptionWhenExplicitlyInstantiatedWithReferences) {
+     GeneratesCorrectDescriptionWhenExplicitlyInstantiatedWithReferences) {
   UncopyableFoo foo1('1'), foo2('2');
   const Matcher<const UncopyableFoo&> m =
       ReferencesAnyOf<const UncopyableFoo&, const UncopyableFoo&>(foo1, foo2);
