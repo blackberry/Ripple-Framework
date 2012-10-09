@@ -60,7 +60,7 @@ class MockFoo {
 };
 
 // Tests that Cardinality objects can be default constructed.
-TEST(CardinalityTest, IsDefaultConstructable) {
+TEST(CardinalityTest, IsDefaultConstructible) {
   Cardinality c;
 }
 

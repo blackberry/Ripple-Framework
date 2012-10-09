@@ -161,7 +161,7 @@ template <typename T>
 class DefaultValue {
  public:
   // Sets the default value for type T; requires T to be
-  // copy-constructable and have a public destructor.
+  // copy-constructible and have a public destructor.
   static void Set(T x) {
     delete value_;
     value_ = new T(x);
