@@ -300,7 +300,7 @@ TEST (QtStageWebView, CanSetVisible){
 	EXPECT_TRUE(webview.isVisible());
 }
 
-TEST (QtStageWebView, CanSetInvisable){
+TEST (QtStageWebView, CanSetInvisible){
 	QtStageWebView webview;
 	webview.continueLoad();
 

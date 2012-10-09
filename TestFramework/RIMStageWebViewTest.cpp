@@ -391,7 +391,7 @@ TEST (RIMStageWebView, CanSetVisible){
 	EXPECT_TRUE(webview.isVisible());
 }
 
-TEST (RIMStageWebView, CanSetInvisable){
+TEST (RIMStageWebView, CanSetInvisible){
 	QSize size(360, 480);
 	RIMStageWebView webview(size);
 	webview.setGeometry(0, 0, 360, 480);
