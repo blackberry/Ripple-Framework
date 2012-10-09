@@ -1286,7 +1286,7 @@ class MockSpec {
 // C++ treats the void type specially.  For example, you cannot define
 // a void-typed variable or pass a void value to a function.
 // ActionResultHolder<T> holds a value of type T, where T must be a
-// copyable type or void (T doesn't need to be default-constructable).
+// copyable type or void (T doesn't need to be default-constructible).
 // It hides the syntactic difference between void and other types, and
 // is used to unify the code for invoking both void-returning and
 // non-void-returning mock functions.
