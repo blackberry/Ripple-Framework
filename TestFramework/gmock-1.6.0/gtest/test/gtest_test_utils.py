@@ -207,14 +207,14 @@ class Subprocess:
       following attributes:
         terminated_by_signal   True iff the child process has been terminated
                                by a signal.
-        signal                 Sygnal that terminated the child process.
+        signal                 Signal that terminated the child process.
         exited                 True iff the child process exited normally.
         exit_code              The code with which the child process exited.
         output                 Child process's stdout and stderr output
                                combined in a string.
     """
 
-    # The subprocess module is the preferrable way of running programs
+    # The subprocess module is the preferable way of running programs
     # since it is available and behaves consistently on all platforms,
     # including Windows. But it is only available starting in python 2.4.
     # In earlier python versions, we revert to the popen2 module, which is

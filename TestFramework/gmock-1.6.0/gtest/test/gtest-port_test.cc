@@ -241,11 +241,11 @@ TEST(FormatFileLocationTest, FormatsUnknownFile) {
   EXPECT_PRED_FORMAT2(IsSubstring, "42", FormatFileLocation(NULL, 42));
 }
 
-TEST(FormatFileLocationTest, FormatsUknownLine) {
+TEST(FormatFileLocationTest, FormatsUnknownLine) {
   EXPECT_EQ("foo.cc:", FormatFileLocation("foo.cc", -1));
 }
 
-TEST(FormatFileLocationTest, FormatsUknownFileAndLine) {
+TEST(FormatFileLocationTest, FormatsUnknownFileAndLine) {
   EXPECT_EQ("unknown file:", FormatFileLocation(NULL, -1));
 }
 
@@ -254,16 +254,16 @@ TEST(FormatCompilerIndependentFileLocationTest, FormatsFileLocation) {
   EXPECT_EQ("foo.cc:42", FormatCompilerIndependentFileLocation("foo.cc", 42));
 }
 
-TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownFile) {
+TEST(FormatCompilerIndependentFileLocationTest, FormatsUnknownFile) {
   EXPECT_EQ("unknown file:42",
             FormatCompilerIndependentFileLocation(NULL, 42));
 }
 
-TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownLine) {
+TEST(FormatCompilerIndependentFileLocationTest, FormatsUnknownLine) {
   EXPECT_EQ("foo.cc", FormatCompilerIndependentFileLocation("foo.cc", -1));
 }
 
-TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownFileAndLine) {
+TEST(FormatCompilerIndependentFileLocationTest, FormatsUnknownFileAndLine) {
   EXPECT_EQ("unknown file", FormatCompilerIndependentFileLocation(NULL, -1));
 }
 
@@ -789,7 +789,7 @@ TEST(MatchRegexAtHeadTest, WorksWhenRegexStartsWithRepetition) {
 }
 
 TEST(MatchRegexAtHeadTest,
-     WorksWhenRegexStartsWithRepetionOfEscapeSequence) {
+     WorksWhenRegexStartsWithRepetitionOfEscapeSequence) {
   EXPECT_FALSE(MatchRegexAtHead("\\.+a", "abc"));
   EXPECT_FALSE(MatchRegexAtHead("\\s?b", "  b"));
 
@@ -951,14 +951,14 @@ TEST(ThreadLocalTest, SingleParamConstructorInitializesToParam) {
   EXPECT_EQ(&i, t2.get());
 }
 
-class NoDefaultContructor {
+class NoDefaultConstructor {
  public:
-  explicit NoDefaultContructor(const char*) {}
-  NoDefaultContructor(const NoDefaultContructor&) {}
+  explicit NoDefaultConstructor(const char*) {}
+  NoDefaultConstructor(const NoDefaultContructor&) {}
 };
 
-TEST(ThreadLocalTest, ValueDefaultContructorIsNotRequiredForParamVersion) {
-  ThreadLocal<NoDefaultContructor> bar(NoDefaultContructor("foo"));
+TEST(ThreadLocalTest, ValueDefaultConstructorIsNotRequiredForParamVersion) {
+  ThreadLocal<NoDefaultConstructor> bar(NoDefaultContructor("foo"));
   bar.pointer();
 }
 

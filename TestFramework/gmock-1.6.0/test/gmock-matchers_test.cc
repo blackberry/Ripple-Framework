@@ -738,7 +738,7 @@ TEST(TypedEqTest, CanDescribeSelf) {
 // Type<T>::IsTypeOf(v) compiles iff the type of value v is T, where T
 // is a "bare" type (i.e. not in the form of const U or U&).  If v's
 // type is not T, the compiler will generate a message about
-// "undefined referece".
+// "undefined reference".
 template <typename T>
 struct Type {
   static bool IsTypeOf(const T& /* v */) { return true; }
@@ -748,7 +748,7 @@ struct Type {
 };
 
 TEST(TypedEqTest, HasSpecifiedType) {
-  // Verfies that the type of TypedEq<T>(v) is Matcher<T>.
+  // Verifies that the type of TypedEq<T>(v) is Matcher<T>.
   Type<Matcher<int> >::IsTypeOf(TypedEq<int>(5));
   Type<Matcher<double> >::IsTypeOf(TypedEq<double>(5));
 }
@@ -844,7 +844,7 @@ TEST(IsNullTest, MatchesNullPointer) {
   //     MatcherInterface<void *> *)'
   // gmock-matchers.h:  (point of instantiation: 'testing::
   //     gmock_matchers_test::IsNullTest_MatchesNullPointer_Test::TestBody()')
-  // gmock-matchers.h:   (instantiating: 'testing::PolymorphicMatc
+  // gmock-matchers.h:   (instantiating: 'testing::PolymorphicMatcher'
   Matcher<void*> m3 = IsNull();
   void* p3 = NULL;
   EXPECT_TRUE(m3.Matches(p3));
@@ -952,7 +952,7 @@ TEST(RefTest, CanDescribeSelf) {
   EXPECT_EQ(string(ss.str()), Describe(m));
 }
 
-// Test that Ref(non_const_varialbe) can be used as a matcher for a
+// Test that Ref(non_const_variable) can be used as a matcher for a
 // const reference.
 TEST(RefTest, CanBeUsedAsMatcherForConstReference) {
   int a = 0;
@@ -1247,7 +1247,7 @@ TEST(PairTest, MatchesCorrectly) {
   EXPECT_THAT(p, Pair(25, "foo"));
   EXPECT_THAT(p, Pair(Ge(20), HasSubstr("o")));
 
-  // 'first' doesnt' match, but 'second' matches.
+  // 'first' doesn't match, but 'second' matches.
   EXPECT_THAT(p, Not(Pair(42, "foo")));
   EXPECT_THAT(p, Not(Pair(Lt(25), "foo")));
 
@@ -3599,7 +3599,7 @@ TYPED_TEST(ContainerEqTest, DuplicateDifference) {
 #endif  // GTEST_HAS_TYPED_TEST
 
 // Tests that mutliple missing values are reported.
-// Using just vector here, so order is predicatble.
+// Using just vector here, so order is predictable.
 TEST(ContainerEqExtraTest, MultipleValuesMissing) {
   static const int vals[] = {1, 1, 2, 3, 5, 8};
   static const int test_vals[] = {2, 1, 5};
@@ -3612,7 +3612,7 @@ TEST(ContainerEqExtraTest, MultipleValuesMissing) {
 }
 
 // Tests that added values are reported.
-// Using just vector here, so order is predicatble.
+// Using just vector here, so order is predictable.
 TEST(ContainerEqExtraTest, MultipleValuesAdded) {
   static const int vals[] = {1, 1, 2, 3, 5, 8};
   static const int test_vals[] = {1, 2, 92, 3, 5, 8, 46};

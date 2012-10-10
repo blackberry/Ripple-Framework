@@ -318,7 +318,7 @@ class MockB {
   GTEST_DISALLOW_COPY_AND_ASSIGN_(MockB);
 };
 
-// Tests that functions with no EXPECT_CALL() ruls can be called any
+// Tests that functions with no EXPECT_CALL() rules can be called any
 // number of times.
 TEST(ExpectCallTest, UnmentionedFunctionCanBeCalledAnyNumberOfTimes) {
   {

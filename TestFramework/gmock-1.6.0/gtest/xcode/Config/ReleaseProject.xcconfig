@@ -15,7 +15,7 @@
 // Optimize for space and size (Apple recommendation)
 GCC_OPTIMIZATION_LEVEL = s
 
-// Deploment postprocessing is what triggers Xcode to strip
+// Deployment postprocessing is what triggers Xcode to strip
 DEPLOYMENT_POSTPROCESSING = YES
 
 // No symbols

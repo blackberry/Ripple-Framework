@@ -537,7 +537,7 @@
             <version>1.1</version>
             <executions>
               <execution>
-                <id>Touch Framwork Build Finished Flag</id>
+                <id>Touch Framework Build Finished Flag</id>
                 <goals>
                   <goal>exec</goal>
                 </goals>

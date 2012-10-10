@@ -276,7 +276,7 @@ TEST(DefaultValueOfReferenceTest, IsInitiallyUnset) {
   EXPECT_FALSE(DefaultValue<UserType&>::IsSet());
 }
 
-// Tests that DefaultValue<T&>::Exists is false initiallly.
+// Tests that DefaultValue<T&>::Exists is false initially.
 TEST(DefaultValueOfReferenceTest, IsInitiallyNotExisting) {
   EXPECT_FALSE(DefaultValue<int&>::Exists());
   EXPECT_FALSE(DefaultValue<UserType&>::Exists());
@@ -348,7 +348,7 @@ TEST(ActionInterfaceTest, MakeAction) {
   EXPECT_EQ(5, action.Perform(make_tuple(true, 5)));
 }
 
-// Tests that Action<F> can be contructed from a pointer to
+// Tests that Action<F> can be constructed from a pointer to
 // ActionInterface<F>.
 TEST(ActionTest, CanBeConstructedFromActionInterface) {
   Action<MyFunction> action(new MyActionImpl);
@@ -635,7 +635,7 @@ TEST(DoDefaultTest, ReturnsBuiltInDefaultValueByDefault) {
 
 // Tests that DoDefault() aborts the process when there is no built-in
 // default value for the return type.
-TEST(DoDefaultDeathTest, DiesForUnknowType) {
+TEST(DoDefaultDeathTest, DiesForUnknownType) {
   MockClass mock;
   EXPECT_CALL(mock, Foo())
       .WillRepeatedly(DoDefault());
@@ -665,7 +665,7 @@ TEST(DoDefaultDeathTest, DiesIfUsedInCompositeAction) {
 }
 
 // Tests that DoDefault() returns the default value set by
-// DefaultValue<T>::Set() when it's not overriden by an ON_CALL().
+// DefaultValue<T>::Set() when it's not overridden by an ON_CALL().
 TEST(DoDefaultTest, ReturnsUserSpecifiedPerTypeDefaultValueWhenThereIsOne) {
   DefaultValue<int>::Set(1);
   MockClass mock;
