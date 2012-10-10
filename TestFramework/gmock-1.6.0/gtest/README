@@ -335,7 +335,7 @@ instead of
 
 in order to define a test.
 
-Upgrating from an Earlier Version
+Upgrading from an Earlier Version
 ---------------------------------
 
 We strive to keep Google Test releases backward compatible.
