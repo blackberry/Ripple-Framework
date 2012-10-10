@@ -1029,7 +1029,7 @@ template <typename T>
 class DefaultValue {
  public:
   // Sets the default value for type T; requires T to be
-  // copy-constructable and have a public destructor.
+  // copy-constructible and have a public destructor.
   static void Set(T x) {
     delete value_;
     value_ = new T(x);
@@ -5038,7 +5038,7 @@ class SafeMatcherCastImpl {
     // type U.
     GTEST_COMPILE_ASSERT_(
         internal::is_reference<T>::value || !internal::is_reference<U>::value,
-        cannot_convert_non_referentce_arg_to_reference);
+        cannot_convert_non_reference_arg_to_reference);
     // In case both T and U are arithmetic types, enforce that the
     // conversion is not lossy.
     typedef GTEST_REMOVE_REFERENCE_AND_CONST_(T) RawT;
@@ -6472,9 +6472,9 @@ class ResultOfMatcher {
 
    private:
     // Functors often define operator() as non-const method even though
-    // they are actualy stateless. But we need to use them even when
+    // they are actually stateless. But we need to use them even when
     // 'this' is a const pointer. It's the user's responsibility not to
-    // use stateful callables with ResultOf(), which does't guarantee
+    // use stateful callables with ResultOf(), which doesn't guarantee
     // how many times the callable will be invoked.
     mutable CallableStorageType callable_;
     const Matcher<ResultType> matcher_;
@@ -8463,7 +8463,7 @@ class ExpectationBase {
   GTEST_DISALLOW_ASSIGN_(ExpectationBase);
 };  // class ExpectationBase
 
-// Impements an expectation for the given function type.
+// Implements an expectation for the given function type.
 template <typename F>
 class TypedExpectation : public ExpectationBase {
  public:
@@ -8890,7 +8890,7 @@ class MockSpec {
 // C++ treats the void type specially.  For example, you cannot define
 // a void-typed variable or pass a void value to a function.
 // ActionResultHolder<T> holds a value of type T, where T must be a
-// copyable type or void (T doesn't need to be default-constructable).
+// copyable type or void (T doesn't need to be default-constructible).
 // It hides the syntactic difference between void and other types, and
 // is used to unify the code for invoking both void-returning and
 // non-void-returning mock functions.
@@ -9022,7 +9022,7 @@ class FunctionMockerBase : public UntypedFunctionMockerBase {
   }
 
   // Performs the default action of this mock function on the given arguments
-  // and returns the result. Asserts with a helpful call descrption if there is
+  // and returns the result. Asserts with a helpful call description if there is
   // no valid return value. This method doesn't depend on the mutable state of
   // this object, and thus can be called concurrently without locking.
   // L = *

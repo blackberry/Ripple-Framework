@@ -44,7 +44,7 @@ public slots:
 	void executeJavaScript(const QString& script);
 	void crossOrigin(const bool allow);
 	void customHTTPHeader(const QString& key, const QString& value);
-	void setVisable(const bool isVisible);
+	void setVisible(const bool isVisible);
 	void setWindowGeometry(int x, int y, int w, int h);
 	QString location();
 	void historyBack();

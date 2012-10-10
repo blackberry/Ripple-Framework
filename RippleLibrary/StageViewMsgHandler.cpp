@@ -64,7 +64,7 @@ void StageViewMsgHandler::customHTTPHeader(const QString& key, const QString& va
   rimStageWebview()->customHTTPHeaders(key, value);
 }
 
-void StageViewMsgHandler::setVisable(const bool isVisible)
+void StageViewMsgHandler::setVisible(const bool isVisible)
 {
 	rimStageWebview()->visible(isVisible);
 }

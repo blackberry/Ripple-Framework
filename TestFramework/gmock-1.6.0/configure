@@ -10793,7 +10793,7 @@ if test -n "$hardcode_libdir_flag_spec" ||
     # Linking always hardcodes the temporary library directory.
     hardcode_action=relink
   else
-    # We can link without hardcoding, and we can hardcode nonexisting dirs.
+    # We can link without hardcoding, and we can hardcode nonexistent dirs.
     hardcode_action=immediate
   fi
 else
@@ -14210,7 +14210,7 @@ if test -n "$hardcode_libdir_flag_spec_CXX" ||
     # Linking always hardcodes the temporary library directory.
     hardcode_action_CXX=relink
   else
-    # We can link without hardcoding, and we can hardcode nonexisting dirs.
+    # We can link without hardcoding, and we can hardcode nonexistent dirs.
     hardcode_action_CXX=immediate
   fi
 else
@@ -15032,7 +15032,7 @@ if test "x${HAVE_BUILT_GTEST}" = "xyes"; then :
 else
   subdirs="$subdirs gtest"
 
-      # GTEST_CONFIG needs to be executable both in a Makefile environmont and
+      # GTEST_CONFIG needs to be executable both in a Makefile environment and
       # in a shell script environment, so resolve an absolute path for it here.
       GTEST_CONFIG="`pwd -P`/gtest/scripts/gtest-config"
       GTEST_CPPFLAGS='-I$(top_srcdir)/gtest/include'

@@ -43,7 +43,7 @@ void IPCTestSuit::producerTest()
   sendMessage(IPCChannel_MESSAGE_TEST1, QString("hello"));
   sendMessage(IPCChannel_MESSAGE_TEST2, QString("world!"));
 
-  //send messagas in a new thread
+  //send messages in a new thread
   //MessageSendThread* pMsgSend = new MessageSendThread(m_pHandler, this);
   //pMsgSend->start();
 }

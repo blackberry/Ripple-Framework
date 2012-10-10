@@ -45,7 +45,7 @@ HEX_DIGITS = set('0123456789abcdefABCDEF')
 INT_OR_FLOAT_DIGITS = set('01234567890eE-+')
 
 
-# C++0x string preffixes.
+# C++0x string prefixes.
 _STR_PREFIXES = set(('R', 'u8', 'u8R', 'u', 'uR', 'U', 'UR', 'L', 'LR'))
 
 
@@ -155,7 +155,7 @@ def GetTokens(source):
             # they are something like L"".
             if (source[i] == "'" and (i - start) == 1 and
                 source[start:i] in 'uUL'):
-                # u, U, and L are valid C++0x character preffixes.
+                # u, U, and L are valid C++0x character prefixes.
                 token_type = CONSTANT
                 i = _GetChar(source, start, i)
             elif source[i] == "'" and source[start:i] in _STR_PREFIXES:

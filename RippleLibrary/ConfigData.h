@@ -43,7 +43,7 @@ public:
     void localStoragePath(QString path);
 
     QString buildServiceCommand();
-    void buildServiceCommmand(QString cmd);
+    void buildServiceCommand(QString cmd);
 
     unsigned short buildServicePort();
     void buildServicePort(unsigned short port);
