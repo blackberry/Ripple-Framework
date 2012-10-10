@@ -1232,7 +1232,7 @@ void FuncWithAssert(int* n) {
 
 // Tests that ASSERT_DEATH_IF_SUPPORTED does not return from the current
 // function (as ASSERT_DEATH does) if death tests are not supported.
-TEST(ConditionalDeathMacrosTest, AssertDeatDoesNotReturnhIfUnsupported) {
+TEST(ConditionalDeathMacrosTest, AssertDeathDoesNotReturnIfUnsupported) {
   int n = 0;
   FuncWithAssert(&n);
   EXPECT_EQ(1, n);
