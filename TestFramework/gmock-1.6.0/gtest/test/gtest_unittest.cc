@@ -1985,7 +1985,7 @@ TEST(Int32FromEnvOrDieDeathTest, AbortsOnFailure) {
 }
 
 // Tests that Int32FromEnvOrDie() aborts with an error message
-// if the variable cannot be represnted by an Int32.
+// if the variable cannot be represented by an Int32.
 TEST(Int32FromEnvOrDieDeathTest, AbortsOnInt32Overflow) {
   SetEnv(GTEST_FLAG_PREFIX_UPPER_ "VAR", "1234567891234567891234");
   EXPECT_DEATH_IF_SUPPORTED(
