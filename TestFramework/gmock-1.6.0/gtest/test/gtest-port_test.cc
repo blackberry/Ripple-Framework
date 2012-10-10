@@ -241,11 +241,11 @@ TEST(FormatFileLocationTest, FormatsUnknownFile) {
   EXPECT_PRED_FORMAT2(IsSubstring, "42", FormatFileLocation(NULL, 42));
 }
 
-TEST(FormatFileLocationTest, FormatsUknownLine) {
+TEST(FormatFileLocationTest, FormatsUnknownLine) {
   EXPECT_EQ("foo.cc:", FormatFileLocation("foo.cc", -1));
 }
 
-TEST(FormatFileLocationTest, FormatsUknownFileAndLine) {
+TEST(FormatFileLocationTest, FormatsUnknownFileAndLine) {
   EXPECT_EQ("unknown file:", FormatFileLocation(NULL, -1));
 }
 
@@ -254,16 +254,16 @@ TEST(FormatCompilerIndependentFileLocationTest, FormatsFileLocation) {
   EXPECT_EQ("foo.cc:42", FormatCompilerIndependentFileLocation("foo.cc", 42));
 }
 
-TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownFile) {
+TEST(FormatCompilerIndependentFileLocationTest, FormatsUnknownFile) {
   EXPECT_EQ("unknown file:42",
             FormatCompilerIndependentFileLocation(NULL, 42));
 }
 
-TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownLine) {
+TEST(FormatCompilerIndependentFileLocationTest, FormatsUnknownLine) {
   EXPECT_EQ("foo.cc", FormatCompilerIndependentFileLocation("foo.cc", -1));
 }
 
-TEST(FormatCompilerIndependentFileLocationTest, FormatsUknownFileAndLine) {
+TEST(FormatCompilerIndependentFileLocationTest, FormatsUnknownFileAndLine) {
   EXPECT_EQ("unknown file", FormatCompilerIndependentFileLocation(NULL, -1));
 }
 
