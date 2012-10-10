@@ -498,7 +498,7 @@ TEST(WideStringToUtf8Test, CanEncodeInvalidCodePoint) {
 #else  // !GTEST_WIDE_STRING_USES_UTF16_
 // Tests that surrogate pairs are encoded correctly on the systems using
 // UTF-16 encoding in the wide strings.
-TEST(WideStringToUtf8Test, CanEncodeValidUtf16SUrrogatePairs) {
+TEST(WideStringToUtf8Test, CanEncodeValidUtf16SurrogatePairs) {
   const wchar_t s[] = { 0xD801, 0xDC00, '\0' };
   EXPECT_STREQ("\xF0\x90\x90\x80", WideStringToUtf8(s, -1).c_str());
 }
