@@ -1039,7 +1039,7 @@ struct Big {
   char array[257];
 };
 
-TEST(PrintUnpritableTypeTest, BigObject) {
+TEST(PrintUnprintableTypeTest, BigObject) {
   EXPECT_EQ("257-byte object <00-00 00-00 00-00 00-00 00-00 00-00 "
             "00-00 00-00 00-00 00-00 00-00 00-00 00-00 00-00 00-00 00-00 "
             "00-00 00-00 00-00 00-00 00-00 00-00 00-00 00-00 00-00 00-00 "
