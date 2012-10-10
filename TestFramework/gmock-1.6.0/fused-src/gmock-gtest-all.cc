@@ -1766,7 +1766,7 @@ bool UnitTestOptions::MatchesFilter(const String& name, const char* filter) {
       return false;
     }
 
-    // Skips the pattern separater (the ':' character).
+    // Skips the pattern separator (the ':' character).
     cur_pattern++;
   }
 }
