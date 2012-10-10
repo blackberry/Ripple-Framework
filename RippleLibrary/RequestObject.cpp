@@ -49,7 +49,7 @@ void RequestObject::deny()
 
 void RequestObject::respond(QString code, QString url)
 {
-    qDebug() << "respond code: " << code << "responde message:" << url;
+    qDebug() << "response code: " << code << "response message:" << url;
     //TODO: write response text and set the response code
 }
 
