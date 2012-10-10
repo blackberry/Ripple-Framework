@@ -380,7 +380,7 @@ TEST(RIMStageWebView, CanSignalDocumentLoaded)
 	EXPECT_EQ(1, spy.count());
 }
 
-TEST (RIMStageWebView, CanSetVisable){
+TEST (RIMStageWebView, CanSetVisible){
 	QSize size(360, 480);
 	RIMStageWebView webview(size);
 	webview.setGeometry(0, 0, 360, 480);
