@@ -748,7 +748,7 @@ struct Type {
 };
 
 TEST(TypedEqTest, HasSpecifiedType) {
-  // Verfies that the type of TypedEq<T>(v) is Matcher<T>.
+  // Verifies that the type of TypedEq<T>(v) is Matcher<T>.
   Type<Matcher<int> >::IsTypeOf(TypedEq<int>(5));
   Type<Matcher<double> >::IsTypeOf(TypedEq<double>(5));
 }
