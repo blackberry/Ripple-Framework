@@ -9062,7 +9062,7 @@ const char* TypedTestCasePState::VerifyRegisteredTestNames(
   registered_ = true;
 
   // Skip initial whitespace in registered_tests since some
-  // preprocessors prefix stringizied literals with whitespace.
+  // preprocessors prefix stringified literals with whitespace.
   registered_tests = SkipSpaces(registered_tests);
 
   Message errors;
