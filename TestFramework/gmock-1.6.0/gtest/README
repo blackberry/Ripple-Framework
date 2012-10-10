@@ -352,7 +352,7 @@ Library".
 ### Upgrading from 1.4.0 or Earlier ###
 
 The Autotools build script (configure + make) is no longer officially
-supportted.  You are encouraged to migrate to your own build system or
+supported.  You are encouraged to migrate to your own build system or
 use CMake.  If you still need to use Autotools, you can find
 instructions in the README file from Google Test 1.4.0.
 
