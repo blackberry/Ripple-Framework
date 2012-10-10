@@ -426,7 +426,7 @@ class SafeMatcherCastImpl {
     // type U.
     GTEST_COMPILE_ASSERT_(
         internal::is_reference<T>::value || !internal::is_reference<U>::value,
-        cannot_convert_non_referentce_arg_to_reference);
+        cannot_convert_non_reference_arg_to_reference);
     // In case both T and U are arithmetic types, enforce that the
     // conversion is not lossy.
     typedef GTEST_REMOVE_REFERENCE_AND_CONST_(T) RawT;
@@ -1860,9 +1860,9 @@ class ResultOfMatcher {
 
    private:
     // Functors often define operator() as non-const method even though
-    // they are actualy stateless. But we need to use them even when
+    // they are actually stateless. But we need to use them even when
     // 'this' is a const pointer. It's the user's responsibility not to
-    // use stateful callables with ResultOf(), which does't guarantee
+    // use stateful callables with ResultOf(), which doesn't guarantee
     // how many times the callable will be invoked.
     mutable CallableStorageType callable_;
     const Matcher<ResultType> matcher_;

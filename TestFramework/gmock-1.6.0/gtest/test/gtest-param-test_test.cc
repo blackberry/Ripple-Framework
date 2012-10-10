@@ -752,11 +752,11 @@ INSTANTIATE_TEST_CASE_P(Sequence2, MultipleInstantiationTest, Range(3, 5));
 // here and in gtest-param-test_test2.cc.
 // InstantiationInMultipleTranslationUnitsTest fixture class
 // is defined in gtest-param-test_test.h.
-TEST_P(InstantiationInMultipleTranslaionUnitsTest, IsMultipleOf42) {
+TEST_P(InstantiationInMultipleTranslationUnitsTest, IsMultipleOf42) {
   EXPECT_EQ(0, GetParam() % 42);
 }
 INSTANTIATE_TEST_CASE_P(Sequence1,
-                        InstantiationInMultipleTranslaionUnitsTest,
+                        InstantiationInMultipleTranslationUnitsTest,
                         Values(42, 42*2));
 
 // Tests that each iteration of parameterized test runs in a separate test

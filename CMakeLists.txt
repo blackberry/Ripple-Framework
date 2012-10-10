@@ -39,14 +39,14 @@ ELSE ()
 ENDIF ()
 
 # -----------------------------------------------------------------------------
-# Default target names (can be overrriden in Options${PORT}.cmake file)
+# Default target names (can be overridden in Options${PORT}.cmake file)
 # -----------------------------------------------------------------------------
 SET(WebKit_LIBRARY_NAME WebKit)
 SET(RIPPLELIBRARY_LIBRARY_NAME RippleLibrary)
 
 
 # -----------------------------------------------------------------------------
-# Default library types (can be overrriden in Options${PORT}.cmake file)
+# Default library types (can be overridden in Options${PORT}.cmake file)
 # -----------------------------------------------------------------------------
 SET(RIPPLELIBRARY_LIBRARY_TYPE STATIC)
 

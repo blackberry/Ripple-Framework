@@ -290,7 +290,7 @@ TEST(QtStageWebView, CanGoToSpecificHistoryLocation)
 	EXPECT_EQ(1, webview.historyPosition());
 }
 
-TEST (QtStageWebView, CanSetVisable){
+TEST (QtStageWebView, CanSetVisible){
 	QtStageWebView webview;
 	webview.continueLoad();
 
@@ -300,7 +300,7 @@ TEST (QtStageWebView, CanSetVisable){
 	EXPECT_TRUE(webview.isVisible());
 }
 
-TEST (QtStageWebView, CanSetInvisable){
+TEST (QtStageWebView, CanSetInvisible){
 	QtStageWebView webview;
 	webview.continueLoad();
 

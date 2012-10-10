@@ -708,7 +708,7 @@ def IsComment(cur_line):
   return '//' in cur_line
 
 
-def IsInPreprocessorDirevative(prev_lines, cur_line):
+def IsInPreprocessorDerivative(prev_lines, cur_line):
   if cur_line.lstrip().startswith('#'):
     return True
   return prev_lines != [] and prev_lines[-1].endswith('\\')
@@ -768,7 +768,7 @@ def WrapCode(line, line_concat, output):
     output.append(prefix + cur_line.strip())
 
 
-def WrapPreprocessorDirevative(line, output):
+def WrapPreprocessorDerivative(line, output):
   WrapCode(line, ' \\', output)
 
 
@@ -792,13 +792,13 @@ def WrapLongLine(line, output):
       output.append(line)
     else:
       WrapComment(line, output)
-  elif IsInPreprocessorDirevative(output, line):
+  elif IsInPreprocessorDerivative(output, line):
     if IsHeaderGuardOrInclude(line):
       # The style guide made an exception to allow long header guard lines
       # and includes.
       output.append(line)
     else:
-      WrapPreprocessorDirevative(line, output)
+      WrapPreprocessorDerivative(line, output)
   else:
     WrapPlainCode(line, output)
 

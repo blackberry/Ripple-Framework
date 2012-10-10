@@ -875,7 +875,7 @@ TEST(ExpectCallTest, TakesDefaultActionWhenWillListIsExhausted) {
                         " - returning default value."));
 }
 
-TEST(FunctionMockerTest, ReportsExpectCallLocationForExhausedActions) {
+TEST(FunctionMockerTest, ReportsExpectCallLocationForExhaustedActions) {
   MockB b;
   std::string expect_call_location = FormatFileLocation(__FILE__, __LINE__ + 1);
   EXPECT_CALL(b, DoB()).Times(AnyNumber()).WillOnce(Return(1));
@@ -994,7 +994,7 @@ TEST(UnexpectedCallTest, GeneratesFailureForVoidFunction) {
 
 // Tests that an unexpected non-void function generates the right
 // failure message.
-TEST(UnexpectedCallTest, GeneartesFailureForNonVoidFunction) {
+TEST(UnexpectedCallTest, GeneratesFailureForNonVoidFunction) {
   MockB b1;
   EXPECT_CALL(b1, DoB(1));
   b1.DoB(1);
@@ -1041,7 +1041,7 @@ TEST(UnexpectedCallTest, UnmatchedArguments) {
 
 // Tests that Google Mock explains that an expectation with
 // unsatisfied pre-requisites doesn't match the call.
-TEST(UnexpectedCallTest, UnsatisifiedPrerequisites) {
+TEST(UnexpectedCallTest, UnsatisfiedPrerequisites) {
   Sequence s1, s2;
   MockB b;
   EXPECT_CALL(b, DoB(1))
@@ -1352,7 +1352,7 @@ TEST(SequenceTest, Retirement) {
 
 // Tests Expectation.
 
-TEST(ExpectationTest, ConstrutorsWork) {
+TEST(ExpectationTest, ConstructorsWork) {
   MockA a;
   Expectation e1;  // Default ctor.
 

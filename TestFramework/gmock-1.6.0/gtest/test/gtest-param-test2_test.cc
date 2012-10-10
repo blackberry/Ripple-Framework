@@ -56,10 +56,10 @@ INSTANTIATE_TEST_CASE_P(MultiplesOf33,
 
 // Tests that a parameterized test case can be instantiated
 // in multiple translation units. Another instantiation is defined
-// in gtest-param-test_test.cc and InstantiationInMultipleTranslaionUnitsTest
+// in gtest-param-test_test.cc and InstantiationInMultipleTranslationUnitsTest
 // fixture is defined in gtest-param-test_test.h
 INSTANTIATE_TEST_CASE_P(Sequence2,
-                        InstantiationInMultipleTranslaionUnitsTest,
+                        InstantiationInMultipleTranslationUnitsTest,
                         Values(42*3, 42*4, 42*5));
 
 #endif  // GTEST_HAS_PARAM_TEST

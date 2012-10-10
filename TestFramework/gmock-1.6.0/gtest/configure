@@ -10760,7 +10760,7 @@ if test -n "$hardcode_libdir_flag_spec" ||
     # Linking always hardcodes the temporary library directory.
     hardcode_action=relink
   else
-    # We can link without hardcoding, and we can hardcode nonexisting dirs.
+    # We can link without hardcoding, and we can hardcode nonexistent dirs.
     hardcode_action=immediate
   fi
 else
@@ -14177,7 +14177,7 @@ if test -n "$hardcode_libdir_flag_spec_CXX" ||
     # Linking always hardcodes the temporary library directory.
     hardcode_action_CXX=relink
   else
-    # We can link without hardcoding, and we can hardcode nonexisting dirs.
+    # We can link without hardcoding, and we can hardcode nonexistent dirs.
     hardcode_action_CXX=immediate
   fi
 else
