@@ -8855,7 +8855,7 @@ void PrintTo(const char* s, ostream* os) {
   }
 }
 
-// MSVC compiler can be configured to define whar_t as a typedef
+// MSVC compiler can be configured to define wchar_t as a typedef
 // of unsigned short. Defining an overload for const wchar_t* in that case
 // would cause pointers to unsigned shorts be printed as wide strings,
 // possibly accessing more memory than intended and causing invalid
