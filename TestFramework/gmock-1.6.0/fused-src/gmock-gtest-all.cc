@@ -6867,7 +6867,7 @@ DeathTest::TestRole WindowsDeathTest::AssumeRole() {
   event_handle_.Reset(::CreateEvent(
       &handles_are_inheritable,
       TRUE,    // The event will automatically reset to non-signaled state.
-      FALSE,   // The initial state is non-signalled.
+      FALSE,   // The initial state is non-signaled.
       NULL));  // The even is unnamed.
   GTEST_DEATH_TEST_CHECK_(event_handle_.Get() != NULL);
   const String filter_flag = String::Format("--%s%s=%s.%s",
