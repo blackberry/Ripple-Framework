@@ -635,7 +635,7 @@ TEST(DoDefaultTest, ReturnsBuiltInDefaultValueByDefault) {
 
 // Tests that DoDefault() aborts the process when there is no built-in
 // default value for the return type.
-TEST(DoDefaultDeathTest, DiesForUnknowType) {
+TEST(DoDefaultDeathTest, DiesForUnknownType) {
   MockClass mock;
   EXPECT_CALL(mock, Foo())
       .WillRepeatedly(DoDefault());
