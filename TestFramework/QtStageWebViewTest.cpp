@@ -290,7 +290,7 @@ TEST(QtStageWebView, CanGoToSpecificHistoryLocation)
 	EXPECT_EQ(1, webview.historyPosition());
 }
 
-TEST (QtStageWebView, CanSetVisable){
+TEST (QtStageWebView, CanSetVisible){
 	QtStageWebView webview;
 	webview.continueLoad();
 
